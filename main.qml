@@ -42,22 +42,28 @@ ApplicationWindow {
             id: combo1
             anchors.top: descriptionText.bottom
             width: parent.width
+            leftPadding: parent.width * 0.05
+            rightPadding: parent.width * 0.05
+            currentIndex: 2
+
             model: [ "banana", "Apple", "Testi"]
+           /* delegate: Row {
+                    Text { text: "Fruit: " + text }
+                    Text { text: "Color: " + color }
+                }
+            */
+            /*
+            model: ListModel {
+                    id: cbItems
+                    ListElement { text: "Banana"; color: "Yellow" }
+                    ListElement { text: "Apple"; color: "Green" }
+                    ListElement { text: "Coconut"; color: "Brown" }
+                }
+                //width: 2070
+            onCurrentIndexChanged: console.debug(cbItems.get(currentIndex).text + ", " + cbItems.get(currentIndex).color)
+            */
+            onCurrentIndexChanged: console.debug(currentIndex)
 
-
-                /*ListModel {
-                id: model
-                ListElement { text: "Banana"; color: "Yellow" }
-                ListElement { text: "Apple"; color: "Green" }
-                ListElement { text: "Coconut"; color: "Brown" }
-                */
-            //}
-            //onAccepted: {
-            //    if (find(currentText) === -1) {
-            //        model.append({text: editText})
-            //        currentIndex = find(editText)
-            //    }
-            //}
         }
 
         Button {
@@ -69,6 +75,8 @@ ApplicationWindow {
             text: "TestButton"
             //onClicked:
         }
+
+
 
         ListView {
             anchors.top: button1.bottom
