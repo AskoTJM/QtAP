@@ -25,6 +25,7 @@ ApplicationWindow {
     }*/
     Loader {
         id: windowLoader
+        anchors.fill: parent
     }
 
 
@@ -90,8 +91,8 @@ ApplicationWindow {
             onClicked: {
                 // Does not update comboChoice variable, works now
                 //pageLoader.active
-                windowLoader.source = "../addressbook.qml"
-                //windowLoader.forceActiveFocus()
+                windowLoader.source = "addressbook.qml"
+
                 console.debug("Button says: " + comboChoice.choice)
 
             }
