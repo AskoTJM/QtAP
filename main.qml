@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.0
 import QtQuick.Timeline 1.0
+import QtQuick.Window 2.2
 
 
 ApplicationWindow {
@@ -14,7 +15,14 @@ ApplicationWindow {
     property string combochoicetext2 : "Apple"
     property string combochoicetext3 : "Pineapple"
 
-    property int comboChoice
+    property var comboChoice : QtObject { property int choice: 0 }
+
+   /* Window{ id: newWindow ; x: 100; y: 100; width: 100; height: 100;
+        Text {
+            id: newWindowText
+            text: qsTr("text")
+        }
+    }*/
 
    ScrollView {
        id: scroll1
@@ -59,7 +67,8 @@ ApplicationWindow {
                  //console.debug("CurrentText says: " + currentText)
                  console.debug("TextAt(currentIndex) says: " + textAt(currentIndex) )
                  // Doesn't get updated after initial settting
-                 var comboChoice = currentIndex
+                 comboChoice.choice = currentIndex
+
             }
         }
 
@@ -72,7 +81,8 @@ ApplicationWindow {
             text: "TestButton"
             onClicked: {
                 // Does not update comboChoice variable
-                console.debug("Button says: " + comboChoice)
+
+                console.debug("Button says: " + comboChoice.choice)
 
             }
         }
