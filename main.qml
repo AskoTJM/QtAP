@@ -3,13 +3,18 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.0
 import QtQuick.Timeline 1.0
 
+
 ApplicationWindow {
     id: appWindow
     visible: true
     width: 640
     height: 480
     title: qsTr("QTAndroidTestbench")
+    property string combochoicetext1 : "Banana"
+    property string combochoicetext2 : "Apple"
+    property string combochoicetext3 : "Pineapple"
 
+    property int comboChoice
 
    ScrollView {
        id: scroll1
@@ -46,24 +51,16 @@ ApplicationWindow {
             rightPadding: parent.width * 0.05
             currentIndex: 2
 
-            model: [ "banana", "Apple", "Testi"]
-           /* delegate: Row {
-                    Text { text: "Fruit: " + text }
-                    Text { text: "Color: " + color }
-                }
-            */
-            /*
-            model: ListModel {
-                    id: cbItems
-                    ListElement { text: "Banana"; color: "Yellow" }
-                    ListElement { text: "Apple"; color: "Green" }
-                    ListElement { text: "Coconut"; color: "Brown" }
-                }
-                //width: 2070
-            onCurrentIndexChanged: console.debug(cbItems.get(currentIndex).text + ", " + cbItems.get(currentIndex).color)
-            */
-            onCurrentIndexChanged: console.debug(currentIndex)
+            model: [ combochoicetext1 , combochoicetext2 , combochoicetext3 ]
 
+            onCurrentIndexChanged:{
+                 // When using loader, preload upcoming view here?
+                 // Using currentText always shows previously chosen one.
+                 //console.debug("CurrentText says: " + currentText)
+                 console.debug("TextAt(currentIndex) says: " + textAt(currentIndex) )
+                 // Doesn't get updated after initial settting
+                 var comboChoice = currentIndex
+            }
         }
 
         Button {
@@ -73,7 +70,11 @@ ApplicationWindow {
             anchors.top: combo1.bottom
 
             text: "TestButton"
-            //onClicked:
+            onClicked: {
+                // Does not update comboChoice variable
+                console.debug("Button says: " + comboChoice)
+
+            }
         }
 
 
