@@ -24,10 +24,7 @@ ApplicationWindow {
         }
     }*/
     Loader {
-        id: pageLoader
-        anchors.fill: parent
-        source: "Addressbook.qml"
-        active: true
+        id: windowLoader
     }
 
 
@@ -91,15 +88,15 @@ ApplicationWindow {
 
             text: "TestButton"
             onClicked: {
-                // Does not update comboChoice variable
-                pageLoader.active
-
+                // Does not update comboChoice variable, works now
+                //pageLoader.active
+                windowLoader.source = "../addressbook.qml"
+                //windowLoader.forceActiveFocus()
                 console.debug("Button says: " + comboChoice.choice)
 
             }
 
         }
-
 
 
         ListView {
@@ -111,5 +108,15 @@ ApplicationWindow {
                 width: parent.width
             }
         }
-    }
+
+
+   }
+/*
+   Connections {
+       ignoreUnknownSignals: true
+       target: windowLoader.valid? windowLoader.item : null
+       onChangeToAddressbook: { windowLoader.source = "Addressbook.qml" }
+       onPageExit: { windowLoader.source = "main.qml" }
+   }
+   */
 }
