@@ -23,6 +23,13 @@ ApplicationWindow {
             text: qsTr("text")
         }
     }*/
+    Loader {
+        id: pageLoader
+        anchors.fill: parent
+        source: "Addressbook.qml"
+        active: true
+    }
+
 
    ScrollView {
        id: scroll1
@@ -66,11 +73,15 @@ ApplicationWindow {
                  // Using currentText always shows previously chosen one.
                  //console.debug("CurrentText says: " + currentText)
                  console.debug("TextAt(currentIndex) says: " + textAt(currentIndex) )
-                 // Doesn't get updated after initial settting
+
+                 // Doesn't get updated after initial setting
+                 // update: Works now when using QtObject
                  comboChoice.choice = currentIndex
 
             }
         }
+
+
 
         Button {
             id: button1
@@ -81,10 +92,12 @@ ApplicationWindow {
             text: "TestButton"
             onClicked: {
                 // Does not update comboChoice variable
+                pageLoader.active
 
                 console.debug("Button says: " + comboChoice.choice)
 
             }
+
         }
 
 
