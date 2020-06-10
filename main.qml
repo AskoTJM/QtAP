@@ -24,12 +24,12 @@ ApplicationWindow {
         }
     }*/
     header: ToolBar {
-            height: 13
+            height: 30
             Label {
                 text: qsTr("QtAndroidTestbench")
                // background: "grey"
                // color: "black"
-                font.pixelSize: 10
+                font.pixelSize: 15
                 anchors.centerIn: parent
             }
         }
