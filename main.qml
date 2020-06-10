@@ -23,15 +23,23 @@ ApplicationWindow {
             text: qsTr("text")
         }
     }*/
-    Loader {
-        id: windowLoader
-        anchors.fill: parent
-    }
+    header: ToolBar {
+            height: 13
+            Label {
+                text: qsTr("QtAndroidTestbench")
+               // background: "grey"
+               // color: "black"
+                font.pixelSize: 10
+                anchors.centerIn: parent
+            }
+        }
 
 
-   ScrollView {
+    StackView{
        id: scroll1
        anchors.fill: parent
+       //initialItem: Qt.resolvedUrl("")
+
 
 
         Text {
@@ -88,18 +96,18 @@ ApplicationWindow {
             anchors.top: combo1.bottom
 
             text: "TestButton"
+            autoExclusive: true
             onClicked: {
-                // Does not update comboChoice variable, works now
-                //pageLoader.active
-                windowLoader.source = "addressbook.qml"
+                //addressbook{}
 
-                console.debug("Button says: " + comboChoice.choice)
+                //appWindow.hide()
+                windowLoader.source = "addressbook.qml"
+                //console.debug("Button says: " + comboChoice.choice)
 
             }
-
         }
 
-
+        /*
         ListView {
             anchors.top: button1.bottom
             width: parent.width
@@ -109,6 +117,15 @@ ApplicationWindow {
                 width: parent.width
             }
         }
+        */
+
+         Loader {
+            id: windowLoader
+            anchors.fill: parent
+
+            //opacity: 0
+
+         }
 
 
    }
