@@ -14,5 +14,17 @@ QtObject {
     property color appTextColor: "white"
 
     // Strings, probably smarter to transfer into another file.
-    property string appChoice1Title: "Addressbook"
+
+    property string appChoiceDefaultDescription: "This app was tested with 5\" display at 1920x1080 resolution \nand targeting Android API 24 (Android 7.0) \nSo if it looks weird, try those."
+
+    property string appChoice0Title: "Addressbook"
+    property string appChoice0Description: "App for accessing addressbook located in Heroku using JSON"
+
+    property string appChoice1Title: "Apple"
+    property string appChoice1Description: "How do you like them apples?"
+
+    property string appChoice2Title: "Banana"
+    property string appChoice2Description: "BANANAS!!!"
+
 }
+
