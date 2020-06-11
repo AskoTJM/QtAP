@@ -8,45 +8,93 @@ StackView {
     id: addBook
     signal message(string msg)
     signal returnToMain()
+    initialItem: mainAddressView
+    anchors.fill: parent
 
 
-    Rectangle{
-        id: addBookRect
+    Component{
+        id: mainAddressView
+            Item{
+                Rectangle{
 
-        color: AppStyle.appBackgroundColor
-        anchors.fill: parent
+                color: AppStyle.appBackgroundColor
+                anchors.fill: parent
 
-        Text{
-            focus: true
-            id: abText
-            color: AppStyle.appTextColor
-            text: "Testi"
-            font.pointSize: 27
-            fontSizeMode: Text.FixedSize
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            //anchors.fill: parent
-            anchors{
-                top: parent.top
-                left: parent.left
+                Text{
+                    //focus: true
+                    id: abText
+                    color: AppStyle.appTextColor
+                    text: "Testi"
+                    font.pointSize: 27
+                    fontSizeMode: Text.FixedSize
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    //anchors.fill: parent
+                    anchors{
+                        top: parent.top
+                        left: parent.left
+                    }
+                }
+
+                Button{
+                    id: addBookButton
+                    anchors.top: abText.bottom
+                    text: "Back to main"
+                    onClicked: addBook.returnToMain()
+                }
+
+                Button{
+                    id: addSecondButton
+                    anchors.top: addBookButton.bottom
+                    text: "Next"
+                    onClicked: {
+                        //abText.visible = false
+                        //addBookButton.visible = false
+                        push(secondAddressView)
+
+                     }
+                }
             }
-
-
         }
-
-        Button{
-            id: addBookButton
-            anchors.top: abText.bottom
-            text: "Takaisin"
-            onClicked: addBook.returnToMain()
-
-            //console.debug("Work damn you!")
-            //addBook.message("clicked!")
-            //onClicked: returnToMain
-        }
-
-
     }
 
+    Component{
+            id: secondAddressView
+            Item{
+                Rectangle{
+                //id: addBookRect
 
+                //visible: false
+                color: AppStyle.appBackgroundColor
+                anchors.fill: parent
+
+                    Text{
+                        //focus: true
+                        id: ab2Text
+                        color: AppStyle.appTextColor
+                        text: "SecondTest"
+                        font.pointSize: 27
+                        fontSizeMode: Text.FixedSize
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        //anchors.fill: parent
+                        anchors{
+                            top: parent.top
+                            left: parent.left
+                        }
+                    }
+
+                    Button{
+                        id: addPrevButton
+                        anchors.top: ab2Text.bottom
+                        text: "Prev"
+                        onClicked: {
+                            push(mainAddressView)
+                         }
+                    }
+
+                }
+            }
+        }
 }
+
