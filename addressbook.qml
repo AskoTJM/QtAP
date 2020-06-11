@@ -6,11 +6,13 @@ import "."
 StackView {
     visible: true
     id: addBook
-    signal pageExit
+    signal message(string msg)
+    signal returnToMain()
+
 
     Rectangle{
         id: addBookRect
-        signal pageExit
+
         color: AppStyle.appBackgroundColor
         anchors.fill: parent
 
@@ -36,13 +38,14 @@ StackView {
             id: addBookButton
             anchors.top: abText.bottom
             text: "Takaisin"
+            onClicked: addBook.returnToMain()
 
+            //console.debug("Work damn you!")
+            //addBook.message("clicked!")
+            //onClicked: returnToMain
         }
 
-        Connections{
-            target: addBookButton
-            onClicked: addBook.pageExit
-        }
+
     }
 
 

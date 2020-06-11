@@ -15,7 +15,7 @@ ApplicationWindow {
 
     signal changeToAddressBook
 
-    property string combochoicetext1 : "Addressbook"
+    property string combochoicetext1 : "AddressBook"
     property string combochoicetext2 : "Apple"
     property string combochoicetext3 : "Pineapple"
 
@@ -26,10 +26,8 @@ ApplicationWindow {
             height: AppStyle.headerTitleSize
 
             Label {
-                text: qsTr("QtAndroidTestbench Dev state")
-               // background: "grey"
-               // color: "black"
-                font.pixelSize: 10
+                text: qsTr("QtAndroidTestbench Dev mode")
+                font.pixelSize: 15
                 anchors.centerIn: parent
             }
         }
@@ -37,8 +35,9 @@ ApplicationWindow {
             height: AppStyle.headerTitleSize
 
             Label{
+                id: footerTxt
                 text: qsTr("QtAndroidTestbench Dev state")
-                font.pixelSize: 10
+                font.pixelSize: 15
                 anchors.centerIn: parent
             }
     }
@@ -83,14 +82,8 @@ ApplicationWindow {
 
             model: [ combochoicetext1 , combochoicetext2 , combochoicetext3 ]
 
-            onCurrentIndexChanged:{
-                 // When using loader, preload upcoming view here?
-                 // Using currentText always shows previously chosen one.
-                 //console.debug("CurrentText says: " + currentText)
+            onCurrentIndexChanged:{               
                  console.debug("TextAt(currentIndex) says: " + textAt(currentIndex) )
-
-                 // Doesn't get updated after initial setting
-                 // update: Works now when using QtObject
                  comboChoice.choice = currentIndex
 
             }
@@ -106,13 +99,20 @@ ApplicationWindow {
 
             text: "TestButton"
             autoExclusive: true
-            //onClicked: {
+            onClicked: {
                     //console.debug("Button says: " + comboChoice.choice)
+                //footerTxt.text = "Gone"
                 //windowLoader.source = "addressbook.qml"
                 //goToAddressbook
-
-
-            }
+                   if (comboChoice.choice === 0 ){
+                       footerTxt.text = "Addressbook"
+                       windowLoader.source = "addressbook.qml"
+                   }
+                   else{
+                       footerTxt.text = comboChoice.choice
+                       console.debug("Button says: " + comboChoice.choice)
+                   }
+               }
         }
 
         /*
@@ -130,21 +130,29 @@ ApplicationWindow {
          Loader {
             id: windowLoader
             anchors.fill: parent
-
+            //function getBackToMain() { windowLoader.source = "main.qml" }
 
          }
 
          Connections {
              ignoreUnknownSignals: true
+             target : windowLoader.item
+             onMessage: console.log(msg)
              //target: windowLoader.valid ? windowLoader.item : null
-             target: button1
-             onClicked : {
-                if (comboChoice.choice === 0 ) windowLoader.source = "addressbook.qml"
-                else console.debug("Button says: " + comboChoice.choice)
+             //target: button1
+             //onClicked : {
+             //   if (comboChoice.choice === 0 ) windowLoader.source = "addressbook.qml"
+             //   else console.debug("Button says: " + comboChoice.choice)
+             //}
+             // onChangeToAddressbook: { windowLoader.source = "Addressbook.qml" }
+
+             onReturnToMain: {
+                 windowLoader.source = ""
+                 footerTxt.text = "Main"
              }
-             onChangeToAddressbook: { windowLoader.source = "Addressbook.qml" }
-             onExit : { windowLoader.source = "main.qml" }
+             //onExit : { windowLoader.source = "main.qml" }
          }
 
    }
 
+}
