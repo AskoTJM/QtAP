@@ -78,7 +78,7 @@ ApplicationWindow {
             width: parent.width
             leftPadding: parent.width * 0.05
             rightPadding: parent.width * 0.05
-            currentIndex: 2
+            currentIndex: 0
 
             model: [ combochoicetext1 , combochoicetext2 , combochoicetext3 ]
 
@@ -90,20 +90,15 @@ ApplicationWindow {
         }
 
 
-
         Button {
             id: button1
             width: parent /2
             height: 50
             anchors.top: combo1.bottom
 
-            text: "TestButton"
+            text: "Go"
             autoExclusive: true
             onClicked: {
-                    //console.debug("Button says: " + comboChoice.choice)
-                //footerTxt.text = "Gone"
-                //windowLoader.source = "addressbook.qml"
-                //goToAddressbook
                    if (comboChoice.choice === 0 ){
                        footerTxt.text = "Addressbook"
                        windowLoader.source = "addressbook.qml"
@@ -129,22 +124,16 @@ ApplicationWindow {
 
          Loader {
             id: windowLoader
-            anchors.fill: parent
-            //function getBackToMain() { windowLoader.source = "main.qml" }
-
+            anchors.fill: parent         
          }
 
          Connections {
              ignoreUnknownSignals: true
-             target : windowLoader.item
+             target :  windowLoader.item
              onMessage: console.log(msg)
+             // target with check is, probably smart but now freezes the whole thing. So don't uncomment
              //target: windowLoader.valid ? windowLoader.item : null
-             //target: button1
-             //onClicked : {
-             //   if (comboChoice.choice === 0 ) windowLoader.source = "addressbook.qml"
-             //   else console.debug("Button says: " + comboChoice.choice)
-             //}
-             // onChangeToAddressbook: { windowLoader.source = "Addressbook.qml" }
+
 
              onReturnToMain: {
                  windowLoader.source = ""
