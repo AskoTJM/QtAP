@@ -3,5 +3,7 @@
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>addressbook.qml</file>
+        <file>AppStyle.qml</file>
+        <file>qmldir</file>
     </qresource>
 </RCC>

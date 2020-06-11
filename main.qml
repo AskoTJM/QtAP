@@ -3,6 +3,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.0
 import QtQuick.Timeline 1.0
 import QtQuick.Window 2.2
+import "."
 
 
 ApplicationWindow {
@@ -24,7 +25,7 @@ ApplicationWindow {
         }
     }*/
     header: ToolBar {
-            height: 30
+            height: AppStyle.headerTitleSize
             Label {
                 text: qsTr("QtAndroidTestbench")
                // background: "grey"
