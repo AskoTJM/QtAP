@@ -21,7 +21,7 @@ StackView {
                 anchors.fill: parent
 
                 Text{
-                    //focus: true
+
                     id: abText
                     color: AppStyle.appTextColor
                     text: "Testi"
@@ -29,7 +29,7 @@ StackView {
                     fontSizeMode: Text.FixedSize
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
-                    //anchors.fill: parent
+
                     anchors{
                         top: parent.top
                         left: parent.left
@@ -48,10 +48,8 @@ StackView {
                     anchors.top: addBookButton.bottom
                     text: "Next"
                     onClicked: {
-                        //abText.visible = false
-                        //addBookButton.visible = false
-                        push(secondAddressView)
 
+                        push(secondAddressView)
                      }
                 }
             }
@@ -62,14 +60,12 @@ StackView {
             id: secondAddressView
             Item{
                 Rectangle{
-                //id: addBookRect
 
-                //visible: false
                 color: AppStyle.appBackgroundColor
                 anchors.fill: parent
 
                     Text{
-                        //focus: true
+
                         id: ab2Text
                         color: AppStyle.appTextColor
                         text: "SecondTest"

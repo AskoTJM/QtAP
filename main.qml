@@ -15,7 +15,7 @@ ApplicationWindow {
 
     signal changeToAddressBook
 
-    property string combochoicetext1 : "AddressBook"
+    property string combochoicetext1 : AppStyle.appChoice1Title
     property string combochoicetext2 : "Apple"
     property string combochoicetext3 : "Pineapple"
 
@@ -46,7 +46,6 @@ ApplicationWindow {
     StackView{
        id: scroll1
        anchors.fill: parent
-       //initialItem: Qt.resolvedUrl("")
 
 
 
@@ -58,8 +57,6 @@ ApplicationWindow {
             topPadding: parent.height * 0.05
             leftPadding: parent.width * 0.05
             rightPadding: parent.width * 0.05
-
-            //implicitHeight: parent.height * 0.45
 
             id: descriptionText
             width: parent.width
