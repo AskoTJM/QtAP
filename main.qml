@@ -12,28 +12,36 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("QTAndroidTestbench")
-    property string combochoicetext1 : "Banana"
+
+    signal changeToAddressBook
+
+    property string combochoicetext1 : "Addressbook"
     property string combochoicetext2 : "Apple"
     property string combochoicetext3 : "Pineapple"
 
     property var comboChoice : QtObject { property int choice: 0 }
 
-   /* Window{ id: newWindow ; x: 100; y: 100; width: 100; height: 100;
-        Text {
-            id: newWindowText
-            text: qsTr("text")
-        }
-    }*/
+
     header: ToolBar {
             height: AppStyle.headerTitleSize
+
             Label {
-                text: qsTr("QtAndroidTestbench")
+                text: qsTr("QtAndroidTestbench Dev state")
                // background: "grey"
                // color: "black"
-                font.pixelSize: 15
+                font.pixelSize: 10
                 anchors.centerIn: parent
             }
         }
+    footer: ToolBar{
+            height: AppStyle.headerTitleSize
+
+            Label{
+                text: qsTr("QtAndroidTestbench Dev state")
+                font.pixelSize: 10
+                anchors.centerIn: parent
+            }
+    }
 
 
     StackView{
@@ -98,12 +106,11 @@ ApplicationWindow {
 
             text: "TestButton"
             autoExclusive: true
-            onClicked: {
-                //addressbook{}
+            //onClicked: {
+                    //console.debug("Button says: " + comboChoice.choice)
+                //windowLoader.source = "addressbook.qml"
+                //goToAddressbook
 
-                //appWindow.hide()
-                windowLoader.source = "addressbook.qml"
-                //console.debug("Button says: " + comboChoice.choice)
 
             }
         }
@@ -124,18 +131,20 @@ ApplicationWindow {
             id: windowLoader
             anchors.fill: parent
 
-            //opacity: 0
 
          }
 
+         Connections {
+             ignoreUnknownSignals: true
+             //target: windowLoader.valid ? windowLoader.item : null
+             target: button1
+             onClicked : {
+                if (comboChoice.choice === 0 ) windowLoader.source = "addressbook.qml"
+                else console.debug("Button says: " + comboChoice.choice)
+             }
+             onChangeToAddressbook: { windowLoader.source = "Addressbook.qml" }
+             onExit : { windowLoader.source = "main.qml" }
+         }
 
    }
-/*
-   Connections {
-       ignoreUnknownSignals: true
-       target: windowLoader.valid? windowLoader.item : null
-       onChangeToAddressbook: { windowLoader.source = "Addressbook.qml" }
-       onPageExit: { windowLoader.source = "main.qml" }
-   }
-   */
-}
+
