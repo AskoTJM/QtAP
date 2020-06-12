@@ -157,7 +157,7 @@ StackView {
 
                     Button{
                         id: addPrevButton
-                        anchors.top: ab2Text.bottom
+                        anchors.top: ab3Text.bottom
                         text: "Prev"
                         onClicked: {
                             push(mainAddressView)

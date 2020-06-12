@@ -128,9 +128,9 @@ ApplicationWindow {
                 id: appDescriptionText
                 padding: 10
                 wrapMode: Text.WordWrap               
-                // Let's just set the first choices text, needs
-                // text: AppStyle.appChoice0Description
+
                 anchors.fill: parent
+            // Replace this with script later?
                 Component.onCompleted: appDescriptionText.text = AppStyle.appChoice0Description
             }
 
