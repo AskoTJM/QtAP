@@ -2,18 +2,18 @@ import QtQuick 2.0
 pragma Singleton
 
 QtObject {
-    // Object sizes
+// Object sizes
     property int appHeaderTitleSize: 10
 
-    // Font sizes
+// Font sizes
     property int appHeaderFontSize : 15
 
-    // Colors
+// Colors
     property color appHeaderBackgroundColor: "black"
     property color appBackgroundColor: "black"
     property color appTextColor: "white"
 
-    // Strings, probably smarter to transfer into another file.
+// Strings for ComboBox choosing app, probably would be smarter to transfer into another file.
 
     property string appChoiceDefaultDescription: "This app was tested with 5\" display at 1920x1080 resolution \nand targeting Android API 24 (Android 7.0) \nSo if it looks weird, try those."
 

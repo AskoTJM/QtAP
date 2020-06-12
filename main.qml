@@ -9,20 +9,19 @@ import "."
 ApplicationWindow {
     id: appWindow
     visible: true
-    width: 640
-    height: 480
+// Not necessary?
+    //   width: 640
+    //   height: 480
     title: qsTr("QTAndroidTestbench")
+    color: AppStyle.appBackgroundColor
 
+// Signals
     signal changeToAddressBook
 
-    // This is probably unnecessary step, should try without it.
-    //property string combochoicetext1 : AppStyle.appChoice0Title
-    //property string combochoicetext2 : AppStyle.appChoice1Title
-    //property string combochoicetext3 : AppStyle.appChoice2Title
-
+// Needed to update comboChoice correctly, otherwise seemed to stuck on first one selected
     property var comboChoice : QtObject { property int choice: 0 }
 
-
+// Probably removed, can't seem to be able to properly modify to fit the UI
     header: ToolBar {
             height: AppStyle.headerTitleSize
 
@@ -44,10 +43,10 @@ ApplicationWindow {
     }
 
 
+
     ScrollView{
        id: scroll1
        anchors.fill: parent
-
 
 
         Text {
@@ -70,6 +69,8 @@ ApplicationWindow {
 
         }
 
+
+    // ComboBox for choosing which sub app user wants to try.
         ComboBox {
             id: appChoiceCombo
             anchors.top: descriptionText.bottom
@@ -90,7 +91,7 @@ ApplicationWindow {
             onCurrentIndexChanged:{               
                  console.debug("TextAt(currentIndex) says: " + textAt(currentIndex) )
                  comboChoice.choice = currentIndex
-                // Stupid way of doing this but couldn't figure out how to create automatically
+            // Stupid way of doing this but couldn't figure out how to create automatically
                 switch(currentIndex){
                     case 0:
                         appDescriptionText.text = AppStyle.appChoice0Description
@@ -119,20 +120,18 @@ ApplicationWindow {
             width: parent.width * 0.95
             anchors.horizontalCenter: parent.horizontalCenter
             height: 140
-
-            color: "white"
-
-            //horizontalCenter: horizontalCenter
+            color: "white"       
             visible: true
 
              Text {
 
                 id: appDescriptionText
                 padding: 10
-                wrapMode: Text.WordWrap
-                //text: qsTr("AppStyle.appChoice1Description")
-                text: AppStyle.appChoiceDefaultDescription
+                wrapMode: Text.WordWrap               
+                // Let's just set the first choices text, needs
+                // text: AppStyle.appChoice0Description
                 anchors.fill: parent
+                Component.onCompleted: appDescriptionText.text = AppStyle.appChoice0Description
             }
 
         }
@@ -147,16 +146,23 @@ ApplicationWindow {
             text: "Go"
             autoExclusive: true
             onClicked: {
-                   if (comboChoice.choice === 0 ){
-                       footerTxt.text = "Addressbook"
-                       windowLoader.source = "addressbook.qml"
+                   switch(comboChoice.choice){
+                       case 0:
+                           footerTxt.text = "Addressbook"
+                           windowLoader.source = "addressbook.qml"
+                           break;
+                       case 1:
+                           footerTxt.text = "Apples"
+                           console.debug("Button says: " + comboChoice.choice)
+                           break;
+                       default:
+                           footerTxt.text = comboChoice.choice
+                           console.debug("Button says: " + comboChoice.choice)
+                           break;
                    }
-                   else{
-                       footerTxt.text = comboChoice.choice
-                       console.debug("Button says: " + comboChoice.choice)
-                   }
-               }
+             }
         }
+    }
 
         /*
         ListView {
@@ -179,7 +185,7 @@ ApplicationWindow {
              ignoreUnknownSignals: true
              target :  windowLoader.item
              onMessage: console.log(msg)
-             // target with check is, probably smart but now freezes the whole thing. So don't uncomment
+        // target with check is, probably smart but now freezes the whole thing. So don't uncomment
              //target: windowLoader.valid ? windowLoader.item : null
 
 
@@ -189,7 +195,5 @@ ApplicationWindow {
              }
              //onExit : { windowLoader.source = "main.qml" }
          }
-
-   }
 
 }

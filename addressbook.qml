@@ -4,21 +4,31 @@ import "."
 
 
 StackView {
-    visible: true
+
     id: addBook
+// Signals
     signal message(string msg)
     signal returnToMain()
+
     initialItem: mainAddressView
     anchors.fill: parent
 
+    visible: true
 
     Component{
         id: mainAddressView
+        // Component can only have one child, so wrapping everything in Item works around that, child->grandchild?
             Item{
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
-                anchors.fill: parent
+                anchors{
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    //bottom: addBookBackToMainButton.top
+                }
 
                 Text{
 
@@ -38,17 +48,21 @@ StackView {
 
                 Button{
                     id: addBookButton
-                    anchors.top: abText.bottom
+                    anchors{
+                        horizontalCenter: parent.horizontalCenter
+                        //left: parent.left
+                        bottom: parent.bottom
+
+                    }
                     text: "Back to main"
                     onClicked: addBook.returnToMain()
                 }
 
                 Button{
                     id: addSecondButton
-                    anchors.top: addBookButton.bottom
+                    anchors.top: abText.bottom
                     text: "Next"
                     onClicked: {
-
                         push(secondAddressView)
                      }
                 }
@@ -58,11 +72,18 @@ StackView {
 
     Component{
             id: secondAddressView
+        // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
-                anchors.fill: parent
+                anchors{
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    //bottom: addBookBackToMainButton.top
+                }
 
                     Text{
 
@@ -73,7 +94,6 @@ StackView {
                         fontSizeMode: Text.FixedSize
                         verticalAlignment: Text.AlignVCenter
                         horizontalAlignment: Text.AlignHCenter
-                        //anchors.fill: parent
                         anchors{
                             top: parent.top
                             left: parent.left
@@ -92,6 +112,7 @@ StackView {
                 }
             }
         }
+
 
 }
 
