@@ -23,6 +23,7 @@ StackView {
 
                 color: AppStyle.appBackgroundColor
                 anchors{
+                // Didn't work as planned, but I might try again later
                     top: parent.top
                     left: parent.left
                     right: parent.right
@@ -59,11 +60,20 @@ StackView {
                 }
 
                 Button{
-                    id: addSecondButton
+                    id: getAddButton
                     anchors.top: abText.bottom
-                    text: "Next"
+                    text: "Get data"
                     onClicked: {
-                        push(secondAddressView)
+                        push(dataAddressView)
+                     }
+                }
+
+                Button{
+                    id: addAddButton
+                    anchors.top: getAddButton.bottom
+                    text: "Add data"
+                    onClicked: {
+                        push(userAddressView)
                      }
                 }
             }
@@ -71,13 +81,14 @@ StackView {
     }
 
     Component{
-            id: secondAddressView
+            id: dataAddressView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
                 anchors{
+                // Didn't work as planned, but I might try again later
                     top: parent.top
                     left: parent.left
                     right: parent.right
@@ -113,6 +124,48 @@ StackView {
             }
         }
 
+    Component{
+            id: userAddressView
+        // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
+            Item{
+                Rectangle{
 
+                color: AppStyle.appBackgroundColor
+                anchors{
+                // Didn't work as planned, but I might try again later
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    //bottom: addBookBackToMainButton.top
+                }
+
+                    Text{
+
+                        id: ab3Text
+                        color: AppStyle.appTextColor
+                        text: "ThirdTest"
+                        font.pointSize: 27
+                        fontSizeMode: Text.FixedSize
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors{
+                            top: parent.top
+                            left: parent.left
+                        }
+                    }
+
+                    Button{
+                        id: addPrevButton
+                        anchors.top: ab2Text.bottom
+                        text: "Prev"
+                        onClicked: {
+                            push(mainAddressView)
+                         }
+                    }
+
+                }
+            }
+        }
 }
 

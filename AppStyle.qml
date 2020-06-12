@@ -26,5 +26,7 @@ QtObject {
     property string appChoice2Title: "Banana"
     property string appChoice2Description: "BANANAS!!!"
 
+// JSON Parsing in QML? https://stackoverflow.com/questions/41900383/parsing-json-in-qml/41900561
+
 }
 
