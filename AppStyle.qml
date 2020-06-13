@@ -13,7 +13,9 @@ QtObject {
     property color appBackgroundColor: "black"
     property color appTextColor: "white"
 
-// Strings for ComboBox choosing app, probably would be smarter to transfer into another file.
+//  main.qml Specifics
+
+    // Strings for ComboBox choosing app, probably would be smarter to transfer into another file.
 
     property string appChoiceDefaultDescription: "This app was tested with 5\" display at 1920x1080 resolution \nand targeting Android API 24 (Android 7.0) \nSo if it looks weird, try those."
 
@@ -26,7 +28,18 @@ QtObject {
     property string appChoice2Title: "Banana"
     property string appChoice2Description: "BANANAS!!!"
 
-// JSON Parsing in QML? https://stackoverflow.com/questions/41900383/parsing-json-in-qml/41900561
+// addressbook.qml ( = ab) Specifics
+    // Strings
+    property string abGetData: "Get data"
+    property string abAddUser: "Add data"
+    property string abReturnToMain: "Return to main"
+
+    // Values
+    property int abButtonWidth: 150
+    property int abButtonPadding: 10
+
+
+    // JSON Parsing in QML? https://stackoverflow.com/questions/41900383/parsing-json-in-qml/41900561
 
 }
 

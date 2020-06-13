@@ -5,83 +5,99 @@ import "."
 
 StackView {
 
-    id: addBook
+    id: abStack
 // Signals
     signal message(string msg)
     signal returnToMain()
 
-    initialItem: mainAddressView
+    initialItem: abMainView
     anchors.fill: parent
 
     visible: true
 
     Component{
-        id: mainAddressView
+        id: abMainView
         // Component can only have one child, so wrapping everything in Item works around that, child->grandchild?
             Item{
                 Rectangle{
 
-                color: AppStyle.appBackgroundColor
-                anchors{
-                // Didn't work as planned, but I might try again later
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                    //bottom: addBookBackToMainButton.top
-                }
-
-                Text{
-
-                    id: abText
-                    color: AppStyle.appTextColor
-                    text: "Testi"
-                    font.pointSize: 27
-                    fontSizeMode: Text.FixedSize
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-
+                    color: AppStyle.appBackgroundColor
                     anchors{
-                        top: parent.top
-                        left: parent.left
-                    }
-                }
-
-                Button{
-                    id: addBookButton
-                    anchors{
-                        horizontalCenter: parent.horizontalCenter
+                    // Didn't work as planned, but I might try again later
+                        //top: parent.top
                         //left: parent.left
-                        bottom: parent.bottom
-
+                        //right: parent.right
+                        //bottom: parent.bottom
+                        fill: parent
                     }
-                    text: "Back to main"
-                    onClicked: addBook.returnToMain()
-                }
 
-                Button{
-                    id: getAddButton
-                    anchors.top: abText.bottom
-                    text: "Get data"
-                    onClicked: {
-                        push(dataAddressView)
-                     }
-                }
+                    Text{
 
-                Button{
-                    id: addAddButton
-                    anchors.top: getAddButton.bottom
-                    text: "Add data"
-                    onClicked: {
-                        push(userAddressView)
-                     }
+                        id: abMainText
+                        color: AppStyle.appTextColor
+                        text: "Testi"
+                        font.pointSize: 27
+                        fontSizeMode: Text.FixedSize
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+
+                        anchors{
+                            top: parent.top
+                            //left: parent.left
+                        }
+                    }
+
+                    Grid{
+                        width: parent.width
+                        height: implicitHeight
+                        rows: 2
+                        columns: 2
+                        rowSpacing: AppStyle.abButtonPadding / 2
+                        columnSpacing: AppStyle.abButtonPadding
+                        anchors{
+                            top: abMainText.bottom
+                            horizontalCenter: parent.horizontalCenter
+
+                        }
+
+                            Button{
+                                id: abGetDataButton
+                                //anchors.top: abMainText.bottom
+                                width: AppStyle.abButtonWidth
+
+                                text: "Get data"
+                                onClicked: {
+                                    push(abAddressView)
+                                }
+                            }
+
+                            Button{
+                                id: abAddDataButton
+                                width: AppStyle.abButtonWidth
+
+                                //anchors.top: abGetDataButton.bottom
+                                text: "Add data"
+                                onClicked: {
+                                    push(abContactView)
+                                }
+                            }
+
+                            Button{
+                                id: abBackToMainButton
+                                width: AppStyle.abButtonWidth
+
+
+                                text: "Back to main"
+                                onClicked: abStack.returnToMain()
+                            }
+
+                }
                 }
             }
-        }
     }
 
     Component{
-            id: dataAddressView
+            id: abAddressView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
                 Rectangle{
@@ -98,7 +114,7 @@ StackView {
 
                     Text{
 
-                        id: ab2Text
+                        id: abAddressViewText
                         color: AppStyle.appTextColor
                         text: "SecondTest"
                         font.pointSize: 27
@@ -112,11 +128,11 @@ StackView {
                     }
 
                     Button{
-                        id: addPrevButton
-                        anchors.top: ab2Text.bottom
+                        id: abAddressViewPrevButton
+                        anchors.top: abAddressViewText.bottom
                         text: "Prev"
                         onClicked: {
-                            push(mainAddressView)
+                            push(abMainView)
                          }
                     }
 
@@ -125,7 +141,7 @@ StackView {
         }
 
     Component{
-            id: userAddressView
+            id: abContactView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
                 Rectangle{
@@ -142,7 +158,7 @@ StackView {
 
                     Text{
 
-                        id: ab3Text
+                        id: abContactViewText
                         color: AppStyle.appTextColor
                         text: "ThirdTest"
                         font.pointSize: 27
@@ -156,11 +172,11 @@ StackView {
                     }
 
                     Button{
-                        id: addPrevButton
-                        anchors.top: ab3Text.bottom
+                        id: abContactViewPrevButton
+                        anchors.top: abContactViewText.bottom
                         text: "Prev"
                         onClicked: {
-                            push(mainAddressView)
+                            push(abMainView)
                          }
                     }
 
