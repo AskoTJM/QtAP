@@ -33,10 +33,11 @@ QtObject {
     property string abGetData: "Get data"
     property string abAddUser: "Add data"
     property string abReturnToMain: "Return to main"
+    property string abTitle: "Heroku Addressbook"
 
     // Values
     property int abButtonWidth: 150
-    property int abButtonPadding: 10
+    property int abButtonMarging: 10
 
 
     // JSON Parsing in QML? https://stackoverflow.com/questions/41900383/parsing-json-in-qml/41900561

@@ -35,28 +35,30 @@ StackView {
 
                         id: abMainText
                         color: AppStyle.appTextColor
-                        text: "Testi"
+                        text: AppStyle.abTitle
                         font.pointSize: 27
                         fontSizeMode: Text.FixedSize
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
 
                         anchors{
                             top: parent.top
+                            margins: AppStyle.abButtonMarging + 10
+                            horizontalCenter: parent.horizontalCenter
                             //left: parent.left
                         }
                     }
 
                     Grid{
-                        width: parent.width
+                        width: implicitWidth // parent.width
                         height: implicitHeight
                         rows: 2
                         columns: 2
-                        rowSpacing: AppStyle.abButtonPadding / 2
-                        columnSpacing: AppStyle.abButtonPadding
+                        rowSpacing: AppStyle.abButtonMarging / 2
+                        columnSpacing: AppStyle.abButtonMarging
                         anchors{
                             top: abMainText.bottom
                             horizontalCenter: parent.horizontalCenter
+                            topMargin: 20
+                            bottomMargin: 20
 
                         }
 
@@ -91,7 +93,7 @@ StackView {
                                 onClicked: abStack.returnToMain()
                             }
 
-                }
+                    }
                 }
             }
     }
