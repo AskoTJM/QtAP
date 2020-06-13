@@ -6,6 +6,7 @@ import QtQuick.Window 2.2
 import "."
 
 
+
 ApplicationWindow {
     id: appWindow
     visible: true

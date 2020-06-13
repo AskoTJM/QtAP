@@ -67,7 +67,7 @@ StackView {
                                 //anchors.top: abMainText.bottom
                                 width: AppStyle.abButtonWidth
 
-                                text: "Get data"
+                                text: AppStyle.abGetData
                                 onClicked: {
                                     push(abAddressView)
                                 }
@@ -118,7 +118,7 @@ StackView {
 
                         id: abAddressViewText
                         color: AppStyle.appTextColor
-                        text: "SecondTest"
+                        text: "AddressBook"
                         font.pointSize: 27
                         fontSizeMode: Text.FixedSize
                         verticalAlignment: Text.AlignVCenter
@@ -138,9 +138,13 @@ StackView {
                          }
                     }
 
+
                 }
+Component.onCompleted: getData()
             }
-        }
+
+
+    }
 
     Component{
             id: abContactView
@@ -185,5 +189,27 @@ StackView {
                 }
             }
         }
+
+
+
+
+    function getData(){
+        var req = new XMLHttpRequest;
+                req.open("GET", "https://qtphone.herokuapp.com/contact");
+        req.onload = function() {
+                    var objectArray = JSON.parse(req.responseText);
+                    if (objectArray.errors !== undefined) {
+                        console.log("Error : " + objectArray.errors[0].message)
+                    } else {
+                        for (var key in objectArray.statuses) {
+                            var jsonObject = objectArray.statuses[key];
+                            //tweets.append(jsonObject);
+                            console.log(jsonObject);
+                        }
+                    }
+                    wrapper.isLoaded()
+                }
+                req.send();
+    }
 }
 
