@@ -7,6 +7,7 @@ QtObject {
 
 // Font sizes
     property int appHeaderFontSize : 15
+    property int appInfoFontSize: 15
 
 // Colors
     property color appHeaderBackgroundColor: "black"

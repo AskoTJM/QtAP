@@ -58,7 +58,7 @@ StackView {
                             top: abMainText.bottom
                             horizontalCenter: parent.horizontalCenter
                             topMargin: 20
-                            bottomMargin: 20
+
 
                         }
 

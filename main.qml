@@ -50,6 +50,7 @@ ApplicationWindow {
 
 
         Text {
+            id: descriptionText
             anchors.top: parent.top
             font.pointSize: 24
             color: AppStyle.appTextColor
@@ -58,9 +59,9 @@ ApplicationWindow {
             leftPadding: parent.width * 0.05
             rightPadding: parent.width * 0.05
 
-            id: descriptionText
+
             width: parent.width
-            height: 120
+            height: implicitHeight
             wrapMode: Text.WordWrap
 
             text: qsTr("Qt/Android Testbench")
@@ -69,16 +70,37 @@ ApplicationWindow {
 
         }
 
+        Text {
+            id: appGuideText
+            width: parent.width
+            font.pointSize: AppStyle.appInfoFontSize
+            color: AppStyle.appTextColor
+            textFormat: Text.RichText
+            topPadding: parent.height * 0.05
+            leftPadding: parent.width * 0.05
+            rightPadding: parent.width * 0.05
+            anchors.top: descriptionText.bottom
+            text: AppStyle.appChoiceDefaultDescription
+            wrapMode: Text.WordWrap
+            font.family: "Arial"
+            horizontalAlignment: Text.AlignHCenter
+        }
+
 
     // ComboBox for choosing which sub app user wants to try.
         ComboBox {
             id: appChoiceCombo
-            anchors.top: descriptionText.bottom
-            anchors.leftMargin: parent.width * 0.05
-            anchors.rightMargin: parent.width * 0.05
+            anchors {
+                top: appGuideText.bottom
+                leftMargin: parent.width * 0.05
+                rightMargin: parent.width * 0.05
+                topMargin:  20
+            }
             width: parent.width
             leftPadding: parent.width * 0.05
             rightPadding: parent.width * 0.05
+
+        // Set ComboBox Index to 0 so we have something chosen by default
             currentIndex: 0
 
             //model: [ combochoicetext1 , combochoicetext2 , combochoicetext3 ]
