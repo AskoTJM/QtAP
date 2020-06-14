@@ -18,6 +18,8 @@ SOURCES += \
 
 RESOURCES += qml.qrc
 
+QT += androidextras
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -29,12 +31,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-#android {
-#    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-#
-#    DISTFILES += \
-#        android/AndroidManifest.xml \
-#        android/build.gradle \
-#        android/res/values/libs.xml
-#}
+android {
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+    DISTFILES += \
+        android/AndroidManifest.xml \
+        android/build.gradle \
+        android/res/values/libs.xml
+}
 android: include(C:/OpenSSL/android_openssl-master/openssl.pri)
