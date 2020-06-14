@@ -207,7 +207,7 @@ Component.onCompleted: getData()
                             console.log(jsonObject);
                         }
                     }
-                    wrapper.isLoaded()
+                    // wrapper.isLoaded()
                 }
                 req.send();
     }

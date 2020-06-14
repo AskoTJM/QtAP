@@ -41,6 +41,7 @@ ApplicationWindow {
                 font.pixelSize: 15
                 anchors.centerIn: parent
             }
+
     }
 
 
