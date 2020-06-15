@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     return app.exec();
-
+// Added for permission request
     #if defined (Q_OS_ANDROID)
         if(!requestAndroidPermissions())
             return -1;

@@ -95,13 +95,14 @@ StackView {
 
                     }
                 }
-            }
+        }
     }
 
     Component{
             id: abAddressView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
+                Component.onCompleted: getData()
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
@@ -138,12 +139,8 @@ StackView {
                          }
                     }
 
-
                 }
-Component.onCompleted: getData()
             }
-
-
     }
 
     Component{
@@ -191,25 +188,29 @@ Component.onCompleted: getData()
         }
 
 
-
-
     function getData(){
+       // var url = new URL('https://qtphone.herokuapp.com/contact');
+        console.log("Hmm1")
+
         var req = new XMLHttpRequest;
-                req.open("GET", "https://qtphone.herokuapp.com/contact");
+                req.open("GET", 'https://qtphone.herokuapp.com/contact');
         req.onload = function() {
                     var objectArray = JSON.parse(req.responseText);
                     if (objectArray.errors !== undefined) {
                         console.log("Error : " + objectArray.errors[0].message)
+                        console.log("Hmm2")
+
                     } else {
                         for (var key in objectArray.statuses) {
                             var jsonObject = objectArray.statuses[key];
                             //tweets.append(jsonObject);
-                            console.log(jsonObject);
+                            //console.log(jsonObject)
+                            console.log("Hmm3")
                         }
                     }
                     // wrapper.isLoaded()
                 }
                 req.send();
     }
-}
 
+}
