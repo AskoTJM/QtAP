@@ -102,7 +102,9 @@ StackView {
             id: abAddressView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
-                Component.onCompleted: getData()
+               // Let's try something else,
+               // Component.onCompleted: getData()
+                Component.onCompleted: getData2()
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
@@ -194,11 +196,12 @@ StackView {
 
         var req = new XMLHttpRequest;
                 req.open("GET", 'https://qtphone.herokuapp.com/contact');
+                console.log("Hmm2")
         req.onload = function() {
                     var objectArray = JSON.parse(req.responseText);
                     if (objectArray.errors !== undefined) {
                         console.log("Error : " + objectArray.errors[0].message)
-                        console.log("Hmm2")
+                        console.log("Hmm3")
 
                     } else {
                         for (var key in objectArray.statuses) {
@@ -211,6 +214,10 @@ StackView {
                     // wrapper.isLoaded()
                 }
                 req.send();
+    }
+
+    function getData2(){
+        abgetdata();
     }
 
 }

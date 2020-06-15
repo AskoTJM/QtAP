@@ -4,6 +4,7 @@
 
 #if defined (Q_OS_ANDROID)
 #include <QtAndroidExtras/QtAndroid>
+#include <QNetworkAccessManager>
 
 bool requestAndroidPermissions(){
     //Request requiered permissions at runtime
@@ -28,6 +29,7 @@ bool requestAndroidPermissions(){
 }
 #endif
 
+
 int main(int argc, char *argv[])
 {
 
@@ -47,10 +49,11 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     return app.exec();
+    requestAndroidPermissions();
 // Added for permission request
-    #if defined (Q_OS_ANDROID)
-        if(!requestAndroidPermissions())
-            return -1;
-    #endif
+//    #if defined (Q_OS_ANDROID)
+//       if(!requestAndroidPermissions())
+//          return -1;
+//  #endif
 }
 
