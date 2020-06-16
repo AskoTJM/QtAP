@@ -6,5 +6,7 @@
         <file>AppStyle.qml</file>
         <file>qmldir</file>
         <file>contact.qml</file>
+        <file>littlehelper.js</file>
+        <file>data.json</file>
     </qresource>
 </RCC>

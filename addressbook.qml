@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
 import "."
+import "littlehelper.js" as Utils
+
 
 
 StackView {
@@ -14,6 +16,12 @@ StackView {
     anchors.fill: parent
 
     visible: true
+
+    property alias msg: ttext
+    // property will store data
+     property var jsonData: null
+
+        Text { id: ttext; anchors.fill: parent; anchors.margins: 10 }
 
     Component{
         id: abMainView
@@ -103,8 +111,9 @@ StackView {
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
             Item{
                // Let's try something else,
-               // Component.onCompleted: getData()
                 Component.onCompleted: getData2()
+               // Component.onCompleted: Utils.makeRequest()
+
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
@@ -194,30 +203,49 @@ StackView {
        // var url = new URL('https://qtphone.herokuapp.com/contact');
         console.log("Hmm1")
 
-        var req = new XMLHttpRequest;
+        var req = new XMLHttpRequest;               
                 req.open("GET", 'https://qtphone.herokuapp.com/contact');
                 console.log("Hmm2")
         req.onload = function() {
-                    var objectArray = JSON.parse(req.responseText);
+                console.log("Hmm3")
+                var objectArray = JSON.parse(req.responseText);
                     if (objectArray.errors !== undefined) {
                         console.log("Error : " + objectArray.errors[0].message)
-                        console.log("Hmm3")
+                        console.log("Hmm4")
 
                     } else {
                         for (var key in objectArray.statuses) {
                             var jsonObject = objectArray.statuses[key];
                             //tweets.append(jsonObject);
                             //console.log(jsonObject)
-                            console.log("Hmm3")
+                            console.log("Hmm5")
                         }
                     }
                     // wrapper.isLoaded()
                 }
                 req.send();
+                console.log("Hmm6")
     }
 
+
     function getData2(){
-        abgetdata();
-    }
+        console.log("Hmmm1")
+        var xhr = new XMLHttpRequest
+            console.log("Hmmm2")
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                console.log("Hmmm3" + xhr.responseText)
+                var dataString = xhr.responseText
+                console.log("Hmmm4 "+ dataString)
+
+                abStack.jsonData = JSON.parse(dataString)
+              }
+            }
+            console.log("Hmmm5")
+            xhr.open("GET", Qt.resolvedUrl("https://qtphone.herokuapp.com/contact"))
+            xhr.send()
+            console.log("Hmmm6")
+          }
+
 
 }
