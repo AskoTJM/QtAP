@@ -234,9 +234,17 @@ StackView {
             console.log("Hmmm2")
             xhr.onreadystatechange = function() {
               if (xhr.readyState === XMLHttpRequest.DONE) {
-                console.log("Hmmm3" + xhr.responseText)
+                console.log("Hmmm3")
+                // New test code
+                var objectArray = JSON.parse(xhr.responseText)
+                //console.log("Hmmm4 "+ objectArray.email)
+                  for (var x in objectArray) {
+                      var jsonObject = objectArray.at[x+1];
+                      console.log("Very hmm " + jsonObject) // Object.keys(objectArray).length)
+                  }
+                //
                 var dataString = xhr.responseText
-                console.log("Hmmm4 "+ dataString)
+                //console.log("Hmmm4 "+ dataString)
 
                 abStack.jsonData = JSON.parse(dataString)
               }
