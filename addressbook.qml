@@ -5,6 +5,7 @@ import "littlehelper.js" as Utils
 
 
 
+
 StackView {
 
     id: abStack
@@ -229,6 +230,7 @@ StackView {
 
 
     function getData2(){
+
         console.log("Hmmm1")
         var xhr = new XMLHttpRequest
             console.log("Hmmm2")
@@ -239,8 +241,8 @@ StackView {
                 var objectArray = JSON.parse(xhr.responseText)
                 //console.log("Hmmm4 "+ objectArray.email)
                   for (var x in objectArray) {
-                      var jsonObject = objectArray.at[x+1];
-                      console.log("Very hmm " + jsonObject) // Object.keys(objectArray).length)
+                      var jsonObject = objectArray.id
+                      console.log("Very hmm " + jsonObject.id // Object.keys(objectArray).length)
                   }
                 //
                 var dataString = xhr.responseText

@@ -2,6 +2,19 @@
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 
+
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonValue>
+#include <QString>
+#include <QDebug>
+#include <QFile>
+#include <QDateTime>
+#include <QDir>
+
+
 #if defined (Q_OS_ANDROID)
 #include <QtAndroidExtras/QtAndroid>
 #include <QNetworkAccessManager>
