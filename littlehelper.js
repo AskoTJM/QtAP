@@ -22,10 +22,13 @@ function getDataFromCloud(getTheUrl){
 }
 
 function outputJSONData(){
-
+    abJSONModel.clear()
     for (var x in abStack.jsonData) {
         var jsonObject = abStack.jsonData[x]
-        console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
+        //console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
+        abJSONModel.append({"lastname": jsonObject["lastname"],"firstname":jsonObject["firstname"]})
+        console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
     }
 }
+

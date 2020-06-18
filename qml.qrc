@@ -5,7 +5,7 @@
         <file>addressbook.qml</file>
         <file>AppStyle.qml</file>
         <file>qmldir</file>
-        <file>contact.qml</file>
+        <file>ContactModel.qml</file>
         <file>littlehelper.js</file>
     </qresource>
 </RCC>

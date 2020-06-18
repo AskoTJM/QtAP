@@ -5,7 +5,6 @@ import "littlehelper.js" as Utils
 
 
 
-
 StackView {
 
     id: abStack
@@ -20,9 +19,29 @@ StackView {
 
 
     // property will store data
-     property var jsonData
+    property var jsonData
 
+    ListModel{
+        id: abJSONModel
+    }
 
+    Component{
+        id: abAddressList
+        Row {
+                    //spacing: 10
+                    Text {
+                        color: AppStyle.appTextColor
+                        font.pixelSize: 24
+                        text: "Nimi: "+lastname +", "+firstname+" "
+                        horizontalAlignment: horizontalAlignment
+                    }
+
+//                    Text {
+//                        color: AppStyle.appTextColor
+//                        text: firstname
+//                    }
+                }
+    }
 
     Component{
         id: abMainView
@@ -95,6 +114,8 @@ StackView {
     Component{
             id: abAddressView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
+
+
             ScrollView{
                // Let's try something else,
                 Component.onCompleted: console.log("abAddressView ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
@@ -126,9 +147,10 @@ StackView {
                     }
 
                     Grid{
+                        id: abAddressViewGrid
                         width: implicitWidth
                         height: implicitHeight
-                        rows: 1
+                        rows: 2
                         columns: 2
                         rowSpacing: AppStyle.abButtonMarging / 2
                         columnSpacing: AppStyle.abButtonMarging
@@ -148,6 +170,21 @@ StackView {
                             }
 
                             Button{
+                                id: abAddressViewDataOutButton
+                                width: AppStyle.abButtonWidth
+                                text: "Populate"
+                                onClicked:  console.log("Helvetti")
+
+                            }
+
+                            Button{
+                                id: abAddressViewPlaceholderButton
+                                width: AppStyle.abButtonWidth
+                                text: "Placeholder"
+                               //onClicked:
+                            }
+
+                            Button{
                                 id: abAddressViewPrevButton
                                 width: AppStyle.abButtonWidth
                                 text: AppStyle.abReturnToMain
@@ -155,20 +192,32 @@ StackView {
                             }
                     }
 
-                    ListView {
-                        anchors.fill: parent
-                        model: ListModel { id: model}
-                        delegate: Text { text: "- " + lastname + ", " + firstname }
-                        Component.onCompleted: {
+                    ScrollView{
+                        anchors.bottom: parent.bottom
+                        anchors.top: abAddressViewGrid.bottom
+                        //color: AppStyle.appBackgroundColor
+                        width: parent.width
+                        implicitHeight: abAddressListView.contentHeight
 
-                                    model.clear();
+                        Text{
+                            id: abCounterText
+                            anchors.top: parent.top
+                            color: AppStyle.appTextColor
+                            width: parent.width
+                            text: abJSONModel.count
+                        }
 
-                                    for (var i in jsonData) {
-                                        var jsonObject = abStack.jsonData[i]
-                                        model.append({lastname = jsonObject["lastname"], firstname = jsonObject["firstname"]})
-                                    }
-                                }
-
+                        ListView {
+                                id: abAddressListView
+                                anchors.top: abCounterText.bottom
+                                //Screws up
+                                //clip: true
+                                width: parent * 0.95
+                                height: contentHeight
+                                visible: true
+                                model: abJSONModel
+                                delegate: abAddressList
+                        }
 
 
                     }
@@ -217,7 +266,7 @@ StackView {
                          }
                     }
 
-                }
-            }
-        }
-}
+                }//Rectangle
+            }//Item
+    }//Component
+}//StackView
