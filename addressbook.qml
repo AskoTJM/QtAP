@@ -18,11 +18,11 @@ StackView {
 
     visible: true
 
-    property alias msg: ttext
+
     // property will store data
      property var jsonData
 
-        Text { id: ttext; anchors.fill: parent; anchors.margins: 10 }
+
 
     Component{
         id: abMainView
@@ -31,12 +31,7 @@ StackView {
                 Rectangle{
 
                     color: AppStyle.appBackgroundColor
-                    anchors{
-                    // Didn't work as planned, but I might try again later
-                        //top: parent.top
-                        //left: parent.left
-                        //right: parent.right
-                        //bottom: parent.bottom
+                    anchors{                  
                         fill: parent
                     }
 
@@ -52,12 +47,11 @@ StackView {
                             top: parent.top
                             margins: AppStyle.abButtonMarging + 10
                             horizontalCenter: parent.horizontalCenter
-                            //left: parent.left
                         }
                     }
 
                     Grid{
-                        width: implicitWidth // parent.width
+                        width: implicitWidth
                         height: implicitHeight
                         rows: 2
                         columns: 2
@@ -67,15 +61,11 @@ StackView {
                             top: abMainText.bottom
                             horizontalCenter: parent.horizontalCenter
                             topMargin: 20
-
-
                         }
 
                             Button{
                                 id: abGetDataButton
-                                //anchors.top: abMainText.bottom
                                 width: AppStyle.abButtonWidth
-
                                 text: AppStyle.abGetData
                                 onClicked: {
                                     push(abAddressView)
@@ -85,20 +75,15 @@ StackView {
                             Button{
                                 id: abAddDataButton
                                 width: AppStyle.abButtonWidth
+                                text: AppStyle.abAddUser
+                                onClicked: push(abContactView)
 
-                                //anchors.top: abGetDataButton.bottom
-                                text: "Add data"
-                                onClicked: {
-                                    push(abContactView)
-                                }
                             }
 
                             Button{
                                 id: abBackToMainButton
                                 width: AppStyle.abButtonWidth
-
-
-                                text: "Back to main"
+                                text: AppStyle.abReturnToMain
                                 onClicked: abStack.returnToMain()
                             }
 
@@ -110,9 +95,9 @@ StackView {
     Component{
             id: abAddressView
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
-            Item{
+            ScrollView{
                // Let's try something else,
-                Component.onCompleted:  Utils.getDataFromHeroku()
+                Component.onCompleted: console.log("abAddressView ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
 
                 Rectangle{
 
@@ -122,36 +107,74 @@ StackView {
                     top: parent.top
                     left: parent.left
                     right: parent.right
-                    bottom: parent.bottom
-                    //bottom: addBookBackToMainButton.top
+                    bottom: parent.bottom                   
                 }
 
                     Text{
 
-                        id: abAddressViewText
+                        id: abAddressViewTitleText
                         color: AppStyle.appTextColor
-                        text: "AddressBook"
+                        text: AppStyle.abTitle
                         font.pointSize: 27
                         fontSizeMode: Text.FixedSize
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
+
                         anchors{
                             top: parent.top
-                            left: parent.left
+                            margins: AppStyle.abButtonMarging + 10
+                            horizontalCenter: parent.horizontalCenter
                         }
                     }
 
-                    Button{
-                        id: abAddressViewPrevButton
-                        anchors.top: abAddressViewText.bottom
-                        text: "Prev"
-                        onClicked: {
-                            push(abMainView)
-                         }
+                    Grid{
+                        width: implicitWidth
+                        height: implicitHeight
+                        rows: 1
+                        columns: 2
+                        rowSpacing: AppStyle.abButtonMarging / 2
+                        columnSpacing: AppStyle.abButtonMarging
+                        anchors{
+                            top: abAddressViewTitleText.bottom
+                            horizontalCenter: parent.horizontalCenter
+                            topMargin: 20
+                        }
+
+                            Button{
+                                id: abGetDataFromCloud
+                                width: AppStyle.abButtonWidth
+                                text: AppStyle.abGetDataFromCloud
+                                onClicked: {
+                                    Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                                }
+                            }
+
+                            Button{
+                                id: abAddressViewPrevButton
+                                width: AppStyle.abButtonWidth
+                                text: AppStyle.abReturnToMain
+                                onClicked: push(abMainView)
+                            }
                     }
 
-                }
+                    ListView {
+                        anchors.fill: parent
+                        model: ListModel { id: model}
+                        delegate: Text { text: "- " + lastname + ", " + firstname }
+                        Component.onCompleted: {
+
+                                    model.clear();
+
+                                    for (var i in jsonData) {
+                                        var jsonObject = abStack.jsonData[i]
+                                        model.append({lastname = jsonObject["lastname"], firstname = jsonObject["firstname"]})
+                                    }
+                                }
+
+
+
+                    }
+
             }
+        }
     }
 
     Component{
@@ -197,72 +220,4 @@ StackView {
                 }
             }
         }
-
-
-
-// Were going with the another one.  Keeping this code for now. Cleanup later.
-//
-//    function getData(){
-//       // var url = new URL('https://qtphone.herokuapp.com/contact');
-//        console.log("Hmm1")
-
-//        var req = new XMLHttpRequest;
-//                req.open("GET", 'https://qtphone.herokuapp.com/contact');
-//                console.log("Hmm2")
-//        req.onload = function() {
-//                console.log("Hmm3")
-//                var objectArray = JSON.parse(req.responseText);
-//                    if (objectArray.errors !== undefined) {
-//                        console.log("Error : " + objectArray.errors[0].message)
-//                        console.log("Hmm4")
-
-//                    } else {
-//                        for (var key in objectArray.statuses) {
-//                            var jsonObject = objectArray.statuses[key];
-//                            //tweets.append(jsonObject);
-//                            //console.log(jsonObject)
-//                            console.log("Hmm5")
-//                        }
-//                    }
-//                    // wrapper.isLoaded()
-//                }
-//                req.send();
-//                console.log("Hmm6")
-//    }
-
-
-//    function getDataFromHeroku(){
-
-//        console.log("Hmmm1")
-//        var xhr = new XMLHttpRequest
-//            console.log("Hmmm2")
-//            xhr.onreadystatechange = function() {
-//              if (xhr.readyState === XMLHttpRequest.DONE) {
-//                console.log("Hmmm3")
-//            // New test code
-//                jsonData = xhr.responseText
-//                var objectArray = JSON.parse(xhr.responseText)
-//            // chug data to safety
-//                abStack.jsonData = objectArray
-//                //console.log("Hmmm4 "+ objectArray.email)
-//                  for (var x in objectArray) {
-//                      //var jsonObject = objectArray[x]
-//                      var jsonObject = abStack.jsonData[x]
-//                      console.log("Very hmm " + x + " " + jsonObject["email"]) // Object.keys(objectArray).length)
-//                      //console.log("Very hmm " + x + " " + abStack.jsonData["email"])
-//                  }
-//                //
-//                var dataString = xhr.responseText
-//                //console.log("Hmmm4 "+ dataString)
-
-//                abStack.jsonData = JSON.parse(dataString)
-//              }
-//            }
-//            console.log("Hmmm5")
-//            xhr.open("GET", Qt.resolvedUrl("https://qtphone.herokuapp.com/contact"))
-//            xhr.send()
-//            console.log("Hmmm6")
-//          }
-
-
 }

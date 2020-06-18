@@ -31,10 +31,11 @@ QtObject {
 
 // addressbook.qml ( = ab) Specifics
     // Strings
-    property string abGetData: "Get data"
-    property string abAddUser: "Add data"
+    property string abGetData: "Browse Contacts"
+    property string abAddUser: "Add Contact"
     property string abReturnToMain: "Return to main"
     property string abTitle: "Heroku Addressbook"
+    property string abGetDataFromCloud: "Get from Cloud"
 
     // Values
     property int abButtonWidth: 150

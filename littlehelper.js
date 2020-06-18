@@ -1,34 +1,31 @@
 
-function getDataFromHeroku(){
+function getDataFromCloud(getTheUrl){
 
-    console.log("Hmmm1")
+    //console.log("getDataFromNet_phase_1")
     var xhr = new XMLHttpRequest
-        console.log("Hmmm2")
+        //console.log("getDataFromNet_phase_2")
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log("Hmmm3")
+        //    console.log("getDataFromNet_phase_3")
         // New test code
             jsonData = xhr.responseText
             var objectArray = JSON.parse(xhr.responseText)
         // chug data to safety
             abStack.jsonData = objectArray
-            //console.log("Hmmm4 "+ objectArray.email)
-              for (var x in objectArray) {
-                  //var jsonObject = objectArray[x]
-                  var jsonObject = abStack.jsonData[x]
-                  console.log("Very hmm " + x + " " + jsonObject["email"]) // Object.keys(objectArray).length)
-                  //console.log("Very hmm " + x + " " + abStack.jsonData["email"])
-              }
-            //
-            var dataString = xhr.responseText
-            //console.log("Hmmm4 "+ dataString)
-
-            abStack.jsonData = JSON.parse(dataString)
+                outputJSONData()
           }
         }
-        console.log("Hmmm5")
-        xhr.open("GET", Qt.resolvedUrl("https://qtphone.herokuapp.com/contact"))
+        //console.log("getDataFromNet_phase_5")
+        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
-        console.log("Hmmm6")
+        console.log("function getDataFromNet run")
 }
 
+function outputJSONData(){
+
+    for (var x in abStack.jsonData) {
+        var jsonObject = abStack.jsonData[x]
+        console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
+
+    }
+}
