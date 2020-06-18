@@ -200,33 +200,36 @@ StackView {
         }
 
 
-    function getData(){
-       // var url = new URL('https://qtphone.herokuapp.com/contact');
-        console.log("Hmm1")
 
-        var req = new XMLHttpRequest;               
-                req.open("GET", 'https://qtphone.herokuapp.com/contact');
-                console.log("Hmm2")
-        req.onload = function() {
-                console.log("Hmm3")
-                var objectArray = JSON.parse(req.responseText);
-                    if (objectArray.errors !== undefined) {
-                        console.log("Error : " + objectArray.errors[0].message)
-                        console.log("Hmm4")
+// Were going with the another one.  Keeping this code for now. Cleanup later.
+//
+//    function getData(){
+//       // var url = new URL('https://qtphone.herokuapp.com/contact');
+//        console.log("Hmm1")
 
-                    } else {
-                        for (var key in objectArray.statuses) {
-                            var jsonObject = objectArray.statuses[key];
-                            //tweets.append(jsonObject);
-                            //console.log(jsonObject)
-                            console.log("Hmm5")
-                        }
-                    }
-                    // wrapper.isLoaded()
-                }
-                req.send();
-                console.log("Hmm6")
-    }
+//        var req = new XMLHttpRequest;
+//                req.open("GET", 'https://qtphone.herokuapp.com/contact');
+//                console.log("Hmm2")
+//        req.onload = function() {
+//                console.log("Hmm3")
+//                var objectArray = JSON.parse(req.responseText);
+//                    if (objectArray.errors !== undefined) {
+//                        console.log("Error : " + objectArray.errors[0].message)
+//                        console.log("Hmm4")
+
+//                    } else {
+//                        for (var key in objectArray.statuses) {
+//                            var jsonObject = objectArray.statuses[key];
+//                            //tweets.append(jsonObject);
+//                            //console.log(jsonObject)
+//                            console.log("Hmm5")
+//                        }
+//                    }
+//                    // wrapper.isLoaded()
+//                }
+//                req.send();
+//                console.log("Hmm6")
+//    }
 
 
     function getData2(){
@@ -237,12 +240,16 @@ StackView {
             xhr.onreadystatechange = function() {
               if (xhr.readyState === XMLHttpRequest.DONE) {
                 console.log("Hmmm3")
-                // New test code
+            // New test code
+                jsonData = xhr.responseText
                 var objectArray = JSON.parse(xhr.responseText)
+            // chug data to safety
+                jsonData = objectArray
                 //console.log("Hmmm4 "+ objectArray.email)
                   for (var x in objectArray) {
-                      var jsonObject = objectArray.id
-                      console.log("Very hmm " + jsonObject.id // Object.keys(objectArray).length)
+                      var jsonObject = objectArray[x]
+                      //console.log("Very hmm " + x + " " + jsonObject["email"]) // Object.keys(objectArray).length)
+                      console.log("Very hmm " + x + " " + jsonData["lastname"])
                   }
                 //
                 var dataString = xhr.responseText
