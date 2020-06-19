@@ -33,7 +33,7 @@ StackView {
                         color: AppStyle.appTextColor
                         font.pixelSize: 24
                         text: "Nimi: "+lastname +", "+firstname+" "
-                        horizontalAlignment: horizontalAlignment
+                        //horizontalAlignment: horizontalAlignment
                     }
 
                     Text {
