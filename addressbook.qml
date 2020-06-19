@@ -29,17 +29,18 @@ StackView {
         id: abAddressList
         Row {
                     //spacing: 10
-                    Text {
+                    ListElement {
                         color: AppStyle.appTextColor
                         font.pixelSize: 24
                         text: "Nimi: "+lastname +", "+firstname+" "
                         horizontalAlignment: horizontalAlignment
                     }
 
-//                    Text {
-//                        color: AppStyle.appTextColor
-//                        text: firstname
-//                    }
+                    Text {
+                        color: AppStyle.appTextColor
+                        text: firstname
+
+                    }
                 }
     }
 
@@ -116,114 +117,129 @@ StackView {
         // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
 
 
-            ScrollView{
-               // Let's try something else,
-                Component.onCompleted: console.log("abAddressView ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                Item{
+                    //anchors.fill: parent
+                    //implicitHeight: childrenRect.height
+                    //width: parent.width
+                    // Let's try something else,
+                    Component.onCompleted: console.log("abAddressView ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
 
-                Rectangle{
+                    Rectangle{
 
-                color: AppStyle.appBackgroundColor
-                anchors{
-                // Didn't work as planned, but I might try again later
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom                   
-                }
-
-                    Text{
-
-                        id: abAddressViewTitleText
-                        color: AppStyle.appTextColor
-                        text: AppStyle.abTitle
-                        font.pointSize: 27
-                        fontSizeMode: Text.FixedSize
-
-                        anchors{
-                            top: parent.top
-                            margins: AppStyle.abButtonMarging + 10
-                            horizontalCenter: parent.horizontalCenter
-                        }
+                    color: AppStyle.appBackgroundColor
+                    anchors{
+                    // Didn't work as planned, but I might try again later
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
                     }
 
-                    Grid{
-                        id: abAddressViewGrid
-                        width: implicitWidth
-                        height: implicitHeight
-                        rows: 2
-                        columns: 2
-                        rowSpacing: AppStyle.abButtonMarging / 2
-                        columnSpacing: AppStyle.abButtonMarging
-                        anchors{
-                            top: abAddressViewTitleText.bottom
-                            horizontalCenter: parent.horizontalCenter
-                            topMargin: 20
+                        Text{
+
+                            id: abAddressViewTitleText
+                            color: AppStyle.appTextColor
+                            text: AppStyle.abTitle
+                            font.pointSize: 27
+                            fontSizeMode: Text.FixedSize
+
+                            anchors{
+                                top: parent.top
+                                margins: AppStyle.abButtonMarging + 10
+                                horizontalCenter: parent.horizontalCenter
+                            }
                         }
 
-                            Button{
-                                id: abGetDataFromCloud
-                                width: AppStyle.abButtonWidth
-                                text: AppStyle.abGetDataFromCloud
-                                onClicked: {
-                                    Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                        Grid{
+                            id: abAddressViewGrid
+                            width: implicitWidth
+                            height: implicitHeight
+                            rows: 2
+                            columns: 2
+                            rowSpacing: AppStyle.abButtonMarging / 2
+                            columnSpacing: AppStyle.abButtonMarging
+                            anchors{
+                                top: abAddressViewTitleText.bottom
+                                horizontalCenter: parent.horizontalCenter
+                                topMargin: 20
+                            }
+
+                                Button{
+                                    id: abGetDataFromCloud
+                                    width: AppStyle.abButtonWidth
+                                    text: AppStyle.abGetDataFromCloud
+                                    onClicked: {
+                                        Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                                    }
                                 }
-                            }
 
-                            Button{
-                                id: abAddressViewDataOutButton
-                                width: AppStyle.abButtonWidth
-                                text: "Populate"
-                                onClicked:  console.log("Helvetti")
+                                Button{
+                                    id: abAddressViewDataOutButton
+                                    width: AppStyle.abButtonWidth
+                                    text: "Populate"
+                                    onClicked:  console.log("Helvetti")
 
-                            }
+                                }
 
-                            Button{
-                                id: abAddressViewPlaceholderButton
-                                width: AppStyle.abButtonWidth
-                                text: "Placeholder"
-                               //onClicked:
-                            }
+                                Button{
+                                    id: abAddressViewPlaceholderButton
+                                    width: AppStyle.abButtonWidth
+                                    text: "Placeholder"
+                                   //onClicked:
+                                }
 
-                            Button{
-                                id: abAddressViewPrevButton
-                                width: AppStyle.abButtonWidth
-                                text: AppStyle.abReturnToMain
-                                onClicked: push(abMainView)
-                            }
-                    }
-
-                    ScrollView{
-                        anchors.bottom: parent.bottom
-                        anchors.top: abAddressViewGrid.bottom
-                        //color: AppStyle.appBackgroundColor
-                        width: parent.width
-                        implicitHeight: abAddressListView.contentHeight
+                                Button{
+                                    id: abAddressViewPrevButton
+                                    width: AppStyle.abButtonWidth
+                                    text: AppStyle.abReturnToMain
+                                    onClicked: push(abMainView)
+                                }
+                        }
 
                         Text{
                             id: abCounterText
-                            anchors.top: parent.top
-                            color: AppStyle.appTextColor
+                            anchors.top: abAddressViewGrid.bottom
+                            color: "white"
                             width: parent.width
                             text: abJSONModel.count
                         }
 
-                        ListView {
-                                id: abAddressListView
-                                anchors.top: abCounterText.bottom
-                                //Screws up
-                                //clip: true
-                                width: parent * 0.95
-                                height: contentHeight
-                                visible: true
-                                model: abJSONModel
-                                delegate: abAddressList
+
+                        Rectangle{
+                            //anchors.fill: abAddressViewScroll
+                            color: "grey"
+                            anchors.bottom: parent.bottom
+                            anchors.top: abAddressViewGrid.bottom
+                            width: parent.width
+                            //implicitHeight: abAddressListView.contentHeight
+
+
+
+                            ScrollView{
+                                id: abAddressViewScroll
+                                height: children.height
+                                width: parent.width
+                                clip: true
+
+                                // Just counter for testing purposes for how many contacts there are
+
+
+                                ListView {
+                                        id: abAddressListView
+                                        anchors.top: parent.top
+                                        //Screws up
+                                        //clip: true
+                                        width: parent * 0.95
+                                        height: contentHeight
+                                        visible: true
+                                        model: abJSONModel
+                                        delegate: abAddressList
+                                }
+                            }
                         }
 
-
-                    }
-
+                }
             }
-        }
     }
 
     Component{
