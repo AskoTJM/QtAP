@@ -26,7 +26,9 @@ function outputJSONData(){
     for (var x in abStack.jsonData) {
         var jsonObject = abStack.jsonData[x]
         //console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
-        abJSONModel.append({"lastname": jsonObject["lastname"],"firstname":jsonObject["firstname"]})
+        abJSONModel.append({"lastname": jsonObject["lastname"]
+                               , "firstname": jsonObject["firstname"]
+                               , "id": jsonObject["id"]})
         console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
     }

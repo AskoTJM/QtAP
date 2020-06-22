@@ -26,23 +26,50 @@ StackView {
     }
 
     Component{
-        id: abAddressList
-        Row {
-                    //spacing: 10
-                    ListElement {
-                        color: AppStyle.appTextColor
-                        font.pixelSize: 24
-                        text: "Nimi: "+lastname +", "+firstname+" "
-                        //horizontalAlignment: horizontalAlignment
-                    }
+        id: abAddressList     
+//                    Text {
+//                        color: AppStyle.appTextColor
+//                        font.pixelSize: AppStyle.appDefaultFontSize
+//                        text: id + ": "+ lastname +", "+ firstname
+//                        anchors.leftMargin: 10
+//                        MouseArea{
+//                            anchors.fill: parent
+//                            onClicked: console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
+//                     }
+                        MouseArea {
+                         //  anchors.fill: parent
+                           onClicked: console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
+                           width:  childrenRect.width
+                           height: childrenRect.height
 
-                    Text {
-                        color: AppStyle.appTextColor
-                        text: firstname
+                           Row {
+                               //spacing: 10
 
-                    }
-                }
-    }
+
+                               Text {
+                                   color: AppStyle.appTextColor
+                                   font.pixelSize: AppStyle.appDefaultFontSize
+                                   text: id + ": "
+
+
+                                   width: parent.width  * 0.3
+                               }
+                               Text {
+                                   color: AppStyle.appTextColor
+                                   font.pixelSize: AppStyle.appDefaultFontSize
+                                   text: lastname +", "
+
+                               }
+                               Text {
+                                   color: AppStyle.appTextColor
+                                   font.pixelSize: AppStyle.appDefaultFontSize
+                                   text: firstname
+
+
+                               }
+                           }
+                    }//Text
+    }//Component
 
     Component{
         id: abMainView
@@ -140,7 +167,7 @@ StackView {
                             id: abAddressViewTitleText
                             color: AppStyle.appTextColor
                             text: AppStyle.abTitle
-                            font.pointSize: 27
+                            font.pointSize: AppStyle.appInfoFontSize
                             fontSizeMode: Text.FixedSize
 
                             anchors{
@@ -196,12 +223,16 @@ StackView {
                                 }
                         }
 
+
+                        // Just counter for testing purposes for how many contacts there are
                         Text{
                             id: abCounterText
                             anchors.top: abAddressViewGrid.bottom
+                            //anchors.right: parent.right
+                            font.pointSize: AppStyle.appDefaultFontSize
                             color: "white"
                             width: parent.width
-                            text: abJSONModel.count
+                            text: "Addressess in database: " + abJSONModel.count
                         }
 
 
@@ -209,7 +240,8 @@ StackView {
                             //anchors.fill: abAddressViewScroll
                             color: "grey"
                             anchors.bottom: parent.bottom
-                            anchors.top: abAddressViewGrid.bottom
+                            anchors.topMargin: 10
+                            anchors.top: abCounterText.bottom
                             width: parent.width
                             //implicitHeight: abAddressListView.contentHeight
 
@@ -217,20 +249,22 @@ StackView {
 
                             ScrollView{
                                 id: abAddressViewScroll
-                                height: children.height
-                                width: parent.width
-                                clip: true
+                                height: parent.height
+                                width: parent.width - 20
+                                //clip: true
+                                //padding: 10
 
-                                // Just counter for testing purposes for how many contacts there are
+
 
 
                                 ListView {
                                         id: abAddressListView
                                         anchors.top: parent.top
                                         //Screws up
-                                        //clip: true
+                                        boundsBehavior: Flickable.StopAtBounds
+                                        clip: true
                                         width: parent * 0.95
-                                        height: contentHeight
+                                        //height: contentHeight
                                         visible: true
                                         model: abJSONModel
                                         delegate: abAddressList
