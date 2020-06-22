@@ -28,17 +28,9 @@ StackView {
 
     Component{
         id: abAddressList     
-//                    Text {
-//                        color: AppStyle.appTextColor
-//                        font.pixelSize: AppStyle.appDefaultFontSize
-//                        text: id + ": "+ lastname +", "+ firstname
-//                        anchors.leftMargin: 10
-//                        MouseArea{
-//                            anchors.fill: parent
-//                            onClicked: console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
-//                     }
+
                         MouseArea {
-                         //  anchors.fill: parent
+
                            onClicked: console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
                            width:  childrenRect.width
                            height: childrenRect.height
@@ -50,7 +42,6 @@ StackView {
                                   font.pixelSize: AppStyle.appDefaultFontSize
                                   text: (id).pad(3) + ": "
                                   horizontalAlignment: Text.AlignRight
-                                  Layout.width: abAddressList.width * 0.3
 
                                 }
                                 Text {
@@ -64,38 +55,11 @@ StackView {
                                   color: AppStyle.appTextColor
                                   font.pixelSize: AppStyle.appDefaultFontSize
                                   text: firstname
-                                  //width: parent.fill
+
 
                                 }
-                            }
-
-//                           Row {
-//                               //spacing: 10
-
-
-//                               Text {
-//                                   color: AppStyle.appTextColor
-//                                   font.pixelSize: AppStyle.appDefaultFontSize
-//                                   text: (id).pad(3) + ": "
-//                                   horizontalAlignment: Text.AlignRight
-
-//                               }
-//                               Text {
-//                                   color: AppStyle.appTextColor
-//                                   font.pixelSize: AppStyle.appDefaultFontSize
-//                                   text: lastname +", "
-
-
-//                               }
-//                               Text {
-//                                   color: AppStyle.appTextColor
-//                                   font.pixelSize: AppStyle.appDefaultFontSize
-//                                   text: firstname
-//                                   width: parent.fill
-
-//                               }
-//                           }
-                    }//Text
+                            }//RowLayout
+                    }//MouseArea
     }//Component
 
     Component{
@@ -161,10 +125,11 @@ StackView {
                                 onClicked: abStack.returnToMain()
                             }
 
-                    }
-                }
-        }
-    }
+                    }//Grid
+
+                }//Rectangle
+        }//Item
+    }//Component
 
     Component{
             id: abAddressView
@@ -172,10 +137,7 @@ StackView {
 
 
                 Item{
-                    //anchors.fill: parent
-                    //implicitHeight: childrenRect.height
-                    //width: parent.width
-                    // Let's try something else,
+
                     Component.onCompleted: console.log("abAddressView ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
 
                     Rectangle{
@@ -230,8 +192,8 @@ StackView {
                                 Button{
                                     id: abAddressViewDataOutButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Populate"
-                                    onClicked:  console.log("Helvetti")
+                                    text: "PlaceHolder"
+                                    onClicked:  console.log("No.")
 
                                 }
 
@@ -239,7 +201,7 @@ StackView {
                                     id: abAddressViewPlaceholderButton
                                     width: AppStyle.abButtonWidth
                                     text: "Placeholder"
-                                   //onClicked:
+                                    onClicked: console.log("Nope.")
                                 }
 
                                 Button{
@@ -296,12 +258,12 @@ StackView {
                                         model: abJSONModel
                                         delegate: abAddressList
                                 }
-                            }
-                        }
+                            }//ScrollView
+                        }//Rectangle
 
-                }
-            }
-    }
+                }//Rectangle
+            }//Item
+    }//Component
 
     Component{
             id: abContactView
@@ -319,30 +281,40 @@ StackView {
                     //bottom: addBookBackToMainButton.top
                 }
 
-                    Text{
+                    GridLayout{
+                        rows: 5
+                        columns: 4
 
-                        id: abContactViewText
-                        color: AppStyle.appTextColor
-                        text: "ThirdTest"
-                        font.pointSize: 27
-                        fontSizeMode: Text.FixedSize
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors{
-                            top: parent.top
-                            left: parent.left
+                        Text{
+
+                            id: abContactViewText
+                            color: AppStyle.appTextColor
+                            text: "id: "
+                            font.pointSize: AppStyle.appDefaultFontSize
+                            fontSizeMode: Text.FixedSize
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+
                         }
-                    }
+                        TextField{
+                            text: "Testi"
+                        }
 
-                    Button{
-                        id: abContactViewPrevButton
-                        anchors.top: abContactViewText.bottom
-                        text: "Prev"
-                        onClicked: {
-                            push(abMainView)
-                         }
-                    }
+                        Button{
+                            id: abContactViewPrevButton
+                            text: AppStyle.abReturnToMain
 
+                            Layout.row: 4
+                            Layout.column: 3
+
+                            onClicked: {
+                                push(abMainView)
+                             }
+                        }
+
+
+
+                    } //GridLayout
                 }//Rectangle
             }//Item
     }//Component
