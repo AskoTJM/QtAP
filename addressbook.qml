@@ -21,6 +21,9 @@ StackView {
 
     // property will store data
     property var jsonData
+    property int colNum : 5
+    property int contactViewFirstColumnWidth: 6
+
 
     ListModel{
         id: abJSONModel
@@ -272,49 +275,134 @@ StackView {
                 Rectangle{
 
                 color: AppStyle.appBackgroundColor
-                anchors{
-                // Didn't work as planned, but I might try again later
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                    //bottom: addBookBackToMainButton.top
-                }
+                anchors.fill: parent
+                    Text{
+                        text: "Add/Update Contact"
+                        font.pointSize: 27
+                        anchors.top: parent.top
+                    }
 
                     GridLayout{
-                        rows: 5
-                        columns: 4
+                        rows: 6
+                        columns: 6
+
+                        width: parent.width
+                        anchors{
+                            //fill: parent
+
+                            margins: 10
+                        }
+
 
                         Text{
 
-                            id: abContactViewText
+                            id: abContactViewIdText
                             color: AppStyle.appTextColor
                             text: "id: "
                             font.pointSize: AppStyle.appDefaultFontSize
-                            fontSizeMode: Text.FixedSize
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
+                            width: parent.width / contactViewFirstColumnWidth
+//                            fontSizeMode: Text.FixedSize
+//                            verticalAlignment: Text.AlignVCenter
+//                            horizontalAlignment: Text.AlignHCenter
 
                         }
                         TextField{
                             text: "Testi"
                         }
 
-                        Button{
-                            id: abContactViewPrevButton
-                            text: AppStyle.abReturnToMain
+                        Text{
 
+                            id: abContactViewFirstNameText
+                            color: AppStyle.appTextColor
+                            text: "Firstname: "
+                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.row: 1
+//                            Layout.column: 0
+                            font.pointSize: AppStyle.appDefaultFontSize
+//                            fontSizeMode: Text.FixedSize
+//                            verticalAlignment: Text.AlignVCenter
+//                            horizontalAlignment: Text.AlignHCenter
+
+                        }
+                        TextField{
+                            text: "Testi2"
+                            Layout.columnSpan: colNum
+                        }
+
+                        Text{
+
+                            id: abContactViewLastNameText
+                            color: AppStyle.appTextColor
+                            text: "Lastname: "
+                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.row: 2
+//                            Layout.column: 0
+                            font.pointSize: AppStyle.appDefaultFontSize
+//                            fontSizeMode: Text.FixedSize
+//                            verticalAlignment: Text.AlignVCenter
+//                            horizontalAlignment: Text.AlignHCenter
+                        }
+                        TextField{
+                            text: "Testi3"
+                            Layout.columnSpan: colNum
+                        }
+
+                        Text{
+
+                            id: abContactViewNumberText
+                            color: AppStyle.appTextColor
+                            text: "Phone: "
+                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.row: 3
+//                            Layout.column: 0
+                            font.pointSize: AppStyle.appDefaultFontSize
+//                            fontSizeMode: Text.FixedSize
+//                            verticalAlignment: Text.AlignVCenter
+//                            horizontalAlignment: Text.AlignHCenter
+
+                        }
+                        TextField{
+                            text: "Testi4"
+                            Layout.columnSpan: colNum
+                        }
+                        Text{
+
+                            id: abContactViewEmailText
+                            color: AppStyle.appTextColor
+                            text: "Email: "
+                            width: parent.width / contactViewFirstColumnWidth
                             Layout.row: 4
-                            Layout.column: 3
+//                            Layout.column: 0
+                            font.pointSize: AppStyle.appDefaultFontSize
+//                            fontSizeMode: Text.FixedSize
+//                            verticalAlignment: Text.AlignVCenter
+//                            horizontalAlignment: Text.AlignHCenter
 
-                            onClicked: {
-                                push(abMainView)
-                             }
+                        }
+                        TextField{
+                            text: "Testi5"
+                            Layout.columnSpan: colNum
                         }
 
 
 
                     } //GridLayout
+
+                Row{
+                    anchors.bottom: parent.bottom
+                    anchors.margins: 20
+
+                    Button{
+                        id: abContactViewPrevButton
+                        text: AppStyle.abReturnToMain
+//                        Layout.row: 5
+//                        Layout.column: 3
+                        onClicked: {
+                            push(abMainView)
+                         }
+                    }
+                }
+
                 }//Rectangle
             }//Item
     }//Component

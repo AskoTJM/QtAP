@@ -28,7 +28,9 @@ function outputJSONData(){
         //console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
         abJSONModel.append({"lastname": jsonObject["lastname"]
                                , "firstname": jsonObject["firstname"]
-                               , "id": jsonObject["id"]})
+                               , "id": jsonObject["id"]
+                               , "mobile": jsonObject["mobile"]
+                               , "email": jsonObject["email"]})
         console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
     }
