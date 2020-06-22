@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.5
+import QtQuick.Layouts 1.12
 import "."
 import "littlehelper.js" as Utils
 
@@ -42,32 +43,57 @@ StackView {
                            width:  childrenRect.width
                            height: childrenRect.height
 
-                           Row {
-                               //spacing: 10
+                        RowLayout{
+                            spacing: 10
+                            Text {
+                                  color: AppStyle.appTextColor
+                                  font.pixelSize: AppStyle.appDefaultFontSize
+                                  text: (id).pad(3) + ": "
+                                  horizontalAlignment: Text.AlignRight
+
+                            }
+                            Text {
+                              color: AppStyle.appTextColor
+                              font.pixelSize: AppStyle.appDefaultFontSize
+                              text: lastname +", "
 
 
-                               Text {
-                                   color: AppStyle.appTextColor
-                                   font.pixelSize: AppStyle.appDefaultFontSize
-                                   text: id + ": "
+                            }
+                            Text {
+                              color: AppStyle.appTextColor
+                              font.pixelSize: AppStyle.appDefaultFontSize
+                              text: firstname
+                              width: parent.fill
+
+                            }
+                        }
+
+//                           Row {
+//                               //spacing: 10
 
 
-                                   width: parent.width  * 0.3
-                               }
-                               Text {
-                                   color: AppStyle.appTextColor
-                                   font.pixelSize: AppStyle.appDefaultFontSize
-                                   text: lastname +", "
+//                               Text {
+//                                   color: AppStyle.appTextColor
+//                                   font.pixelSize: AppStyle.appDefaultFontSize
+//                                   text: (id).pad(3) + ": "
+//                                   horizontalAlignment: Text.AlignRight
 
-                               }
-                               Text {
-                                   color: AppStyle.appTextColor
-                                   font.pixelSize: AppStyle.appDefaultFontSize
-                                   text: firstname
+//                               }
+//                               Text {
+//                                   color: AppStyle.appTextColor
+//                                   font.pixelSize: AppStyle.appDefaultFontSize
+//                                   text: lastname +", "
 
 
-                               }
-                           }
+//                               }
+//                               Text {
+//                                   color: AppStyle.appTextColor
+//                                   font.pixelSize: AppStyle.appDefaultFontSize
+//                                   text: firstname
+//                                   width: parent.fill
+
+//                               }
+//                           }
                     }//Text
     }//Component
 
