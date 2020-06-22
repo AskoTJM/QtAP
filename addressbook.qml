@@ -21,8 +21,7 @@ StackView {
 
     // property will store data
     property var jsonData
-    property int colNum : 5
-    property int contactViewFirstColumnWidth: 6
+
 
 
     ListModel{
@@ -284,13 +283,13 @@ StackView {
 
                     GridLayout{
                         rows: 6
-                        columns: 6
+                        columns: 2
 
                         width: parent.width
                         anchors{
                             //fill: parent
 
-                            margins: 10
+                            //margins: 10
                         }
 
 
@@ -300,14 +299,13 @@ StackView {
                             color: AppStyle.appTextColor
                             text: "id: "
                             font.pointSize: AppStyle.appDefaultFontSize
-                            width: parent.width / contactViewFirstColumnWidth
-//                            fontSizeMode: Text.FixedSize
-//                            verticalAlignment: Text.AlignVCenter
-//                            horizontalAlignment: Text.AlignHCenter
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
+
 
                         }
                         TextField{
                             text: "Testi"
+
                         }
 
                         Text{
@@ -315,18 +313,18 @@ StackView {
                             id: abContactViewFirstNameText
                             color: AppStyle.appTextColor
                             text: "Firstname: "
-                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 1
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
-//                            fontSizeMode: Text.FixedSize
-//                            verticalAlignment: Text.AlignVCenter
-//                            horizontalAlignment: Text.AlignHCenter
+
 
                         }
                         TextField{
                             text: "Testi2"
-                            Layout.columnSpan: colNum
+                            Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
+                            Layout.alignment: right
                         }
 
                         Text{
@@ -334,17 +332,16 @@ StackView {
                             id: abContactViewLastNameText
                             color: AppStyle.appTextColor
                             text: "Lastname: "
-                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 2
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
-//                            fontSizeMode: Text.FixedSize
-//                            verticalAlignment: Text.AlignVCenter
-//                            horizontalAlignment: Text.AlignHCenter
+
                         }
                         TextField{
                             text: "Testi3"
-                            Layout.columnSpan: colNum
+                            Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
                         }
 
                         Text{
@@ -352,36 +349,33 @@ StackView {
                             id: abContactViewNumberText
                             color: AppStyle.appTextColor
                             text: "Phone: "
-                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 3
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
-//                            fontSizeMode: Text.FixedSize
-//                            verticalAlignment: Text.AlignVCenter
-//                            horizontalAlignment: Text.AlignHCenter
+
 
                         }
                         TextField{
                             text: "Testi4"
-                            Layout.columnSpan: colNum
+                            Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
                         }
                         Text{
 
                             id: abContactViewEmailText
                             color: AppStyle.appTextColor
                             text: "Email: "
-                            width: parent.width / contactViewFirstColumnWidth
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 4
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
-//                            fontSizeMode: Text.FixedSize
-//                            verticalAlignment: Text.AlignVCenter
-//                            horizontalAlignment: Text.AlignHCenter
 
                         }
                         TextField{
                             text: "Testi5"
-                            Layout.columnSpan: colNum
+                            Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
+                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
                         }
 
 

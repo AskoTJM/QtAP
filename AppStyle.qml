@@ -41,9 +41,12 @@ QtObject {
     // Values
     property int abButtonWidth: 150
     property int abButtonMarging: 10
+    property int abContactViewSecondColumnSpan : 1
+    property var abContactViewSecondColumnWidth : 0.60
+    property var abContactViewFirstColumnWidth : 0.09
 
 
-    // JSON Parsing in QML? https://stackoverflow.com/questions/41900383/parsing-json-in-qml/41900561
+
 
 }
 
