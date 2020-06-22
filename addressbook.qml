@@ -43,30 +43,31 @@ StackView {
                            width:  childrenRect.width
                            height: childrenRect.height
 
-                        RowLayout{
-                            spacing: 10
-                            Text {
+                            RowLayout{
+                                spacing: 10
+                                Text {
                                   color: AppStyle.appTextColor
                                   font.pixelSize: AppStyle.appDefaultFontSize
                                   text: (id).pad(3) + ": "
                                   horizontalAlignment: Text.AlignRight
+                                  Layout.width: abAddressList.width * 0.3
 
+                                }
+                                Text {
+                                  color: AppStyle.appTextColor
+                                  font.pixelSize: AppStyle.appDefaultFontSize
+                                  text: lastname +", "
+
+
+                                }
+                                Text {
+                                  color: AppStyle.appTextColor
+                                  font.pixelSize: AppStyle.appDefaultFontSize
+                                  text: firstname
+                                  //width: parent.fill
+
+                                }
                             }
-                            Text {
-                              color: AppStyle.appTextColor
-                              font.pixelSize: AppStyle.appDefaultFontSize
-                              text: lastname +", "
-
-
-                            }
-                            Text {
-                              color: AppStyle.appTextColor
-                              font.pixelSize: AppStyle.appDefaultFontSize
-                              text: firstname
-                              width: parent.fill
-
-                            }
-                        }
 
 //                           Row {
 //                               //spacing: 10
