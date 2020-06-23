@@ -19,6 +19,7 @@ StackView {
     visible: true
 
 
+    property var currentIndex
     // property will store data
     property var jsonData
 
@@ -267,10 +268,11 @@ StackView {
 
     Component{
             id: abContactView
+
         // Component can only have one child, so wrapping everything in Item works around that.
             Item{
-                Rectangle{
 
+                Rectangle{
                 color: AppStyle.appBackgroundColor
                 anchors.fill: parent
                     Text{
@@ -313,7 +315,7 @@ StackView {
 //                            color: "white"
 
                             TextField{
-                                text: "Testi"
+                                //text: "Testi"
 
                             }
 //                        }
@@ -341,7 +343,7 @@ StackView {
 
                             TextField{
                                 id: abContactViewFirstNameField
-                                text: "Testi2"
+                                //text: "Testi2"
                                 Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                                 Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                                 //Layout.alignment: right
@@ -378,7 +380,7 @@ StackView {
 
                         }
                         TextField{
-                            text: "Testi4"
+                            //text: "Testi4"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
@@ -394,7 +396,7 @@ StackView {
 
                         }
                         TextField{
-                            text: "Testi5"
+                            //text: "Testi5"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
@@ -412,7 +414,13 @@ StackView {
                         id: abContactViewNextButton
                         text: "Next user"
                         onClicked: {
-                            console.log("Next user please")
+                            if( currentIndex === undefined){
+                                currentIndex = 0
+                            }
+                            if( ( currentIndex + 1 ) < Number(abJSONModel.count) ){
+                                currentIndex += 1
+                                console.log("CurrentIndex is: " + Number(currentIndex))
+                            }
                         }
                     }
 
@@ -420,7 +428,13 @@ StackView {
                         id: abContactViewPrevButton
                         text: "Previous user"
                         onClicked: {
-                            console.log("Previous user please")
+                            if( currentIndex === undefined){
+                                currentIndex = 0
+                            }
+                            if(  currentIndex > 0 ){
+                                currentIndex -= 1
+                                console.log("CurrentIndex is: " + Number(currentIndex))
+                            }
                         }
                     }
 
