@@ -22,8 +22,6 @@ StackView {
     // property will store data
     property var jsonData
 
-
-
     ListModel{
         id: abJSONModel
     }
@@ -66,7 +64,7 @@ StackView {
 
     Component{
         id: abMainView
-        // Component can only have one child, so wrapping everything in Item works around that, child->grandchild?
+        // Component can only have one child, so wrapping everything in Item works around that.
             Item{
                 Rectangle{
 
@@ -135,7 +133,7 @@ StackView {
 
     Component{
             id: abAddressView
-        // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
+        // Component can only have one child, so wrapping everything in Item works around that.
 
 
                 Item{
@@ -269,7 +267,7 @@ StackView {
 
     Component{
             id: abContactView
-        // Component can only have one child, so wrapping everything in Item works around that, grandchildren  > children ?
+        // Component can only have one child, so wrapping everything in Item works around that.
             Item{
                 Rectangle{
 
@@ -280,7 +278,12 @@ StackView {
                         text: "Add/Update Contact"
                         color: "white"
                         font.pointSize: 27
-                        anchors.top: parent.top
+                        anchors{
+                            top: parent.top
+                            topMargin: 30
+                            //
+                            horizontalCenter: parent.horizontalCenter
+                        }
                     }
 
                     GridLayout{
@@ -292,7 +295,7 @@ StackView {
                         anchors{
                             //fill: parent
                             top: abContactViewTitle.bottom
-                            //margins: 10
+                            topMargin: 40
                         }
 
 
@@ -329,8 +332,9 @@ StackView {
 
 
                         }
+                        // Background for text removed for now, didn't behave nicely.
 //                        Rectangle{
-//                            color: "grey"
+//                            color: "whitesmoke"
 //                            width: abContactViewFirstNameField.width + 10
 //                            height: abContactViewFirstNameField.height
 //                            radius: 5
@@ -351,7 +355,6 @@ StackView {
                             text: "Lastname: "
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 2
-//                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
 
                         }
@@ -400,12 +403,37 @@ StackView {
 
                     } //GridLayout
 
-                Row{
+                RowLayout{
                     anchors.bottom: parent.bottom
                     anchors.margins: 20
+                    spacing: 10
+
+                    Button{
+                        id: abContactViewNextButton
+                        text: "Next user"
+                        onClicked: {
+                            console.log("Next user please")
+                        }
+                    }
 
                     Button{
                         id: abContactViewPrevButton
+                        text: "Previous user"
+                        onClicked: {
+                            console.log("Previous user please")
+                        }
+                    }
+
+                    Button{
+                        id: abContactViewSaveButton
+                        text: AppStyle.abSaveUser
+                        onClicked: {
+                            console.log("Save data not yet implemented.")
+                        }
+                    }
+
+                    Button{
+                        id: abContactViewBackToMainButton
                         text: AppStyle.abReturnToMain
 //                        Layout.row: 5
 //                        Layout.column: 3

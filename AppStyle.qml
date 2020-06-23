@@ -9,11 +9,12 @@ QtObject {
     property int appHeaderFontSize : 15
     property int appInfoFontSize: 15
     property int appDefaultFontSize: 20
+    property int appDefaultButtonFontSize: 20
 
 // Colors
     property color appHeaderBackgroundColor: "black"
     property color appBackgroundColor: "black"
-    property color appTextColor: "white"
+    property color appTextColor: "whitesmoke"
 
 //  main.qml Specifics
 
@@ -37,6 +38,7 @@ QtObject {
     property string abReturnToMain: "Return to main"
     property string abTitle: "Heroku Addressbook"
     property string abGetDataFromCloud: "Get from Cloud"
+    property string abSaveUser: "Save data"
 
     // Values
     property int abButtonWidth: 150

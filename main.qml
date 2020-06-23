@@ -22,7 +22,7 @@ ApplicationWindow {
 // Needed to update comboChoice correctly, otherwise seemed to stuck on first one selected
     property var comboChoice : QtObject { property int choice: 0 }
 
-// Probably removed, can't seem to be able to properly modify to fit the UI
+// Removed, just takes space and currently doesn't provide any function that can excuse the used screen space
 //    header: ToolBar {
 //            height: AppStyle.headerTitleSize
 
@@ -172,14 +172,17 @@ ApplicationWindow {
             onClicked: {
                    switch(comboChoice.choice){
                        case 0:
+                        // Header and footer were removed to get more screen estate
 //                           footerTxt.text = "Addressbook"
                            windowLoader.source = "addressbook.qml"
                            break;
                        case 1:
+                        // Header and footer were removed to get more screen estate
 //                           footerTxt.text = "Apples"
                            console.debug("Button says: " + comboChoice.choice)
                            break;
                        default:
+                        // Header and footer were removed to get more screen estate
 //                           footerTxt.text = comboChoice.choice
                            console.debug("Button says: " + comboChoice.choice)
                            break;
@@ -188,17 +191,7 @@ ApplicationWindow {
         }
     }
 
-        /*
-        ListView {
-            anchors.top: button1.bottom
-            width: parent.width
-            model: 5
-            delegate: ItemDelegate {
-                text: "Item " + (index + 1)
-                width: parent.width
-            }
-        }
-        */
+
 
          Loader {
             id: windowLoader
@@ -215,7 +208,8 @@ ApplicationWindow {
 
              onReturnToMain: {
                  windowLoader.source = ""
-                 footerTxt.text = "Main"
+            // Header and footer were removed to get more screen estate
+//                 footerTxt.text = "Main"
              }
              //onExit : { windowLoader.source = "main.qml" }
          }
