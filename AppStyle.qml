@@ -42,8 +42,8 @@ QtObject {
     property int abButtonWidth: 150
     property int abButtonMarging: 10
     property int abContactViewSecondColumnSpan : 1
-    property var abContactViewSecondColumnWidth : 0.60
-    property var abContactViewFirstColumnWidth : 0.09
+    property var abContactViewSecondColumnWidth : 0.6
+    property var abContactViewFirstColumnWidth : 0.25 // 0.09
 
 
 

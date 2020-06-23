@@ -23,26 +23,26 @@ ApplicationWindow {
     property var comboChoice : QtObject { property int choice: 0 }
 
 // Probably removed, can't seem to be able to properly modify to fit the UI
-    header: ToolBar {
-            height: AppStyle.headerTitleSize
+//    header: ToolBar {
+//            height: AppStyle.headerTitleSize
 
-            Label {
-                text: qsTr("QtAndroidTestbench Dev mode")
-                font.pixelSize: 15
-                anchors.centerIn: parent
-            }
-        }
-    footer: ToolBar{
-            height: AppStyle.headerTitleSize
+//            Label {
+//                text: qsTr("QtAndroidTestbench Dev mode")
+//                font.pixelSize: 15
+//                anchors.centerIn: parent
+//            }
+//        }
+//    footer: ToolBar{
+//            height: AppStyle.headerTitleSize
 
-            Label{
-                id: footerTxt
-                text: qsTr("QtAndroidTestbench Dev state")
-                font.pixelSize: 15
-                anchors.centerIn: parent
-            }
+//            Label{
+//                id: footerTxt
+//                text: qsTr("QtAndroidTestbench Dev state")
+//                font.pixelSize: 15
+//                anchors.centerIn: parent
+//            }
 
-    }
+//    }
 
 
 
@@ -172,15 +172,15 @@ ApplicationWindow {
             onClicked: {
                    switch(comboChoice.choice){
                        case 0:
-                           footerTxt.text = "Addressbook"
+//                           footerTxt.text = "Addressbook"
                            windowLoader.source = "addressbook.qml"
                            break;
                        case 1:
-                           footerTxt.text = "Apples"
+//                           footerTxt.text = "Apples"
                            console.debug("Button says: " + comboChoice.choice)
                            break;
                        default:
-                           footerTxt.text = comboChoice.choice
+//                           footerTxt.text = comboChoice.choice
                            console.debug("Button says: " + comboChoice.choice)
                            break;
                    }

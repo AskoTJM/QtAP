@@ -276,19 +276,22 @@ StackView {
                 color: AppStyle.appBackgroundColor
                 anchors.fill: parent
                     Text{
+                        id: abContactViewTitle
                         text: "Add/Update Contact"
+                        color: "white"
                         font.pointSize: 27
                         anchors.top: parent.top
                     }
 
                     GridLayout{
+                        id: abContactGridView
                         rows: 6
                         columns: 2
 
                         width: parent.width
                         anchors{
                             //fill: parent
-
+                            top: abContactViewTitle.bottom
                             //margins: 10
                         }
 
@@ -299,49 +302,64 @@ StackView {
                             color: AppStyle.appTextColor
                             text: "id: "
                             font.pointSize: AppStyle.appDefaultFontSize
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
 
 
                         }
-                        TextField{
-                            text: "Testi"
+//                        Rectangle{
+//                            color: "white"
 
-                        }
+                            TextField{
+                                text: "Testi"
+
+                            }
+//                        }
+
+
 
                         Text{
 
                             id: abContactViewFirstNameText
                             color: AppStyle.appTextColor
                             text: "Firstname: "
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 1
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
 
 
                         }
-                        TextField{
-                            text: "Testi2"
-                            Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
-                            Layout.alignment: right
-                        }
+//                        Rectangle{
+//                            color: "grey"
+//                            width: abContactViewFirstNameField.width + 10
+//                            height: abContactViewFirstNameField.height
+//                            radius: 5
+
+                            TextField{
+                                id: abContactViewFirstNameField
+                                text: "Testi2"
+                                Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
+                                Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                                //Layout.alignment: right
+                            }
+//                        }
 
                         Text{
 
                             id: abContactViewLastNameText
                             color: AppStyle.appTextColor
                             text: "Lastname: "
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 2
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
 
                         }
                         TextField{
-                            text: "Testi3"
+                            //text: "Testi3"
+                            //textEdited: "testi3 v2"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
 
                         Text{
@@ -349,7 +367,7 @@ StackView {
                             id: abContactViewNumberText
                             color: AppStyle.appTextColor
                             text: "Phone: "
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 3
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
@@ -359,14 +377,14 @@ StackView {
                         TextField{
                             text: "Testi4"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
                         Text{
 
                             id: abContactViewEmailText
                             color: AppStyle.appTextColor
                             text: "Email: "
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewFirstColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 4
 //                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
@@ -375,7 +393,7 @@ StackView {
                         TextField{
                             text: "Testi5"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
-                            Layout.preferredWidth: parent.width * AppStyle.abContactViewSecondColumnWidth
+                            Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
 
 
