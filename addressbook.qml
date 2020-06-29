@@ -32,10 +32,11 @@ StackView {
 
                         MouseArea {
 
-                           onClicked: console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
-                           width:  childrenRect.width
-                           height: childrenRect.height
-
+                            width:  childrenRect.width
+                            height: childrenRect.height
+                            onClicked: {
+                               console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
+                            }
                             RowLayout{
                                 spacing: 10
                                 Text {
@@ -272,6 +273,13 @@ StackView {
         // Component can only have one child, so wrapping everything in Item works around that.
             Item{
 
+//                property alias abContactViewIdField: abContactViewIdField.text
+//                property alias abContactViewFirstNameField: abContactViewFirstNameField.text
+//                property alias abContactViewLastNameField: abContactViewLastNameField.text
+//                property alias abContactViewNumberField: abContactViewNumberField.text
+//                property alias abContactViewEmailField: abContactViewEmailField.text
+
+
                 Rectangle{
                 color: AppStyle.appBackgroundColor
                 anchors.fill: parent
@@ -299,6 +307,7 @@ StackView {
                             top: abContactViewTitle.bottom
                             topMargin: 40
                         }
+
 
 
                         Text{
@@ -430,6 +439,14 @@ StackView {
                                 console.log("Error in abContactViewNextButton, illegal value in currentIndex")
                             }
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
+//                            Utils.dataToContactView(currentIndex)
+                                var jsonObject = abStack.jsonData[currentIndex]
+                                abContactViewIdField.text = jsonObject["id"]
+                                abContactViewFirstNameField.text = jsonObject["firstname"]
+                                abContactViewLastNameField.text = jsonObject["lastname"]
+                                abContactViewNumberField.text = jsonObject["mobile"]
+                                abContactViewEmailField.text = jsonObject["email"]
+
                         }
 
                     }
@@ -440,6 +457,7 @@ StackView {
                         onClicked: {
                             if( currentIndex === undefined){
                                 currentIndex = 0
+
                             }
 
                             console.log("CurrentIndex goes from: " + Number(currentIndex))
@@ -451,6 +469,15 @@ StackView {
                                 console.log("Error in abContactViewPrevButton, illegal value in currentIndex")
                             }
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
+//                            Utils.dataToContactView(currentIndex)
+
+                                var jsonObject = abStack.jsonData[currentIndex]
+                                abContactViewIdField.text = jsonObject["id"]
+                                abContactViewFirstNameField.text = jsonObject["firstname"]
+                                abContactViewLastNameField.text = jsonObject["lastname"]
+                                abContactViewNumberField.text = jsonObject["mobile"]
+                                abContactViewEmailField.text = jsonObject["email"]
+
                         }
                     }
 
@@ -474,6 +501,10 @@ StackView {
                 }
 
                 }//Rectangle
+
             }//Item
     }//Component
+
 }//StackView
+
+

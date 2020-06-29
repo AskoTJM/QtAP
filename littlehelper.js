@@ -36,13 +36,15 @@ function outputJSONData(){
     }
 }
 
+
+// Currently not working. Issues with writing to global properties
 function dataToContactView(index){
     var jsonObject = abStack.jsonData[index]
-    abContactViewIdField.text = jsonObject["id"]
-    abContactViewFirstNameField.text = jsonObject["firstname"]
-    abContactViewLastNameField.text = jsonObject["lastname"]
-    abContactViewNumberField.text = jsonObject["mobile"]
-    abContactViewEmailField.text = jsonObject["email"]
+    abContactViewIdField = jsonObject["id"]
+    abContactViewFirstNameField = jsonObject["firstname"]
+    abContactViewLastNameField = jsonObject["lastname"]
+    abContactViewNumberField = jsonObject["mobile"]
+    abContactViewEmailField = jsonObject["email"]
 }
 
 
