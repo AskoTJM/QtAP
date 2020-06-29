@@ -36,6 +36,16 @@ function outputJSONData(){
     }
 }
 
+function dataToContactView(index){
+    var jsonObject = abStack.jsonData[index]
+    abContactViewIdField.text = jsonObject["id"]
+    abContactViewFirstNameField.text = jsonObject["firstname"]
+    abContactViewLastNameField.text = jsonObject["lastname"]
+    abContactViewNumberField.text = jsonObject["mobile"]
+    abContactViewEmailField.text = jsonObject["email"]
+}
+
+
 //From https://gist.github.com/endel/321925f6cafa25bbfbde
 // (1).pad(3) // => "001"
 //(10).pad(3) // => "010"

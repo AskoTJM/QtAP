@@ -315,7 +315,7 @@ StackView {
 //                            color: "white"
 
                             TextField{
-                                //text: "Testi"
+                                id: abContactViewIdField
 
                             }
 //                        }
@@ -361,6 +361,7 @@ StackView {
 
                         }
                         TextField{
+                            id: abContactViewLastNameField
                             //text: "Testi3"
                             //textEdited: "testi3 v2"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
@@ -380,6 +381,7 @@ StackView {
 
                         }
                         TextField{
+                            id: abContactViewNumberField
                             //text: "Testi4"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
@@ -396,6 +398,7 @@ StackView {
 
                         }
                         TextField{
+                            id: abContactViewEmailField
                             //text: "Testi5"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
@@ -417,11 +420,18 @@ StackView {
                             if( currentIndex === undefined){
                                 currentIndex = 0
                             }
-                            if( ( currentIndex + 1 ) < Number(abJSONModel.count) ){
+
+                            console.log("CurrentIndex goes from: " + Number(currentIndex))
+                            if( ( currentIndex + 1) >= Number(abJSONModel.count ) ){
+                                currentIndex = 0
+                            }else if( ( currentIndex + 1 ) < Number(abJSONModel.count) ){
                                 currentIndex += 1
-                                console.log("CurrentIndex is: " + Number(currentIndex))
+                            }else{
+                                console.log("Error in abContactViewNextButton, illegal value in currentIndex")
                             }
+                            console.log("CurrentIndex  goes  to: " + Number(currentIndex))
                         }
+
                     }
 
                     Button{
@@ -431,10 +441,16 @@ StackView {
                             if( currentIndex === undefined){
                                 currentIndex = 0
                             }
-                            if(  currentIndex > 0 ){
+
+                            console.log("CurrentIndex goes from: " + Number(currentIndex))
+                            if( currentIndex <= 0){
+                                currentIndex = abJSONModel.count
+                            }else if(  currentIndex > 0 ){
                                 currentIndex -= 1
-                                console.log("CurrentIndex is: " + Number(currentIndex))
+                            }else{
+                                console.log("Error in abContactViewPrevButton, illegal value in currentIndex")
                             }
+                            console.log("CurrentIndex  goes  to: " + Number(currentIndex))
                         }
                     }
 
