@@ -444,7 +444,7 @@ StackView {
 
                             console.log("CurrentIndex goes from: " + Number(currentIndex))
                             if( currentIndex <= 0){
-                                currentIndex = abJSONModel.count
+                                currentIndex = ( abJSONModel.count - 1)
                             }else if(  currentIndex > 0 ){
                                 currentIndex -= 1
                             }else{
