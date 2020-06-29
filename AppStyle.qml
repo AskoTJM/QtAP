@@ -4,6 +4,8 @@ pragma Singleton
 QtObject {
 // Object sizes
     property int appHeaderTitleSize: 10
+    property int appLeftMargin: 20
+    property int appRightMarging: 20
 
 // Font sizes
     property int appHeaderFontSize : 15
