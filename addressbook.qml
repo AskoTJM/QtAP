@@ -15,11 +15,10 @@ StackView {
 
     initialItem: abMainView
     anchors.fill: parent
-    anchors.leftMargin: 20
-    anchors.rightMargin: 20
+    anchors.leftMargin: AppStyle.appLeftMargin
+    anchors.rightMargin: AppStyle.appRightMargin
 
     visible: true
-
 
     property var currentIndex
     // property will store data
@@ -29,42 +28,42 @@ StackView {
         id: abJSONModel
     }
 
-    Component{
-        id: abAddressList     
+        Component{
+            id: abAddressList
 
-                        MouseArea {
+            MouseArea {
 
-                            width:  childrenRect.width
-                            height: childrenRect.height
-                            onClicked: {
-                               console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
-                            }
-                            RowLayout{
-                                spacing: 10
-                                Text {
-                                  color: AppStyle.appTextColor
-                                  font.pixelSize: AppStyle.appDefaultFontSize
-                                  text: (id).pad(3) + ": "
-                                  horizontalAlignment: Text.AlignRight
+                width:  childrenRect.width
+                height: childrenRect.height
+                onClicked: {
+                   console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
+                }
+                RowLayout{
+                    spacing: 10
+                    Text {
+                      color: AppStyle.appTextColor
+                      font.pixelSize: AppStyle.appDefaultFontSize
+                      text: (id).pad(3) + ": "
+                      horizontalAlignment: Text.AlignRight
 
-                                }
-                                Text {
-                                  color: AppStyle.appTextColor
-                                  font.pixelSize: AppStyle.appDefaultFontSize
-                                  text: lastname +", "
-
-
-                                }
-                                Text {
-                                  color: AppStyle.appTextColor
-                                  font.pixelSize: AppStyle.appDefaultFontSize
-                                  text: firstname
+                    }
+                    Text {
+                      color: AppStyle.appTextColor
+                      font.pixelSize: AppStyle.appDefaultFontSize
+                      text: lastname +", "
 
 
-                                }
-                            }//RowLayout
-                    }//MouseArea
-    }//Component
+                    }
+                    Text {
+                      color: AppStyle.appTextColor
+                      font.pixelSize: AppStyle.appDefaultFontSize
+                      text: firstname
+
+
+                    }
+                }//RowLayout
+            }//MouseArea
+        }//Component
 
     Component{
         id: abMainView
@@ -428,10 +427,13 @@ StackView {
 
                     } //GridLayout
 
-                RowLayout{
+                GridLayout{
                     anchors.bottom: parent.bottom
-                    anchors.margins: 20
-                    spacing: 10
+                    rows: 2
+                    columns: 2
+                    //anchors.margins: 20
+                    //spacing: 10
+                    //margins: 10
 
                     Button{
                         id: abContactViewNextButton
@@ -468,7 +470,6 @@ StackView {
                         onClicked: {
                             if( currentIndex === undefined){
                                 currentIndex = 0
-
                             }
 
                             console.log("CurrentIndex goes from: " + Number(currentIndex))

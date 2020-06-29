@@ -49,8 +49,8 @@ ApplicationWindow {
     ScrollView{
        id: scroll1
        anchors.fill: parent
-       anchors.leftMargin: 20
-       anchors.rightMargin: 20
+       anchors.leftMargin: AppStyle.appLeftMargin
+       anchors.rightMargin: AppStyle.appRightMargin
 
 
         Text {
