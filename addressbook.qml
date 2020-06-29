@@ -8,6 +8,7 @@ import "littlehelper.js" as Utils
 
 StackView {
 
+
     id: abStack
 // Signals
     signal message(string msg)
@@ -20,9 +21,26 @@ StackView {
 
     visible: true
 
+//    property alias abIdField: abContactViewIdField.text
+//    property alias abFirstNameField: abContactViewFirstNameField.text
+//    property alias abLastNameField: abContactViewLastNameField.text
+//    property alias abNumberField: abContactViewNumberField.text
+//    property alias abEmailField: abContactViewEmailField.text
+
     property var currentIndex
     // property will store data
     property var jsonData
+
+
+
+//    function dataToContactView(index){
+//        var jsonObject = abStack.jsonData[index]
+//        abIdField = jsonObject["id"]
+//        abFirstNameField = jsonObject["firstname"]
+//        abLastNameField = jsonObject["lastname"]
+//        abNumberField = jsonObject["mobile"]
+//        abEmailField = jsonObject["email"]
+//    }
 
     ListModel{
         id: abJSONModel
@@ -36,7 +54,8 @@ StackView {
                 width:  childrenRect.width
                 height: childrenRect.height
                 onClicked: {
-                   console.log("Clicked: id: "+ id +" "+ lastname +", "+ firstname +" ")
+                   currentIndex = index
+                   console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
                 }
                 RowLayout{
                     spacing: 10
@@ -273,14 +292,26 @@ StackView {
 
         // Component can only have one child, so wrapping everything in Item works around that.
             Item{
+                Component.onCompleted: {
+                    if(currentIndex >= 0){
+                        var jsonObject = abStack.jsonData[currentIndex]
+                        abContactViewIdField.text = jsonObject["id"]
+                        abContactViewFirstNameField.text = jsonObject["firstname"]
+                        abContactViewLastNameField.text = jsonObject["lastname"]
+                        abContactViewNumberField.text = jsonObject["mobile"]
+                        abContactViewEmailField.text = jsonObject["email"]
+                    }else if(currentIndex === -2){
+                        abContactViewIdField.clear()
+                        abContactViewFirstNameField.clear()
+                        abContactViewLastNameField.clear()
+                        abContactViewNumberField.clear()
+                        abContactViewEmailField.clear()
+                    }else if(Number(abJSONModel.count) === 0){
+                        Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                        currentIndex = 0
+                    }
 
-//                property alias abContactViewIdField: abContactViewIdField.text
-//                property alias abContactViewFirstNameField: abContactViewFirstNameField.text
-//                property alias abContactViewLastNameField: abContactViewLastNameField.text
-//                property alias abContactViewNumberField: abContactViewNumberField.text
-//                property alias abContactViewEmailField: abContactViewEmailField.text
-
-
+                }
                 Rectangle{
                 color: AppStyle.appBackgroundColor
                 anchors.fill: parent
@@ -379,8 +410,6 @@ StackView {
                         TextField{
                             id: abContactViewLastNameField
                             color: AppStyle.appTextColor
-                            //text: "Testi3"
-                            //textEdited: "testi3 v2"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
@@ -392,7 +421,6 @@ StackView {
                             text: "Phone: "
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 3
-//                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
 
 
@@ -400,7 +428,6 @@ StackView {
                         TextField{
                             id: abContactViewNumberField
                             color: AppStyle.appTextColor
-                            //text: "Testi4"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
@@ -411,14 +438,12 @@ StackView {
                             text: "Email: "
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                             Layout.row: 4
-//                            Layout.column: 0
                             font.pointSize: AppStyle.appDefaultFontSize
 
                         }
                         TextField{
                             id: abContactViewEmailField
                             color: AppStyle.appTextColor
-                            //text: "Testi5"
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                         }
@@ -427,45 +452,23 @@ StackView {
 
                     } //GridLayout
 
-                GridLayout{
+                Grid{
                     anchors.bottom: parent.bottom
                     rows: 2
                     columns: 2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: implicitWidth
+                    height: implicitHeight
+                    rowSpacing: AppStyle.abButtonMarging / 2
+                    columnSpacing: AppStyle.abButtonMarging
                     //anchors.margins: 20
                     //spacing: 10
                     //margins: 10
 
-                    Button{
-                        id: abContactViewNextButton
-                        text: "Next user"
-                        onClicked: {
-                            if( currentIndex === undefined){
-                                currentIndex = 0
-                            }
-
-                            console.log("CurrentIndex goes from: " + Number(currentIndex))
-                            if( ( currentIndex + 1) >= Number(abJSONModel.count ) ){
-                                currentIndex = 0
-                            }else if( ( currentIndex + 1 ) < Number(abJSONModel.count) ){
-                                currentIndex += 1
-                            }else{
-                                console.log("Error in abContactViewNextButton, illegal value in currentIndex")
-                            }
-                            console.log("CurrentIndex  goes  to: " + Number(currentIndex))
-//                            Utils.dataToContactView(currentIndex)
-                                var jsonObject = abStack.jsonData[currentIndex]
-                                abContactViewIdField.text = jsonObject["id"]
-                                abContactViewFirstNameField.text = jsonObject["firstname"]
-                                abContactViewLastNameField.text = jsonObject["lastname"]
-                                abContactViewNumberField.text = jsonObject["mobile"]
-                                abContactViewEmailField.text = jsonObject["email"]
-
-                        }
-
-                    }
 
                     Button{
                         id: abContactViewPrevButton
+                        width: AppStyle.abButtonWidth
                         text: "Previous user"
                         onClicked: {
                             if( currentIndex === undefined){
@@ -481,7 +484,7 @@ StackView {
                                 console.log("Error in abContactViewPrevButton, illegal value in currentIndex")
                             }
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
-//                            Utils.dataToContactView(currentIndex)
+//                            dataToContactView(currentIndex)
 
                                 var jsonObject = abStack.jsonData[currentIndex]
                                 abContactViewIdField.text = jsonObject["id"]
@@ -494,7 +497,38 @@ StackView {
                     }
 
                     Button{
+                        id: abContactViewNextButton
+                        width: AppStyle.abButtonWidth
+                        text: "Next user"
+                        onClicked: {
+                            if( currentIndex === undefined){
+                                currentIndex = 0
+                            }
+
+                            console.log("CurrentIndex goes from: " + Number(currentIndex))
+                            if( ( currentIndex + 1) >= Number(abJSONModel.count ) ){
+                                currentIndex = 0
+                            }else if( ( currentIndex + 1 ) < Number(abJSONModel.count) ){
+                                currentIndex += 1
+                            }else{
+                                console.log("Error in abContactViewNextButton, illegal value in currentIndex")
+                            }
+                            console.log("CurrentIndex  goes  to: " + Number(currentIndex))
+//                            dataToContactView(currentIndex)
+                                var jsonObject = abStack.jsonData[currentIndex]
+                                abContactViewIdField.text = jsonObject["id"]
+                                abContactViewFirstNameField.text = jsonObject["firstname"]
+                                abContactViewLastNameField.text = jsonObject["lastname"]
+                                abContactViewNumberField.text = jsonObject["mobile"]
+                                abContactViewEmailField.text = jsonObject["email"]
+                        }
+
+                    }
+
+
+                    Button{
                         id: abContactViewSaveButton
+                        width: AppStyle.abButtonWidth
                         text: AppStyle.abSaveUser
                         onClicked: {
                             console.log("Save data not yet implemented.")
@@ -503,9 +537,8 @@ StackView {
 
                     Button{
                         id: abContactViewBackToMainButton
+                        width: AppStyle.abButtonWidth
                         text: AppStyle.abReturnToMain
-//                        Layout.row: 5
-//                        Layout.column: 3
                         onClicked: {
                             push(abMainView)
                          }
@@ -513,10 +546,7 @@ StackView {
                 }
 
                 }//Rectangle
-
             }//Item
     }//Component
-
 }//StackView
-
 
