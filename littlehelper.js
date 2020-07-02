@@ -74,24 +74,34 @@ function dataToContactView(index){
 
 
 // function to search JSON for results
-// Input: String to search, Field to search from
+// Input: String to search, Field to search from, search for exactMatch true/false
 // Output: index of the contact in jsonData
-function searchFromJSON(searchString, searchField){
+function searchFromJSON(searchString, searchField, exactMatch){
     var foundAtIndex;
     console.log("searchFromJSON");
     for (var x in abStack.jsonData) {
         console.log("Transferring.");
         var jsonObject = abStack.jsonData[x];
-//        var searchFieldModified = '"'+ searchField +'"';
-//        var searchStringResult;
         var searchStringResult = jsonObject[searchField];
         console.log("Lets check.");
-        if( searchStringResult === searchString ){
-            //foundAtIndex = jsonObject(currentIndex);
-            console.log("Found!!! At index: "+x);
+
+    // If we need exact match. This works.
+        if(exactMatch === true){
+            if( searchStringResult === searchString ){
+                foundAtIndex = x;
+                console.log("Found!!! At index: "+x);
+            }else{
+                console.log("Not found exact match. :( ");
+            }
         }else{
-            console.log("Not found");
+            if(searchStringResult.indexOf(searchString)){
+                console.log("Found!?! At index: " + x);
+            }else{
+                console.log("Not found. :( ");
+            }
+
         }
+
     }
 
     return foundAtIndex;
