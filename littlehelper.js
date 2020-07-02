@@ -93,8 +93,9 @@ function searchFromJSON(searchString, searchField, exactMatch){
             }else{
                 console.log("Not found exact match. :( ");
             }
+    // when only partial match is needed
         }else{
-            if(searchStringResult.indexOf(searchString)){
+            if(searchStringResult.match(searchString) ){
                 console.log("Found!?! At index: " + x);
             }else{
                 console.log("Not found. :( ");

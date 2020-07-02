@@ -219,7 +219,7 @@ StackView {
                                     text: "CheckIDTest"
                                     onClicked: {
                                     //Testing search function
-                                        Utils.searchFromJSON(Dalai, "firstname", false)
+                                        Utils.searchFromJSON("ala", "firstname", false)
                                     }
 
                                 }
