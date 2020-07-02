@@ -1,12 +1,12 @@
 // Function to get data from the URL JSON and transfering it to jsonData
 function getDataFromCloud(getTheUrl){
 
-    //console.log("getDataFromNet_phase_1")
+    //console.log("getDataFromCloud_phase_1")
     var xhr = new XMLHttpRequest
-        //console.log("getDataFromNet_phase_2")
+        //console.log("getDataFromCloud_phase_2")
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-        //    console.log("getDataFromNet_phase_3")
+        //    console.log("getDataFromCloud_phase_3")
         // New test code
             jsonData = xhr.responseText
             var objectArray = JSON.parse(xhr.responseText)
@@ -15,12 +15,32 @@ function getDataFromCloud(getTheUrl){
                 outputJSONData()
           }
         }
-        //console.log("getDataFromNet_phase_5")
+        //console.log("getDataFromCloud_phase_5")
         xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
-        console.log("function getDataFromNet run")
+        console.log("function getDataFromCloud run")
 }
 
+// Function to check if ID exists in cloud.
+// Is this necessary? Why not just update local database and check from that?
+function checkIfIdExistsInCloud(getTheUrl, idToCheck){
+
+    var xhr = new XMLHttpRequest
+        console.log("checkIfIdExistsInCloud_phase_1")
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log("checkIfIdExistsInCloud_phase_2")
+
+            //jsonData = xhr.responseText
+            var objectArray = JSON.parse(xhr.responseText)
+
+
+          }
+        }
+    xhr.open("GET", Qt.resolvedUrl(getTheUrl))
+    xhr.send()
+    console.log("function checkIfIdExistsInCloud run")
+}
 
 // Function to output data from jsonData and appending it to abJSONModel
 // to generate listView of it.
@@ -41,7 +61,6 @@ function outputJSONData(){
 }
 
 
-
 // Currently not working. Issues with writing to global properties
 // Workaround: For now the same code is in addressbook.qml where needed.
 function dataToContactView(index){
@@ -59,9 +78,20 @@ function dataToContactView(index){
 // Output: index of the contact in jsonData
 function searchFromJSON(searchString, searchField){
     var foundAtIndex;
+    console.log("searchFromJSON");
     for (var x in abStack.jsonData) {
-        var jsonObject = abStack.jsonData[x]
-
+        console.log("Transferring.");
+        var jsonObject = abStack.jsonData[x];
+//        var searchFieldModified = '"'+ searchField +'"';
+//        var searchStringResult;
+        var searchStringResult = jsonObject[searchField];
+        console.log("Lets check.");
+        if( searchStringResult === searchString ){
+            //foundAtIndex = jsonObject(currentIndex);
+            console.log("Found!!! At index: "+x);
+        }else{
+            console.log("Not found");
+        }
     }
 
     return foundAtIndex;
@@ -79,59 +109,59 @@ Number.prototype.pad = function(size) {
   return s;
 }
 
-
+//
 //Contactlist-API
 
 //Get all contacts
 
-//http-GET
+    //http-GET
 
-//https://qtphone.herokuapp.com/contact
-
+    //https://qtphone.herokuapp.com/contact
+//Status: Working
 
 //Get Contact BY ID
 
-//http-GET
+    //http-GET
 
-//https://qtphone.herokuapp.com/contact/x
+    //https://qtphone.herokuapp.com/contact/x
 
-//WHERE x=id-value
+    //WHERE x=id-value
 
 
 
 //Add Contact
 
-//http-POST
+    //http-POST
 
-//https://qtphone.herokuapp.com/contact
+    //https://qtphone.herokuapp.com/contact
 
-//with fields:
+    //with fields:
 
-//firstname
+    //firstname
 
-//lastname
+    //lastname
 
-//mobile
+    //mobile
 
-//email
+    //email
 
 
 //Update Contact
 
-//http-PUT
+    //http-PUT
 
-//https://qtphone.herokuapp.com/contact/x
+    //https://qtphone.herokuapp.com/contact/x
 
-//WHERE x=id-value
+    //WHERE x=id-value
 
-//and fields
-//firstname
+    //and fields
+    //firstname
 
-//lastname
+    //lastname
 
-//mobile
+    //mobile
 
-//email
+    //email
 
 //In the application implement all those operations. So that you can get, add and update contacts.
 //If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:
