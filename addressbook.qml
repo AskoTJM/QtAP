@@ -72,7 +72,6 @@ StackView {
                       font.pixelSize: AppStyle.appDefaultFontSize
                       text: lastname +", "
 
-
                     }
                     Text {
                       color: AppStyle.appTextColor
