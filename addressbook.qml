@@ -56,6 +56,7 @@ StackView {
                 onClicked: {
                    currentIndex = index
                    console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
+                   push(abContactView)
                 }
                 RowLayout{
                     spacing: 10
@@ -136,8 +137,10 @@ StackView {
                                 id: abAddDataButton
                                 width: AppStyle.abButtonWidth
                                 text: AppStyle.abAddUser
-                                onClicked: push(abContactView)
-
+                                onClicked: {
+                                    currentIndex = -2
+                                    push(abContactView)
+                                }
                             }
 
                             Button{

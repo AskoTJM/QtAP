@@ -37,6 +37,7 @@ function outputJSONData(){
 }
 
 
+
 // Currently not working. Issues with writing to global properties
 function dataToContactView(index){
     var jsonObject = abStack.jsonData[index]
@@ -47,6 +48,17 @@ function dataToContactView(index){
     abContactViewEmailField = jsonObject["email"]
 }
 
+
+// function to search JSON for results
+function searchFromJSON(searchString, searchField){
+    var foundAtIndex;
+    for (var x in abStack.jsonData) {
+        var jsonObject = abStack.jsonData[x]
+
+    }
+
+    return foundAtIndex;
+}
 
 //From https://gist.github.com/endel/321925f6cafa25bbfbde
 // (1).pad(3) // => "001"
