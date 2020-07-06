@@ -58,7 +58,6 @@ function checkIfIdExistsInCloud(getTheUrl, idToCheck){
             //jsonData = xhr.responseText
             var objectArray = JSON.parse(xhr.responseText)
 
-
           }
         }
     xhr.open("GET", Qt.resolvedUrl(getTheUrl))
@@ -101,6 +100,7 @@ function dataToContactView(index){
 // Input: searchFromJSON(String to search, Field to search from, search for exactMatch true/false)
 // Returns: Arrays of indexes of the matches in jsonData
 function searchFromJSON(searchString, searchField, exactMatch){
+// Array to save result indexes
     var foundAtIndex = [];
     var searchStringI = /"searchString"/i ;
     console.log("searchFromJSON");
@@ -121,6 +121,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
             }
     // when only partial match is needed
         }else{
+        //Strings to lower case
             searchStringResult = searchStringResult.toLowerCase();
             searchString = searchString.toLowerCase();
             if(searchStringResult.match(searchString) ){
@@ -129,9 +130,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
             }else{
                 console.log("Not found. :( ");
             }
-
         }
-
     }
     return foundAtIndex;
 }
@@ -148,69 +147,71 @@ Number.prototype.pad = function(size) {
   return s;
 }
 
-//
-//Contactlist-API
-
-//Get all contacts
-
-    //http-GET
-
-    //https://qtphone.herokuapp.com/contact
 //Status: Working
+    //Contactlist-API
 
-//Get Contact BY ID
+    //Get all contacts
 
-    //http-GET
+        //http-GET
 
-    //https://qtphone.herokuapp.com/contact/x
+        //https://qtphone.herokuapp.com/contact
 
-    //WHERE x=id-value
+
 //Status: JS working. Waiting for implementation.
+    //Get Contact BY ID
+
+        //http-GET
+
+        //https://qtphone.herokuapp.com/contact/x
+
+        //WHERE x=id-value
 
 
-//Add Contact
 
-    //http-POST
+    //Add Contact
 
-    //https://qtphone.herokuapp.com/contact
+        //http-POST
 
-    //with fields:
+        //https://qtphone.herokuapp.com/contact
 
-    //firstname
+        //with fields:
 
-    //lastname
+        //firstname
 
-    //mobile
+        //lastname
 
-    //email
+        //mobile
+
+        //email
 
 
-//Update Contact
+    //Update Contact
 
-    //http-PUT
+        //http-PUT
 
-    //https://qtphone.herokuapp.com/contact/x
+        //https://qtphone.herokuapp.com/contact/x
 
-    //WHERE x=id-value
+        //WHERE x=id-value
 
-    //and fields
-    //firstname
+        //and fields
+        //firstname
 
-    //lastname
+        //lastname
 
-    //mobile
+        //mobile
 
-    //email
+        //email
 
 //In the application implement all those operations. So that you can get, add and update contacts.
 //If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:
 
-//-Search a contact
-//Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings. I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
-
 // Status: JS Script working, with both exact or non-exact results.
+    //-Search a contact
+    //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
+    //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
 
-//-Save to local database
-//Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
-//Then the user can use the contact-list also without Internet-connection.
-//You can the add features like “sync to Remote-database” and/or “sync to Local-database”.
+
+    //-Save to local database
+    //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
+    //Then the user can use the contact-list also without Internet-connection.
+    //You can the add features like “sync to Remote-database” and/or “sync to Local-database”.
