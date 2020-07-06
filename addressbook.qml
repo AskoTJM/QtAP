@@ -28,6 +28,7 @@ StackView {
 //    property alias abEmailField: abContactViewEmailField.text
 
     property var currentIndex
+    property var currentState
     // property will store data
     property var jsonData
 
@@ -139,6 +140,15 @@ StackView {
                                 onClicked: {
                                     currentIndex = -2
                                     push(abContactView)
+                                }
+                            }
+
+                            Button{
+                                id: abSearchButton
+                                width: AppStyle.abButtonWidth
+                                text: AppStyle.abReturnToMain
+                                onClicked: {
+                                    console.log("Search pushed.")
                                 }
                             }
 

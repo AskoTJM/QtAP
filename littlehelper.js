@@ -8,7 +8,9 @@ function getDataFromCloud(getTheUrl){
           if (xhr.readyState === XMLHttpRequest.DONE) {
         //    console.log("getDataFromCloud_phase_3")
         // New test code
-            jsonData = xhr.responseText
+
+        //Leftover from old code
+            //jsonData = xhr.responseText
             var objectArray = JSON.parse(xhr.responseText)
         // chug data to safety
             abStack.jsonData = objectArray
@@ -23,6 +25,7 @@ function getDataFromCloud(getTheUrl){
 
 // Function to check if ID exists in cloud.
 // Is this necessary? Why not just update local database and check from that?
+// Just use by searchFromJSON([id_number],id,true), run getDataFromCloud() first if fresh data needed.
 function checkIfIdExistsInCloud(getTheUrl, idToCheck){
 
     var xhr = new XMLHttpRequest
