@@ -142,8 +142,9 @@ ApplicationWindow {
             border.width: 2
             anchors.top: appChoiceCombo.bottom
             anchors.topMargin: 6
-            anchors.margins: parent.width * 0.05
-            width: parent.width * 0.95
+            //anchors.margins: parent.width * 0.05
+            //width: parent.width * 0.95
+            width: appChoiceCombo.width
             anchors.horizontalCenter: parent.horizontalCenter
             height: 140
             color: "white"       
