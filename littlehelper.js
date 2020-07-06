@@ -23,6 +23,27 @@ function getDataFromCloud(getTheUrl){
         console.log("function getDataFromCloud run")
 }
 
+// Function to get data from the URL with ID and transfering it to jsonData
+function getDataFromCloudWithId(getTheUrl){
+
+    console.log("getDataFromCloudWithId_phase_1")
+    var xhr = new XMLHttpRequest
+        console.log("getDataFromCloudWithId_phase_2")
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log("getDataFromCloudWithId_phase_3")
+            var objectArray = JSON.parse(xhr.responseText)
+        // chug data to safety
+            abStack.jsonData = objectArray
+            outputJSONData()
+          }
+        }
+        console.log("getDataFromCloudWithId_phase_5")
+        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
+        xhr.send()
+        console.log("function getDataFromCloudWithId run")
+}
+
 // Function to check if ID exists in cloud.
 // Is this necessary? Why not just update local database and check from that?
 // Just use by searchFromJSON([id_number],id,true), run getDataFromCloud() first if fresh data needed.
@@ -76,11 +97,12 @@ function dataToContactView(index){
 }
 
 
-// function to search JSON for results
-// Input: String to search, Field to search from, search for exactMatch true/false
-// Output: index of the contact in jsonData
+// function to search from local data( abStack.jsonData )
+// Input: searchFromJSON(String to search, Field to search from, search for exactMatch true/false)
+// Returns: Arrays of indexes of the matches in jsonData
 function searchFromJSON(searchString, searchField, exactMatch){
-    var foundAtIndex;
+    var foundAtIndex = [];
+    var searchStringI = /"searchString"/i ;
     console.log("searchFromJSON");
     for (var x in abStack.jsonData) {
         console.log("Transferring.");
@@ -91,15 +113,19 @@ function searchFromJSON(searchString, searchField, exactMatch){
     // If we need exact match. This works.
         if(exactMatch === true){
             if( searchStringResult === searchString ){
-                foundAtIndex = x;
-                console.log("Found!!! At index: "+x);
+                //foundAtIndex = x;
+                console.log("Found exact match at index: "+x);
+                foundAtIndex.push(x);
             }else{
                 console.log("Not found exact match. :( ");
             }
     // when only partial match is needed
         }else{
+            searchStringResult = searchStringResult.toLowerCase();
+            searchString = searchString.toLowerCase();
             if(searchStringResult.match(searchString) ){
-                console.log("Found!?! At index: " + x);
+                console.log("Found at least partial match at index: " + x);
+                foundAtIndex.push(x);
             }else{
                 console.log("Not found. :( ");
             }
@@ -107,7 +133,6 @@ function searchFromJSON(searchString, searchField, exactMatch){
         }
 
     }
-
     return foundAtIndex;
 }
 
@@ -115,7 +140,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
 // (1).pad(3) // => "001"
 //(10).pad(3) // => "010"
 //(100).pad(3) // => "100"
-// Can be used to add zero padding
+// Used to add zero padding when showing in ListView
 
 Number.prototype.pad = function(size) {
   var s = String(this);
@@ -140,7 +165,7 @@ Number.prototype.pad = function(size) {
     //https://qtphone.herokuapp.com/contact/x
 
     //WHERE x=id-value
-
+//Status: JS working. Waiting for implementation.
 
 
 //Add Contact
@@ -182,6 +207,8 @@ Number.prototype.pad = function(size) {
 
 //-Search a contact
 //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings. I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
+
+// Status: JS Script working, with both exact or non-exact results.
 
 //-Save to local database
 //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.

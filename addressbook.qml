@@ -226,10 +226,10 @@ StackView {
                                 Button{
                                     id: abAddressViewDataOutButton
                                     width: AppStyle.abButtonWidth
-                                    text: "CheckIDTest"
+                                    text: "SearchTest"
                                     onClicked: {
                                     //Testing search function
-                                        Utils.searchFromJSON("ala", "firstname", false)
+                                        console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
                                     }
 
                                 }
@@ -237,8 +237,10 @@ StackView {
                                 Button{
                                     id: abAddressViewPlaceholderButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Placeholder"
-                                    onClicked: console.log("Nope.")
+                                    text: "Test for get with ID from Cloud"
+                                    onClicked: {
+                                        Utils.getDataFromCloudWithId("https://qtphone.herokuapp.com/contact/2")
+                                    }
                                 }
 
                                 Button{
