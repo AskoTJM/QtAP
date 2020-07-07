@@ -34,6 +34,9 @@ QtObject {
     property string appChoice2Description: "BANANAS!!!"
 
 // addressbook.qml ( = ab) Specifics
+    // URLs
+    property string abURLAddressBook: "https://qtphone.herokuapp.com/contact"
+
     // Strings
     property string abGetData: "Browse Contacts"
     property string abAddUser: "Add Contact"

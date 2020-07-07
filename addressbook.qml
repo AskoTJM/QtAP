@@ -219,7 +219,8 @@ StackView {
                                     width: AppStyle.abButtonWidth
                                     text: AppStyle.abGetDataFromCloud
                                     onClicked: {
-                                        Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                                        //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                                        Utils.getDataFromCloud(AppStyle.abURLAddressBook)
                                     }
                                 }
 
@@ -239,7 +240,7 @@ StackView {
                                     width: AppStyle.abButtonWidth
                                     text: "Test for get with ID from Cloud"
                                     onClicked: {
-                                        Utils.getDataFromCloudWithId("https://qtphone.herokuapp.com/contact/1")
+                                        Utils.getDataFromCloudWithId(AppStyle.abURLAddressBook+"/1")
                                     }
                                 }
 
@@ -324,7 +325,7 @@ StackView {
                         abContactViewNumberField.clear()
                         abContactViewEmailField.clear()
                     }else if(Number(abJSONModel.count) === 0){
-                        Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                        Utils.getDataFromCloud(AppStyle.abURLAddressBook)
                         currentIndex = 0
                     }
 

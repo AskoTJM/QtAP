@@ -1,4 +1,4 @@
-// Function to get data from the URL JSON and transfering it to jsonData
+// Function to get all the contact data from the Cloud JSON and transferring it to jsonData
 function getDataFromCloud(getTheUrl){
 
     //console.log("getDataFromCloud_phase_1")
@@ -23,7 +23,8 @@ function getDataFromCloud(getTheUrl){
         console.log("function getDataFromCloud run")
 }
 
-// Function to get data from the URL with ID and transfering it to jsonData
+// Function to get data from the Cloud with specific ID and transfering it to jsonData
+// Maybe change to use it something else than jsonData, so we don't overwrite tempoprary local data?
 function getDataFromCloudWithId(getTheUrl){
 
     console.log("getDataFromCloudWithId_phase_1")
@@ -42,6 +43,32 @@ function getDataFromCloudWithId(getTheUrl){
         xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
         console.log("function getDataFromCloudWithId run")
+}
+
+
+// Function to send new contact to Heroku
+
+function sendContactToCloud(getTheUrl){
+
+    console.log("sendContactToCloud_phase_1")
+    var xhr = new XMLHttpRequest
+        console.log("sendContactToCloud_phase_2")
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log("sendContactToCloud_phase_3")
+
+
+                    //jsonData = xhr.responseText
+            var objectArray = JSON.parse(xhr.responseText)
+        // chug data to safety
+            abStack.jsonData = objectArray
+                outputJSONData()
+          }
+        }
+        console.log("sendContactToCloud_phase_5")
+        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
+        xhr.send()
+        console.log("function getDataFromCloud run")
 }
 
 // Function to check if ID exists in cloud.
@@ -85,7 +112,7 @@ function outputJSONData(){
 
 
 // Currently not working. Issues with writing to global properties
-// Workaround: For now the same code is in addressbook.qml where needed.
+// Temporary fix: For now the same code is in addressbook.qml where needed.
 function dataToContactView(index){
     var jsonObject = abStack.jsonData[index]
     abContactViewIdField = jsonObject["id"]
@@ -167,7 +194,7 @@ Number.prototype.pad = function(size) {
         //WHERE x=id-value
 
 
-
+//Status: Currently working on.
     //Add Contact
 
         //http-POST
