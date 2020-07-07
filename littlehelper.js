@@ -34,7 +34,7 @@ function getDataFromCloudWithId(getTheUrl){
 
 
 // Function to send new contact to Heroku
-// Status: WIP, need to import values
+// Status: deprecated, replaced by sendContactDataToCloud()
 function sendContactToCloud(getTheUrl){
 
     var jsonToSend = {"firstname":"Allo","lastname":"Hello","mobile":"555 54321","email":"allo@hello.coc"};
@@ -48,7 +48,11 @@ function sendContactToCloud(getTheUrl){
           }
         }
         console.log("sendContactToCloud_phase_5")
-        xhr.open("POST", Qt.resolvedUrl(getTheUrl))
+        if(jsonToSend["id"] === ""){
+           xhr.open("POST", Qt.resolvedUrl(getTheUrl))
+        }
+
+
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         console.log("JsonObject: " + jsonToSend);
         xhr.send(JSON.stringify(jsonToSend));
@@ -56,27 +60,53 @@ function sendContactToCloud(getTheUrl){
 }
 
 // Function to update contact information
-// Status: WIP, needs to get new values.
-function updateContactInCloud(getTheUrl){
+// Status: deprecated, replaced by sendContactDataToCloud()
+function updateContactInCloud(getTheUrl, jsonToSend){
 
-    var jsonToSend = {"firstname":"Jello","lastname":"Hallo","mobile":"515 12345","email":"Jello@Hallo.oco"};
+    //var jsonToSend = {"firstname":"Jello","lastname":"Hallo","mobile":"515 12345","email":"Jello@Hallo.oco"};
+    if(jsonToSend.id === ""){
+        delete jsonToSend.id;
+        console.log("ID null.");
+        var xhr = new XMLHttpRequest
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                //console.log("updateContactInCloud_phase_3: " + xhr.responseText)
+              }
 
-    console.log("updateContactInCloud_phase_1")
+            }
+            xhr.open("PUT", Qt.resolvedUrl(getTheUrl));
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            console.log("JsonObject: " + JSON.stringify(jsonToSend) );
+            console.log("function updateContactInCloud finished.");
+    }else{
+        console.log("ID not null.");
+        delete jsonToSend.id;
+        console.log("JsonObject: " + JSON.stringify(jsonToSend) );
+    }
+}
+// Function to upload data to Cloud
+// Input: URL for Heroku, object with data
+// if id value is set update, if not new contact data.
+// Replaces separate Update and Add new Contact functions
+function sendContactDataToCloud(getTheUrl, jsonToSend){
     var xhr = new XMLHttpRequest
-        console.log("updateContactInCloud_phase_2")
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            //console.log("updateContactInCloud_phase_3: " + xhr.responseText)
+
           }
 
         }
-        console.log("updateContactInCloud_phase_5");
-        xhr.open("PUT", Qt.resolvedUrl(getTheUrl));
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        console.log("JsonObject: " + jsonToSend);
-        xhr.send(JSON.stringify(jsonToSend));
-        console.log("function updateContactInCloud finished.");
-
+    if(jsonToSend.id === ""){
+       xhr.open("POST", Qt.resolvedUrl(getTheUrl))
+       console.log("JsonDataPOST: " + JSON.stringify(jsonToSend) );
+    }
+    if(jsonToSend.id !== ""){
+       xhr.open("PUT", Qt.resolvedUrl(getTheUrl+"/"+jsonToSend.id));
+       console.log("JsonDataPUT: " + JSON.stringify(jsonToSend) );
+    }
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    delete jsonToSend.id;
+    console.log("JsonData: " + JSON.stringify(jsonToSend) );
 }
 
 // Function to check if ID exists in cloud.

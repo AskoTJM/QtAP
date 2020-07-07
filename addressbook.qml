@@ -25,6 +25,7 @@ StackView {
 
 // Switching between contacts is using Index
     property var currentIndex
+// new or updated contact data
     property var currentContact
 // Local Temporary Data
     property var jsonABData
@@ -537,7 +538,14 @@ StackView {
                         width: AppStyle.abButtonWidth
                         text: AppStyle.abSaveUser
                         onClicked: {
-                            console.log("Save data not yet implemented.")
+                            currentContact = {"id":abContactViewIdField.text,
+                                "firstname":abContactViewFirstNameField.text,
+                                "lastname":abContactViewLastNameField.text,
+                                "mobile":abContactViewNumberField.text,
+                                "email":abContactViewEmailField.text};
+                            //Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133", currentContact)
+                            Utils.sendContactDataToCloud(AppStyle.abURLAddressBook, currentContact)
+                            //console.log("Save data: " + JSON.stringify(currentContact) )
                         }
                     }
 
