@@ -3,23 +3,13 @@
 // Status: Working
 function getDataFromCloud(getTheUrl){
 
-    //console.log("getDataFromCloud_phase_1")
     var xhr = new XMLHttpRequest
-        //console.log("getDataFromCloud_phase_2")
         xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-        //    console.log("getDataFromCloud_phase_3")
-        // New test code
-
-        //Leftover from old code
-            //jsonData = xhr.responseText
-            var objectArray = JSON.parse(xhr.responseText)
-        // chug data to safety
-            abStack.jsonData = objectArray
-                outputJSONData()
+          if (xhr.readyState === XMLHttpRequest.DONE) {        
+              abStack.jsonAddressBookData = JSON.parse(xhr.responseText)
+              outputJSONData()
           }
         }
-        //console.log("getDataFromCloud_phase_5")
         xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
         console.log("function getDataFromCloud finished")
@@ -30,19 +20,13 @@ function getDataFromCloud(getTheUrl){
 // Maybe change to use it something else than jsonData, so we don't overwrite tempoprary local data?
 function getDataFromCloudWithId(getTheUrl){
 
-    //console.log("getDataFromCloudWithId_phase_1")
     var xhr = new XMLHttpRequest
-        //console.log("getDataFromCloudWithId_phase_2")
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            //console.log("getDataFromCloudWithId_phase_3")
-            var objectArray = JSON.parse(xhr.responseText)
-        // chug data to safety
-            abStack.jsonData = objectArray
+            abStack.jsonAddressBookData = JSON.parse(xhr.responseText)
             outputJSONData()
           }
         }
-        //console.log("getDataFromCloudWithId_phase_5")
         xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
         console.log("function getDataFromCloudWithId finished")
@@ -121,8 +105,8 @@ function checkIfIdExistsInCloud(getTheUrl, idToCheck){
 // ? Not sure if this is necessary? Can we skip this and generate ListView from jsonData directly?
 function outputJSONData(){
     abJSONModel.clear()
-    for (var x in abStack.jsonData) {
-        var jsonObject = abStack.jsonData[x]
+    for (var x in abStack.jsonAddressBookData) {
+        var jsonObject = abStack.jsonAddressBookData[x]
         //console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
         abJSONModel.append({"lastname": jsonObject["lastname"]
                                , "firstname": jsonObject["firstname"]
@@ -138,7 +122,7 @@ function outputJSONData(){
 // Currently not working. Issues with writing to global properties
 // Temporary fix: For now the same code is in addressbook.qml where needed.
 function dataToContactView(index){
-    var jsonObject = abStack.jsonData[index]
+    var jsonObject = abStack.jsonAddressBookData[index]
     abContactViewIdField = jsonObject["id"]
     abContactViewFirstNameField = jsonObject["firstname"]
     abContactViewLastNameField = jsonObject["lastname"]
@@ -156,9 +140,9 @@ function searchFromJSON(searchString, searchField, exactMatch){
     var foundAtIndex = [];
     var searchStringI = /"searchString"/i ;
     console.log("searchFromJSON");
-    for (var x in abStack.jsonData) {
+    for (var x in abStack.jsonAddressBookData) {
         console.log("Transferring.");
-        var jsonObject = abStack.jsonData[x];
+        var jsonObject = abStack.jsonAddressBookData[x];
         var searchStringResult = jsonObject[searchField];
         console.log("Lets check.");
 

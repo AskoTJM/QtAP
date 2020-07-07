@@ -21,27 +21,11 @@ StackView {
 
     visible: true
 
-//    property alias abIdField: abContactViewIdField.text
-//    property alias abFirstNameField: abContactViewFirstNameField.text
-//    property alias abLastNameField: abContactViewLastNameField.text
-//    property alias abNumberField: abContactViewNumberField.text
-//    property alias abEmailField: abContactViewEmailField.text
+    property var currentState
 
     property var currentIndex
-    property var currentState
-    // property will store data
-    property var jsonData
-
-
-
-//    function dataToContactView(index){
-//        var jsonObject = abStack.jsonData[index]
-//        abIdField = jsonObject["id"]
-//        abFirstNameField = jsonObject["firstname"]
-//        abLastNameField = jsonObject["lastname"]
-//        abNumberField = jsonObject["mobile"]
-//        abEmailField = jsonObject["email"]
-//    }
+    property var currentContact
+    property var jsonAddressBookData
 
     ListModel{
         id: abJSONModel
@@ -314,7 +298,7 @@ StackView {
             Item{
                 Component.onCompleted: {
                     if(currentIndex >= 0){
-                        var jsonObject = abStack.jsonData[currentIndex]
+                        var jsonObject = abStack.jsonAddressBookData[currentIndex]
                         abContactViewIdField.text = jsonObject["id"]
                         abContactViewFirstNameField.text = jsonObject["firstname"]
                         abContactViewLastNameField.text = jsonObject["lastname"]
@@ -506,7 +490,7 @@ StackView {
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
 //                            dataToContactView(currentIndex)
 
-                                var jsonObject = abStack.jsonData[currentIndex]
+                                var jsonObject = abStack.jsonAddressBookData[currentIndex]
                                 abContactViewIdField.text = jsonObject["id"]
                                 abContactViewFirstNameField.text = jsonObject["firstname"]
                                 abContactViewLastNameField.text = jsonObject["lastname"]
@@ -535,7 +519,7 @@ StackView {
                             }
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
 //                            dataToContactView(currentIndex)
-                                var jsonObject = abStack.jsonData[currentIndex]
+                                var jsonObject = abStack.jsonAddressBookData[currentIndex]
                                 abContactViewIdField.text = jsonObject["id"]
                                 abContactViewFirstNameField.text = jsonObject["firstname"]
                                 abContactViewLastNameField.text = jsonObject["lastname"]
