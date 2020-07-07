@@ -227,10 +227,11 @@ StackView {
                                 Button{
                                     id: abAddressViewDataOutButton
                                     width: AppStyle.abButtonWidth
-                                    text: "SearchTest"
+                                    text: "Test update contact"
                                     onClicked: {
                                     //Testing search function
-                                        console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
+                                       //console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
+                                        Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133")
                                     }
 
                                 }
@@ -238,9 +239,10 @@ StackView {
                                 Button{
                                     id: abAddressViewPlaceholderButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Test for get with ID from Cloud"
+                                    text: "Test Post to Cloud"
                                     onClicked: {
-                                        Utils.getDataFromCloudWithId(AppStyle.abURLAddressBook+"/1")
+                                        //Utils.getDataFromCloudWithId(AppStyle.abURLAddressBook+"/1")
+                                        Utils.sendContactToCloud(AppStyle.abURLAddressBook)
                                     }
                                 }
 

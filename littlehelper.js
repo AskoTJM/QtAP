@@ -1,3 +1,4 @@
+
 // Function to get all the contact data from the Cloud JSON and transferring it to jsonData
 function getDataFromCloud(getTheUrl){
 
@@ -20,55 +21,81 @@ function getDataFromCloud(getTheUrl){
         //console.log("getDataFromCloud_phase_5")
         xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
-        console.log("function getDataFromCloud run")
+        console.log("function getDataFromCloud finished")
 }
 
 // Function to get data from the Cloud with specific ID and transfering it to jsonData
 // Maybe change to use it something else than jsonData, so we don't overwrite tempoprary local data?
 function getDataFromCloudWithId(getTheUrl){
 
-    console.log("getDataFromCloudWithId_phase_1")
+    //console.log("getDataFromCloudWithId_phase_1")
     var xhr = new XMLHttpRequest
-        console.log("getDataFromCloudWithId_phase_2")
+        //console.log("getDataFromCloudWithId_phase_2")
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log("getDataFromCloudWithId_phase_3")
+            //console.log("getDataFromCloudWithId_phase_3")
             var objectArray = JSON.parse(xhr.responseText)
         // chug data to safety
             abStack.jsonData = objectArray
             outputJSONData()
           }
         }
-        console.log("getDataFromCloudWithId_phase_5")
+        //console.log("getDataFromCloudWithId_phase_5")
         xhr.open("GET", Qt.resolvedUrl(getTheUrl))
         xhr.send()
-        console.log("function getDataFromCloudWithId run")
+        console.log("function getDataFromCloudWithId finished")
 }
 
 
 // Function to send new contact to Heroku
-
+// Status: WIP
 function sendContactToCloud(getTheUrl){
+
+    var jsonToSend = '{"firstname":"Allo","lastname":"Hello","mobile":"555 12345","email":"allo@hello.coc"}';
+    var JsonObject = JSON.parse(jsonToSend);
+    //var JsonObject = JSON.stringify(jsonToSend);
+    //JSON.parse(JsonObject);
 
     console.log("sendContactToCloud_phase_1")
     var xhr = new XMLHttpRequest
         console.log("sendContactToCloud_phase_2")
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log("sendContactToCloud_phase_3")
 
-
-                    //jsonData = xhr.responseText
-            var objectArray = JSON.parse(xhr.responseText)
-        // chug data to safety
-            abStack.jsonData = objectArray
-                outputJSONData()
+          console.log("sendContactToCloud_phase_3")
           }
         }
         console.log("sendContactToCloud_phase_5")
-        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
-        xhr.send()
-        console.log("function getDataFromCloud run")
+        xhr.open("POST", Qt.resolvedUrl(getTheUrl))
+       // xhr.send(JsonObject);
+        console.log("JsonObject: " + JSON.stringify(JsonObject) )
+        console.log("function sendContactToCloud finished.")
+}
+
+// Function to update contact information
+// Status: WIP
+function updateContactInCloud(getTheUrl){
+    var jsonToSend = '{"firstname":"Allo","lastname":"Hello","mobile":"555 12345","email":"allo@hello.coc"}';
+    //var JsonObject = JSON.parse(jsonToSend);
+    var JsonObject = JSON.stringify(jsonToSend);
+    //JSON.parse(JsonObject);
+
+    console.log("updateContactInCloud_phase_1")
+    var xhr = new XMLHttpRequest
+        console.log("updateContactInCloud_phase_2")
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            //console.log("updateContactInCloud_phase_3: " + xhr.responseText)
+          }
+
+        }
+        console.log("updateContactInCloud_phase_5");
+        xhr.open("PUT", Qt.resolvedUrl(getTheUrl));
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        console.log("JsonObject: " + jsonToSend);
+        xhr.send(JSON.stringify(jsonToSend));
+        console.log("function updateContactInCloud finished.");
+
 }
 
 // Function to check if ID exists in cloud.
