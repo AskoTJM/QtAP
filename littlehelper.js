@@ -6,7 +6,7 @@ function getDataFromCloud(getTheUrl){
     var xhr = new XMLHttpRequest
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {        
-              abStack.jsonAddressBookData = JSON.parse(xhr.responseText)
+              abStack.jsonABData = JSON.parse(xhr.responseText)
               outputJSONData()
           }
         }
@@ -22,8 +22,8 @@ function getDataFromCloudWithId(getTheUrl){
 
     var xhr = new XMLHttpRequest
         xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            abStack.jsonAddressBookData = JSON.parse(xhr.responseText)
+          if (xhr.readyState === XMLHttpRequest.DONE) {           
+            abStack.jsonABData = JSON.parse(xhr.responseText)
             outputJSONData()
           }
         }
@@ -105,8 +105,8 @@ function checkIfIdExistsInCloud(getTheUrl, idToCheck){
 // ? Not sure if this is necessary? Can we skip this and generate ListView from jsonData directly?
 function outputJSONData(){
     abJSONModel.clear()
-    for (var x in abStack.jsonAddressBookData) {
-        var jsonObject = abStack.jsonAddressBookData[x]
+    for (var x in abStack.jsonABData) {
+        var jsonObject = abStack.jsonABData[x]
         //console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
         abJSONModel.append({"lastname": jsonObject["lastname"]
                                , "firstname": jsonObject["firstname"]
@@ -122,7 +122,7 @@ function outputJSONData(){
 // Currently not working. Issues with writing to global properties
 // Temporary fix: For now the same code is in addressbook.qml where needed.
 function dataToContactView(index){
-    var jsonObject = abStack.jsonAddressBookData[index]
+    var jsonObject = abStack.jsonABData[index]
     abContactViewIdField = jsonObject["id"]
     abContactViewFirstNameField = jsonObject["firstname"]
     abContactViewLastNameField = jsonObject["lastname"]
@@ -140,9 +140,9 @@ function searchFromJSON(searchString, searchField, exactMatch){
     var foundAtIndex = [];
     var searchStringI = /"searchString"/i ;
     console.log("searchFromJSON");
-    for (var x in abStack.jsonAddressBookData) {
+    for (var x in abStack.jsonABData) {
         console.log("Transferring.");
-        var jsonObject = abStack.jsonAddressBookData[x];
+        var jsonObject = abStack.jsonABData[x];
         var searchStringResult = jsonObject[searchField];
         console.log("Lets check.");
 

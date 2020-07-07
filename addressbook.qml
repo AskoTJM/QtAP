@@ -20,12 +20,14 @@ StackView {
     anchors.rightMargin: AppStyle.appRightMargin
 
     visible: true
-
+// Maybe use States to change UI and functionality ?
     property var currentState
 
+// Switching between contacts is using Index
     property var currentIndex
     property var currentContact
-    property var jsonAddressBookData
+// Local Temporary Data
+    property var jsonABData
 
     ListModel{
         id: abJSONModel
@@ -298,7 +300,7 @@ StackView {
             Item{
                 Component.onCompleted: {
                     if(currentIndex >= 0){
-                        var jsonObject = abStack.jsonAddressBookData[currentIndex]
+                        var jsonObject = abStack.jsonABData[currentIndex]
                         abContactViewIdField.text = jsonObject["id"]
                         abContactViewFirstNameField.text = jsonObject["firstname"]
                         abContactViewLastNameField.text = jsonObject["lastname"]
@@ -490,7 +492,7 @@ StackView {
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
 //                            dataToContactView(currentIndex)
 
-                                var jsonObject = abStack.jsonAddressBookData[currentIndex]
+                                var jsonObject = abStack.jsonABData[currentIndex]
                                 abContactViewIdField.text = jsonObject["id"]
                                 abContactViewFirstNameField.text = jsonObject["firstname"]
                                 abContactViewLastNameField.text = jsonObject["lastname"]
@@ -519,7 +521,7 @@ StackView {
                             }
                             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
 //                            dataToContactView(currentIndex)
-                                var jsonObject = abStack.jsonAddressBookData[currentIndex]
+                                var jsonObject = abStack.jsonABData[currentIndex]
                                 abContactViewIdField.text = jsonObject["id"]
                                 abContactViewFirstNameField.text = jsonObject["firstname"]
                                 abContactViewLastNameField.text = jsonObject["lastname"]
