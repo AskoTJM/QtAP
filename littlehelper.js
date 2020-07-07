@@ -1,5 +1,6 @@
 
 // Function to get all the contact data from the Cloud JSON and transferring it to jsonData
+// Status: Working
 function getDataFromCloud(getTheUrl){
 
     //console.log("getDataFromCloud_phase_1")
@@ -25,6 +26,7 @@ function getDataFromCloud(getTheUrl){
 }
 
 // Function to get data from the Cloud with specific ID and transfering it to jsonData
+// Status: Working
 // Maybe change to use it something else than jsonData, so we don't overwrite tempoprary local data?
 function getDataFromCloudWithId(getTheUrl){
 
@@ -48,13 +50,10 @@ function getDataFromCloudWithId(getTheUrl){
 
 
 // Function to send new contact to Heroku
-// Status: WIP
+// Status: WIP, need to import values
 function sendContactToCloud(getTheUrl){
 
-    var jsonToSend = '{"firstname":"Allo","lastname":"Hello","mobile":"555 12345","email":"allo@hello.coc"}';
-    var JsonObject = JSON.parse(jsonToSend);
-    //var JsonObject = JSON.stringify(jsonToSend);
-    //JSON.parse(JsonObject);
+    var jsonToSend = {"firstname":"Allo","lastname":"Hello","mobile":"555 54321","email":"allo@hello.coc"};
 
     console.log("sendContactToCloud_phase_1")
     var xhr = new XMLHttpRequest
@@ -62,23 +61,21 @@ function sendContactToCloud(getTheUrl){
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
 
-          console.log("sendContactToCloud_phase_3")
           }
         }
         console.log("sendContactToCloud_phase_5")
         xhr.open("POST", Qt.resolvedUrl(getTheUrl))
-       // xhr.send(JsonObject);
-        console.log("JsonObject: " + JSON.stringify(JsonObject) )
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        console.log("JsonObject: " + jsonToSend);
+        xhr.send(JSON.stringify(jsonToSend));
         console.log("function sendContactToCloud finished.")
 }
 
 // Function to update contact information
-// Status: WIP
+// Status: WIP, needs to get new values.
 function updateContactInCloud(getTheUrl){
-    var jsonToSend = '{"firstname":"Allo","lastname":"Hello","mobile":"555 12345","email":"allo@hello.coc"}';
-    //var JsonObject = JSON.parse(jsonToSend);
-    var JsonObject = JSON.stringify(jsonToSend);
-    //JSON.parse(JsonObject);
+
+    var jsonToSend = {"firstname":"Jello","lastname":"Hallo","mobile":"515 12345","email":"Jello@Hallo.oco"};
 
     console.log("updateContactInCloud_phase_1")
     var xhr = new XMLHttpRequest
@@ -151,6 +148,7 @@ function dataToContactView(index){
 
 
 // function to search from local data( abStack.jsonData )
+// Status: Working
 // Input: searchFromJSON(String to search, Field to search from, search for exactMatch true/false)
 // Returns: Arrays of indexes of the matches in jsonData
 function searchFromJSON(searchString, searchField, exactMatch){
@@ -190,6 +188,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
 }
 
 //From https://gist.github.com/endel/321925f6cafa25bbfbde
+// Status: Working
 // (1).pad(3) // => "001"
 //(10).pad(3) // => "010"
 //(100).pad(3) // => "100"
@@ -264,7 +263,7 @@ Number.prototype.pad = function(size) {
     //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
     //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
 
-
+// Status: In planning.
     //-Save to local database
     //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
     //Then the user can use the contact-list also without Internet-connection.
