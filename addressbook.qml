@@ -206,7 +206,7 @@ StackView {
                                     width: AppStyle.abButtonWidth
                                     text: AppStyle.abGetDataFromCloud
                                     onClicked: {
-                                        //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+
                                         Utils.getDataFromCloud(AppStyle.abURLAddressBook)
                                     }
                                 }
@@ -228,7 +228,7 @@ StackView {
                                     width: AppStyle.abButtonWidth
                                     text: "Test Post to Cloud"
                                     onClicked: {
-                                        //Utils.getDataFromCloudWithId(AppStyle.abURLAddressBook+"/1")
+                                        //Utils.getDataFromCloud(AppStyle.abURLAddressBook+"/1")
                                         Utils.sendContactToCloud(AppStyle.abURLAddressBook)
                                     }
                                 }
@@ -256,7 +256,7 @@ StackView {
 
                         Rectangle{
                             //anchors.fill: abAddressViewScroll
-                            color: "grey"
+                            color: AppStyle.appBackgroundColor
                             anchors.bottom: parent.bottom
                             anchors.topMargin: 10
                             anchors.top: abCounterText.bottom
@@ -546,6 +546,7 @@ StackView {
                             //Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133", currentContact)
                             Utils.sendContactDataToCloud(AppStyle.abURLAddressBook, currentContact)
                             //console.log("Save data: " + JSON.stringify(currentContact) )
+
                         }
                     }
 

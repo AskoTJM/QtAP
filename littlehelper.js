@@ -15,22 +15,7 @@ function getDataFromCloud(getTheUrl){
         console.log("function getDataFromCloud finished")
 }
 
-// Function to get data from the Cloud with specific ID and transfering it to jsonData
-// Status: Working
-// Maybe change to use it something else than jsonData, so we don't overwrite tempoprary local data?
-function getDataFromCloudWithId(getTheUrl){
 
-    var xhr = new XMLHttpRequest
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {           
-            abStack.jsonABData = JSON.parse(xhr.responseText)
-            outputJSONData()
-          }
-        }
-        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
-        xhr.send()
-        console.log("function getDataFromCloudWithId finished")
-}
 
 
 // Function to upload data to Cloud
@@ -59,6 +44,7 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
     }
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     delete jsonToSend.id;
+    xhr.send(JSON.stringify(jsonToSend));
     console.log("JsonData: " + JSON.stringify(jsonToSend) );
 }
 

@@ -1,5 +1,23 @@
 // Place to retire functions not used.
 
+
+// Function to get data from the Cloud with specific ID and transfering it to jsonData
+// Status: Retired, Working, same as getDataFromCloud() or some cases we can change it to do both jobs
+// Maybe change to use it something else than jsonData, so we don't overwrite tempoprary local data?
+function getDataFromCloudWithId(getTheUrl){
+
+    var xhr = new XMLHttpRequest
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            abStack.jsonABData = JSON.parse(xhr.responseText)
+            outputJSONData()
+          }
+        }
+        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
+        xhr.send()
+        console.log("function getDataFromCloudWithId finished")
+}
+
 // Function to send new contact to Heroku
 // Status: deprecated, replaced by sendContactDataToCloud()
 function sendContactToCloud(getTheUrl){
