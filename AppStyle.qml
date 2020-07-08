@@ -44,6 +44,7 @@ QtObject {
     property string abTitle: "Heroku Addressbook"
     property string abGetDataFromCloud: "Get from Cloud"
     property string abSaveUser: "Save data"
+    property string abSearch: "Search"
 
     // Values
     property int abButtonWidth: 150

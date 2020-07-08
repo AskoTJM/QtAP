@@ -133,7 +133,7 @@ Number.prototype.pad = function(size) {
         //https://qtphone.herokuapp.com/contact
 
 
-//Status: JS working. Waiting for implementation.
+//Status: Working
     //Get Contact BY ID
 
         //http-GET
@@ -143,7 +143,7 @@ Number.prototype.pad = function(size) {
         //WHERE x=id-value
 
 
-//Status: Currently working on. JS-Script works
+//Status: Working
     //Add Contact
 
         //http-POST
@@ -160,8 +160,8 @@ Number.prototype.pad = function(size) {
 
         //email
 
-
-    //Update Contact. JS-Script works. Shares code with Add Contact
+//Status: Working
+    //Update Contact.
 
         //http-PUT
 

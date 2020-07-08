@@ -101,7 +101,7 @@ StackView {
                     Grid{
                         width: implicitWidth
                         height: implicitHeight
-                        rows: 2
+                        rows: 3
                         columns: 2
                         rowSpacing: AppStyle.abButtonMarging / 2
                         columnSpacing: AppStyle.abButtonMarging
@@ -133,7 +133,7 @@ StackView {
                             Button{
                                 id: abSearchButton
                                 width: AppStyle.abButtonWidth
-                                text: AppStyle.abReturnToMain
+                                text: AppStyle.abSearch
                                 onClicked: {
                                     console.log("Search pushed.")
                                 }
@@ -214,11 +214,11 @@ StackView {
                                 Button{
                                     id: abAddressViewDataOutButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Test update contact"
+                                    text: "Placeholder"
                                     onClicked: {
                                     //Testing search function
                                        //console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
-                                        Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133")
+                                       // Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133")
                                     }
 
                                 }
@@ -226,10 +226,10 @@ StackView {
                                 Button{
                                     id: abAddressViewPlaceholderButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Test Post to Cloud"
+                                    text: "Placeholder"
                                     onClicked: {
                                         //Utils.getDataFromCloud(AppStyle.abURLAddressBook+"/1")
-                                        Utils.sendContactToCloud(AppStyle.abURLAddressBook)
+                                        //Utils.sendContactToCloud(AppStyle.abURLAddressBook)
                                     }
                                 }
 
@@ -242,7 +242,7 @@ StackView {
                         }
 
 
-                        // Just counter for testing purposes for how many contacts there are
+                        // Counter for testing purposes for how many contacts there are
                         Text{
                             id: abCounterText
                             anchors.top: abAddressViewGrid.bottom
@@ -365,8 +365,6 @@ StackView {
                             TextField{
                                 id: abContactViewIdField
                                 color: AppStyle.appTextColor
-
-
 
                             }
 //                        }
