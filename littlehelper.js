@@ -33,57 +33,6 @@ function getDataFromCloudWithId(getTheUrl){
 }
 
 
-// Function to send new contact to Heroku
-// Status: deprecated, replaced by sendContactDataToCloud()
-function sendContactToCloud(getTheUrl){
-
-    var jsonToSend = {"firstname":"Allo","lastname":"Hello","mobile":"555 54321","email":"allo@hello.coc"};
-
-    console.log("sendContactToCloud_phase_1")
-    var xhr = new XMLHttpRequest
-        console.log("sendContactToCloud_phase_2")
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-
-          }
-        }
-        console.log("sendContactToCloud_phase_5")
-        if(jsonToSend["id"] === ""){
-           xhr.open("POST", Qt.resolvedUrl(getTheUrl))
-        }
-
-
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        console.log("JsonObject: " + jsonToSend);
-        xhr.send(JSON.stringify(jsonToSend));
-        console.log("function sendContactToCloud finished.")
-}
-
-// Function to update contact information
-// Status: deprecated, replaced by sendContactDataToCloud()
-function updateContactInCloud(getTheUrl, jsonToSend){
-
-    //var jsonToSend = {"firstname":"Jello","lastname":"Hallo","mobile":"515 12345","email":"Jello@Hallo.oco"};
-    if(jsonToSend.id === ""){
-        delete jsonToSend.id;
-        console.log("ID null.");
-        var xhr = new XMLHttpRequest
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                //console.log("updateContactInCloud_phase_3: " + xhr.responseText)
-              }
-
-            }
-            xhr.open("PUT", Qt.resolvedUrl(getTheUrl));
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            console.log("JsonObject: " + JSON.stringify(jsonToSend) );
-            console.log("function updateContactInCloud finished.");
-    }else{
-        console.log("ID not null.");
-        delete jsonToSend.id;
-        console.log("JsonObject: " + JSON.stringify(jsonToSend) );
-    }
-}
 // Function to upload data to Cloud
 // Input: URL for Heroku, object with data
 // if id value is set update, if not new contact data.
@@ -96,10 +45,14 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
           }
 
         }
+    // If "id" field is empty, it's new contact data.
     if(jsonToSend.id === ""){
        xhr.open("POST", Qt.resolvedUrl(getTheUrl))
        console.log("JsonDataPOST: " + JSON.stringify(jsonToSend) );
     }
+    // If "id" field has number, were updating existing contact.
+    // Maybe run script to check from local data if that ID number actually exists?
+    // if(searchFromJSON([id_number], "id", true) !== "")
     if(jsonToSend.id !== ""){
        xhr.open("PUT", Qt.resolvedUrl(getTheUrl+"/"+jsonToSend.id));
        console.log("JsonDataPUT: " + JSON.stringify(jsonToSend) );
@@ -109,26 +62,7 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
     console.log("JsonData: " + JSON.stringify(jsonToSend) );
 }
 
-// Function to check if ID exists in cloud.
-// Is this necessary? Why not just update local database and check from that?
-// Just use by searchFromJSON([id_number],id,true), run getDataFromCloud() first if fresh data needed.
-function checkIfIdExistsInCloud(getTheUrl, idToCheck){
 
-    var xhr = new XMLHttpRequest
-        console.log("checkIfIdExistsInCloud_phase_1")
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log("checkIfIdExistsInCloud_phase_2")
-
-            //jsonData = xhr.responseText
-            var objectArray = JSON.parse(xhr.responseText)
-
-          }
-        }
-    xhr.open("GET", Qt.resolvedUrl(getTheUrl))
-    xhr.send()
-    console.log("function checkIfIdExistsInCloud run")
-}
 
 // Function to output data from jsonData and appending it to abJSONModel
 // to generate listView of it.
@@ -148,17 +82,6 @@ function outputJSONData(){
     }
 }
 
-
-// Currently not working. Issues with writing to global properties
-// Temporary fix: For now the same code is in addressbook.qml where needed.
-function dataToContactView(index){
-    var jsonObject = abStack.jsonABData[index]
-    abContactViewIdField = jsonObject["id"]
-    abContactViewFirstNameField = jsonObject["firstname"]
-    abContactViewLastNameField = jsonObject["lastname"]
-    abContactViewNumberField = jsonObject["mobile"]
-    abContactViewEmailField = jsonObject["email"]
-}
 
 
 // function to search from local data( abStack.jsonData )
@@ -234,7 +157,7 @@ Number.prototype.pad = function(size) {
         //WHERE x=id-value
 
 
-//Status: Currently working on.
+//Status: Currently working on. JS-Script works
     //Add Contact
 
         //http-POST
@@ -252,7 +175,7 @@ Number.prototype.pad = function(size) {
         //email
 
 
-    //Update Contact
+    //Update Contact. JS-Script works. Shares code with Add Contact
 
         //http-PUT
 

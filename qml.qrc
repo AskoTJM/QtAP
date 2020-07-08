@@ -7,5 +7,6 @@
         <file>qmldir</file>
         <file>ContactModel.qml</file>
         <file>littlehelper.js</file>
+        <file>ShadyPines.js</file>
     </qresource>
 </RCC>
