@@ -1,0 +1,83 @@
+// File containing notes for project
+
+// GetAllContacts/GetContactByID
+    - To use same script (1:1) level and treat jsonAbData as always storage for temporarily store data?
+      Or to change so that GetContactByID saves result to different var?
+
+
+// Things to add/change/improve?
+    - Progress bar when getting or sending data to Cloud?
+      Wouldn't look like it was stuck.
+
+
+
+
+// Assignment status
+    //Status: Working
+        //Contactlist-API
+
+        //Get all contacts
+
+            //http-GET
+
+            //https://qtphone.herokuapp.com/contact
+
+
+    //Status: Working
+        //Get Contact BY ID
+
+            //http-GET
+
+            //https://qtphone.herokuapp.com/contact/x
+
+            //WHERE x=id-value
+
+
+    //Status: Working
+        //Add Contact
+
+            //http-POST
+
+            //https://qtphone.herokuapp.com/contact
+
+            //with fields:
+
+            //firstname
+
+            //lastname
+
+            //mobile
+
+            //email
+
+    //Status: Working
+        //Update Contact.
+
+            //http-PUT
+
+            //https://qtphone.herokuapp.com/contact/x
+
+            //WHERE x=id-value
+
+            //and fields
+            //firstname
+
+            //lastname
+
+            //mobile
+
+            //email
+
+    //In the application implement all those operations. So that you can get, add and update contacts.
+    //If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:
+
+    // Status: JS Script working, with both exact or non-exact results.
+        //-Search a contact
+        //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
+        //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
+
+    // Status: In planning.
+        //-Save to local database
+        //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
+        //Then the user can use the contact-list also without Internet-connection.
+        //You can the add features like “sync to Remote-database” and/or “sync to Local-database”.

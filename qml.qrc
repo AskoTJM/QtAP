@@ -8,5 +8,6 @@
         <file>ContactModel.qml</file>
         <file>littlehelper.js</file>
         <file>ShadyPines.js</file>
+        <file>notes.txt</file>
     </qresource>
 </RCC>
