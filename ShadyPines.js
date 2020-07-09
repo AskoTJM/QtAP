@@ -1,4 +1,4 @@
-// Place to retire functions not used.
+// Place to retire functions not in use.
 
 
 // Function to get data from the Cloud with specific ID and transfering it to jsonData

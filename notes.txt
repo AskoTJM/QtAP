@@ -1,14 +1,35 @@
 // File containing notes for project
 
-// GetAllContacts/GetContactByID
-    - To use same script (1:1) level and treat jsonAbData as always storage for temporarily store data?
-      Or to change so that GetContactByID saves result to different var?
+// Main features
+    // Status: Thinking about it, maybe leave as-is for now. Because works.
+        - To use same script and treat jsonAbData always as temporarily storage data?
+          Or to change so that GetContactByID saves result to different var?
+
+    // Status: Looking into States in QML
+        - State machine type of solution to tell app what are we doing currently,
+        switching things on and off as needed.
+        Point is that we can re-use the two UI for multiple things.
+        ContactView for Add, Update and Search.
+        AddressView for Browsing Contactas and Search results.
+
+    // Status: Not started
+        - Local database. Scripts related to that.
+
+    // Status: Planning
+        - Changes to UI to make them more suitable for different states.
 
 
 // Things to add/change/improve?
-    - Progress bar when getting or sending data to Cloud?
-      Wouldn't look like it was stuck.
+    // Status: Not started.
+        - Add text to show last time local data was updated from Cloud
 
+
+    // Status: Need to look into how to make, currently not important to implement.
+        - Progress bar when getting or sending data to Cloud?
+          Wouldn't look like it was stuck.
+
+    // Status: Not even thinking about it
+        - Transition animations, might look nice and should be easy to implement.
 
 
 
@@ -43,11 +64,8 @@
             //with fields:
 
             //firstname
-
             //lastname
-
             //mobile
-
             //email
 
     //Status: Working
@@ -60,12 +78,10 @@
             //WHERE x=id-value
 
             //and fields
+
             //firstname
-
             //lastname
-
             //mobile
-
             //email
 
     //In the application implement all those operations. So that you can get, add and update contacts.
@@ -76,7 +92,7 @@
         //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
         //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
 
-    // Status: In planning.
+    // Status: In planning. Need to look into how it works.
         //-Save to local database
         //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
         //Then the user can use the contact-list also without Internet-connection.
