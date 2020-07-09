@@ -10,7 +10,7 @@
         switching things on and off as needed.
         Point is that we can re-use the two UI for multiple things.
         ContactView for Add, Update and Search.
-        AddressView for Browsing Contactas and Search results.
+        AddressView for Browsing Contacts and Search results.
 
     // Status: Not started
         - Local database. Scripts related to that.
@@ -31,7 +31,14 @@
     // Status: Not even thinking about it
         - Transition animations, might look nice and should be easy to implement.
 
+    // Status: Not started
+        - Call to number by clicking it, also send email by clicking it
 
+    // Status: Not started
+        - Limit what can be inserted into fields.
+
+    // Status: Looking into
+        - Learn how to run and make tests
 
 // Assignment status
     //Status: Working
@@ -87,7 +94,7 @@
     //In the application implement all those operations. So that you can get, add and update contacts.
     //If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:
 
-    // Status: JS Script working, with both exact or non-exact results.
+    // Status: JS Script with both exact or non-exact results on specific fields. Realtime filtering not started.
         //-Search a contact
         //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
         //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
