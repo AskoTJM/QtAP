@@ -53,6 +53,7 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
 // Function to output data from jsonData and appending it to abJSONModel
 // to generate listView of it.
 // ? Not sure if this is necessary? Can we skip this and generate ListView from jsonData directly?
+// Maybe not necessary but we can use jsonABData[] to temporary transfer data between.
 function outputJSONData(){
     abJSONModel.clear()
     for (var x in abStack.jsonABData) {
@@ -80,7 +81,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
     var searchStringI = /"searchString"/i ;
     console.log("searchFromJSON");
     for (var x in abStack.jsonABData) {
-        console.log("Transferring.");
+        console.log("Transferring from jsonABData to jsonObject.");
         var jsonObject = abStack.jsonABData[x];
         var searchStringResult = jsonObject[searchField];
         console.log("Lets check.");
@@ -117,27 +118,44 @@ function searchFromJSON(searchString, searchField, exactMatch){
 
 function getDataFromLocalDB(){
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
-    console.log("getDataFromLocalDB run.")
+    console.log("getDataFromLocalDB run.");
+
+
     try {
             db.transaction(function (tx) {
                 console.log("getDataFromLocalDB_transaction run.")
                 tx.executeSql('CREATE TABLE IF NOT EXISTS AddressBook(id INTEGER,firstname TEXT,lastname TEXT,mobile TEXT,email TEXT)')
-                //tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ '333','hello', 'world','12131','a@c.com' ]);
+                tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ '333','hello', 'world','12131','a@c.com' ]);
                 //tx.executeSql('DELETE FROM AddressBook');
                 console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
                 var rs = tx.executeSql('SELECT * FROM AddressBook');
 
-                                    var r = ""
-                                    for (var i = 0; i < rs.rows.length; i++) {
-                                        r += rs.rows.item(i).id + ", " + rs.rows.item(i).firstname + "\n"
-                                        console.log("Row: "+i+" Content: "+ r)
-                                        r = ""
-                                    }
+//                var r = ""
+//                for (var i = 0; i < rs.rows.length; i++) {
+//                    r += rs.rows.item(i).id + ", " + rs.rows.item(i).firstname + "\n"
+//                    console.log("Row: "+i+" Content: "+ r)
+//                    r = ""
+//                }
+//                var r = ""
+                for (var i = 0; i < rs.rows.length; i++) {
+                    var jsonObject = {"id":rs.rows.item(i).id, "firstname":rs.rows.item(i).firstname,
+                                      "lastname" :rs.rows.item(i).lastname, "mobile":rs.rows.items(i).mobile,
+                                      "email": rs.rows.items(i).email};
+//                    jsonObject.id = rs.rows.item(i).id;
+//                    jsonObject.firstname = rs.rows.item(i).firstname;
+//                    jsonObject.lastname = rs.rows.item(i).lastname;
+//                    jsonObject.mobile = rs.rows.items(i).mobile;
+//                    jsonObject.email = rs.rows.items(i).email;
+                    abStack.jsonABData.append(jsonObject);
+                    console.log("Row: "+i+" Content: "+ r)
 
+                }
+                console.log("GetDataFromLocalDB_outputJSONData");
+                outputJSONData();
             })
         } catch (err) {
             console.log("getDataFromLocalDB_transaction_error run.")
-            console.log("Error creating table in database: " + err)
+            console.log("Error in getDataFromLocalDB in database: " + err)
         };
 
 }
