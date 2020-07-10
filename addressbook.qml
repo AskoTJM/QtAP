@@ -11,7 +11,6 @@ import "littlehelper.js" as Utils
 
 StackView {
 
-
     id: abStack
 // Signals
     signal message(string msg)
@@ -36,6 +35,10 @@ StackView {
     property var currentContact
 // Local Temporary Data
     property var jsonABData
+
+    Component.onCompleted:{
+        Utils.getDataFromLocalDB();
+    }
 
     ListModel{
         id: abJSONModel
