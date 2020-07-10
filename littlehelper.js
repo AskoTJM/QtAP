@@ -111,18 +111,51 @@ function searchFromJSON(searchString, searchField, exactMatch){
 }
 
 // function to open/create database for local data
-// Input:
+// Status: WIP
+// Input: -
+// Output: -
 
 function getDataFromLocalDB(){
-    //db.transaction();
+    var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
+    console.log("getDataFromLocalDB run.")
     try {
             db.transaction(function (tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS addressBook (id,firstname,lastname,mobile,email)')
+                console.log("getDataFromLocalDB_transaction run.")
+                tx.executeSql('CREATE TABLE IF NOT EXISTS AddressBook(id INTEGER,firstname TEXT,lastname TEXT,mobile TEXT,email TEXT)')
+                //tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ '333','hello', 'world','12131','a@c.com' ]);
+                //tx.executeSql('DELETE FROM AddressBook');
+                console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
+                var rs = tx.executeSql('SELECT * FROM AddressBook');
+
+                                    var r = ""
+                                    for (var i = 0; i < rs.rows.length; i++) {
+                                        r += rs.rows.item(i).id + ", " + rs.rows.item(i).firstname + "\n"
+                                        console.log("Row: "+i+" Content: "+ r)
+                                        r = ""
+                                    }
+
             })
         } catch (err) {
+            console.log("getDataFromLocalDB_transaction_error run.")
             console.log("Error creating table in database: " + err)
         };
 
+}
+
+// function to clear local DB
+// Status: Works.
+
+function clearLocalDB(){
+    var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
+
+    try{
+         db.transaction(function (tx) {
+            tx.executeSql('DELETE FROM AddressBook');
+        })
+    } catch (err) {
+        console.log("clearLocalDB_transaction_error run.")
+        console.log("Error clearing table AddressBook in database: " + err)
+    };
 }
 
 //From https://gist.github.com/endel/321925f6cafa25bbfbde

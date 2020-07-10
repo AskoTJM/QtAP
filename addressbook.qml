@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 //import QtQuick 2.15
-import QtQuick.LocalStorage 2.0 as Sql
+import QtQuick.LocalStorage 2.0// as Sql
 
 import "."
 import "littlehelper.js" as Utils
@@ -24,8 +24,7 @@ StackView {
     visible: true
 
 // Local database
-    var db = Sql.openDatabaseSync("AddressBookDB", "1.0", "QtPhone SSAddressbook Local Database", 1000000);
-
+    property var db
 // Maybe use States to change UI and functionality ?
     property var currentState
 
@@ -36,8 +35,8 @@ StackView {
 // Local Temporary Data
     property var jsonABData
 
-    Component.onCompleted:{
-        Utils.getDataFromLocalDB();
+    Component.onCompleted: {
+
     }
 
     ListModel{
@@ -84,6 +83,7 @@ StackView {
 
     Component{
         id: abMainView
+
         // Component can only have one child, so wrapping everything in Item works around that.
             Item{
                 Rectangle{
@@ -224,11 +224,12 @@ StackView {
                                 Button{
                                     id: abAddressViewDataOutButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Placeholder"
+                                    text: "Clear Local DB"
                                     onClicked: {
                                     //Testing search function
                                        //console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
                                        // Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133")
+                                        Utils.clearLocalDB();
                                     }
 
                                 }
@@ -236,8 +237,9 @@ StackView {
                                 Button{
                                     id: abAddressViewPlaceholderButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Placeholder"
+                                    text: "Data In Local DB"
                                     onClicked: {
+                                        Utils.getDataFromLocalDB();
                                         //Utils.getDataFromCloud(AppStyle.abURLAddressBook+"/1")
                                         //Utils.sendContactToCloud(AppStyle.abURLAddressBook)
                                     }
