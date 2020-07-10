@@ -110,6 +110,21 @@ function searchFromJSON(searchString, searchField, exactMatch){
     return foundAtIndex;
 }
 
+// function to open/create database for local data
+// Input:
+
+function getDataFromLocalDB(){
+    //db.transaction();
+    try {
+            db.transaction(function (tx) {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS addressBook (id,firstname,lastname,mobile,email)')
+            })
+        } catch (err) {
+            console.log("Error creating table in database: " + err)
+        };
+
+}
+
 //From https://gist.github.com/endel/321925f6cafa25bbfbde
 // Status: Working
 // (1).pad(3) // => "001"

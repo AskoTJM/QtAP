@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 //import QtQuick 2.15
-import QtQuick.LocalStorage 2.0
+import QtQuick.LocalStorage 2.0 as Sql
 
 import "."
 import "littlehelper.js" as Utils
@@ -23,6 +23,10 @@ StackView {
     anchors.rightMargin: AppStyle.appRightMargin
 
     visible: true
+
+// Local database
+    var db = Sql.openDatabaseSync("AddressBookDB", "1.0", "QtPhone SSAddressbook Local Database", 1000000);
+
 // Maybe use States to change UI and functionality ?
     property var currentState
 
