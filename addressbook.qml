@@ -227,11 +227,7 @@ StackView {
                                     text: "Clear jsonABData"
                                     onClicked: {                                   
                                         Utils.clearABData();
-//                                        if(JSON.stringify(jsonABData === undefined)){
-//                                            abAbDataCounterText.text = "Addressess in jsonABData: 0"
-//                                        }else{
-//                                        console.log("jsonABData content:" + JSON.stringify(jsonABData))
-//                                        }
+
                                     }
 
                                 }
@@ -259,7 +255,11 @@ StackView {
                                     id: abAddressViewTestButton1
                                     width: AppStyle.abButtonWidth
                                     text: "Get data from SqLite"
-                                    onClicked: Utils.getDataFromLocalDB()
+                                    onClicked: {
+
+                                        Utils.getDataFromLocalDB()
+                                        console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
+                                    }
                                 }
 
                                 Button{
@@ -291,11 +291,8 @@ StackView {
                             font.pointSize: AppStyle.appDefaultFontSize
                             color: "white"
                             width: parent.width
-                            text: if(JSON.stringify(jsonABData === undefined)){
-                                      abAbDataCounterText.text = "Addressess in jsonABData: 0"
-                                  }else{
-                                  console.log("jsonABData content:" + JSON.stringify(jsonABData))
-                                  }
+                            text: "Addressess in jsonABData: " + JSON.stringify(jsonABData.length)
+
                         }
 
 

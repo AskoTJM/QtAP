@@ -130,7 +130,7 @@ function getDataFromLocalDB(){
                 //console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
                 var rs = tx.executeSql('SELECT * FROM AddressBook');
                 //console.log("getDataFromLocalDB rs = " + JSON.stringify(rs));
-                abStack.jsonABData = rs;
+                //abStack.jsonABData = rs;
 //                var r = ""
 //                for (var i = 0; i < rs.rows.length; i++) {
 //                    r += rs.rows.item(i).id + ", " + rs.rows.item(i).firstname + "\n"
@@ -145,6 +145,7 @@ function getDataFromLocalDB(){
 //                                      "mobile": JSON.stringify(rs.rows.items(i).mobile),
 //                                      "email": JSON.stringify(rs.rows.items(i).email) };
 
+//                    var jsonObject;
 //                    jsonObject.id = rs.rows.item(i).id;
 //                    jsonObject.firstname = rs.rows.item(i).firstname;
 //                    jsonObject.lastname = rs.rows.item(i).lastname;
@@ -152,7 +153,7 @@ function getDataFromLocalDB(){
 //                    jsonObject.email = rs.rows.items(i).email;
                     //abStack.jsonABData.append(jsonObject);
                     //console.log("Row: "+i+" Content: "+ JSON.stringify(rs.rows.item(i).lastname));
-                    console.log("getDataFromLocalDB: " + JSON.stringify(jsonObject));
+                    console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
                 }
                 //console.log("GetDataFromLocalDB_outputJSONData");
                 outputJSONData();
@@ -187,7 +188,7 @@ function saveDataToLocalDB(){
                                                                                         jsonObject["lastname"],
                                                                                         jsonObject["mobile"],
                                                                                         jsonObject["email"] ]);
-                        console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
+                        console.log("saveDataToLocalDB From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
                     }
 
