@@ -165,38 +165,35 @@ function getDataFromLocalDB(){
 //
 //
 function saveDataToLocalDB(){
+
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
     console.log("saveDataToLocalDB run.");
-    try {
-        // Automatically clear Local database so it doesn't get bloated
-            clearLocalDB();
-            db.transaction(function (tx) {
-            //Create table if it doesn't exists
-            //    tx.executeSql('CREATE TABLE IF NOT EXISTS AddressBook(id INTEGER,firstname TEXT,lastname TEXT,mobile TEXT,email TEXT)')
-                for (var x in abStack.jsonABData) {
-                    var jsonObject = abStack.jsonABData[x]
-                    tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ jsonObject["id"],
-                                                                                    jsonObject["firstname"],
-                                                                                    jsonObject["lastname"],
-                                                                                    jsonObject["mobile"],
-                                                                                    jsonObject["email"] ]);
-                    //console.log("outputJSONDataToConsole_phase_1 " + x + " " + jsonObject["lastname"])
-                    //abJSONModel.append({"lastname": jsonObject["lastname"]
-                    //                       , "firstname": jsonObject["firstname"]
-                    //                       , "id": jsonObject["id"]
-                    //                       , "mobile": jsonObject["mobile"]
-                    //                       , "email": jsonObject["email"]})
-                    console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
+    if(abStack.jsonABData === undefined){
+        console.log("saveDataToLocalDB script didn't run because abStack.jsonAbData is empty.")
+    }else{
+        try {
+                db.transaction(function (tx) {
+                //Create table if it doesn't exists
+                //    tx.executeSql('CREATE TABLE IF NOT EXISTS AddressBook(id INTEGER,firstname TEXT,lastname TEXT,mobile TEXT,email TEXT)')
+                    for (var x in abStack.jsonABData) {
+                        var jsonObject = abStack.jsonABData[x]
+                        tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ jsonObject["id"],
+                                                                                        jsonObject["firstname"],
+                                                                                        jsonObject["lastname"],
+                                                                                        jsonObject["mobile"],
+                                                                                        jsonObject["email"] ]);
+                        console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
-                }
+                    }
 
-            console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')))
-            //console.log("Contect of jsonABData:" + JSON.stringify(abStack.jsonABData));
-            })
-    } catch (err) {
-        console.log("saveDataToLocalDB_transaction_error run.")
-        console.log("Error in saveDataToLocalDB in database: " + err)
-    };
+                console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')))
+                //console.log("Contect of jsonABData:" + JSON.stringify(abStack.jsonABData));
+                })
+        } catch (err) {
+            console.log("saveDataToLocalDB_transaction_error run.")
+            console.log("Error in saveDataToLocalDB in database: " + err)
+        };
+    }
 }
 
 
@@ -206,8 +203,10 @@ function saveDataToLocalDB(){
 
 function clearLocalDB(){
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
-// Clear ListView?
+// Clear ListView, temporarily here to make testing easier.
     abJSONModel.clear();
+// Clear abStack.jsonABData
+    abStack.jsonABData = undefined;
     try{
          db.transaction(function (tx) {
             tx.executeSql('DELETE FROM AddressBook');
