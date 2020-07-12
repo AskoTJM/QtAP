@@ -224,13 +224,14 @@ StackView {
                                 Button{
                                     id: abAddressViewDataOutButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Clear Local DB"
-                                    onClicked: {
-                                    //Testing search function
-                                       //console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
-                                       // Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133")
-                                        Utils.clearLocalDB();
-
+                                    text: "Clear jsonABData"
+                                    onClicked: {                                   
+                                        Utils.clearABData();
+//                                        if(JSON.stringify(jsonABData === undefined)){
+//                                            abAbDataCounterText.text = "Addressess in jsonABData: 0"
+//                                        }else{
+//                                        console.log("jsonABData content:" + JSON.stringify(jsonABData))
+//                                        }
                                     }
 
                                 }
@@ -240,8 +241,8 @@ StackView {
                                     width: AppStyle.abButtonWidth
                                     text: "Save In Local DB"
                                     onClicked: {
-                                        //Utils.getDataFromLocalDB();
-                                        Utils.saveDataToLocalDB()
+                                        Utils.clearLocalDB();
+                                        Utils.saveDataToLocalDB();
                                         //Utils.getDataFromCloud(AppStyle.abURLAddressBook+"/1")
                                         //Utils.sendContactToCloud(AppStyle.abURLAddressBook)
                                     }
@@ -257,15 +258,17 @@ StackView {
                                 Button{
                                     id: abAddressViewTestButton1
                                     width: AppStyle.abButtonWidth
-                                    text: "TestButton1"
-                                    onClicked: console.log("Test")
+                                    text: "Get data from SqLite"
+                                    onClicked: Utils.getDataFromLocalDB()
                                 }
 
                                 Button{
                                     id: abAddressViewTestButton2
                                     width: AppStyle.abButtonWidth
-                                    text: "TestButton2"
-                                    onClicked: console.log("Test2")
+                                    text: "Clear ListView"
+                                    onClicked: {
+                                        Utils.clearAddressListView();
+                                    }
                                 }
                         }
 
@@ -281,13 +284,27 @@ StackView {
                             text: "Addressess in database: " + abJSONModel.count
                         }
 
+                        Text{
+                            id: abAbDataCounterText
+                            anchors.top: abCounterText.bottom
+                            //anchors.right: parent.right
+                            font.pointSize: AppStyle.appDefaultFontSize
+                            color: "white"
+                            width: parent.width
+                            text: if(JSON.stringify(jsonABData === undefined)){
+                                      abAbDataCounterText.text = "Addressess in jsonABData: 0"
+                                  }else{
+                                  console.log("jsonABData content:" + JSON.stringify(jsonABData))
+                                  }
+                        }
+
 
                         Rectangle{
                             //anchors.fill: abAddressViewScroll
                             color: AppStyle.appBackgroundColor
                             anchors.bottom: parent.bottom
                             anchors.topMargin: 10
-                            anchors.top: abCounterText.bottom
+                            anchors.top: abAbDataCounterText.bottom
                             width: parent.width
                             //implicitHeight: abAddressListView.contentHeight
 
