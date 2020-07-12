@@ -201,7 +201,7 @@ StackView {
                             id: abAddressViewGrid
                             width: implicitWidth
                             height: implicitHeight
-                            rows: 2
+                            rows: 3
                             columns: 2
                             rowSpacing: AppStyle.abButtonMarging / 2
                             columnSpacing: AppStyle.abButtonMarging
@@ -230,6 +230,7 @@ StackView {
                                        //console.log("Found matches :" + Utils.searchFromJSON("masa", "firstname", false).length );
                                        // Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133")
                                         Utils.clearLocalDB();
+
                                     }
 
                                 }
@@ -237,9 +238,10 @@ StackView {
                                 Button{
                                     id: abAddressViewPlaceholderButton
                                     width: AppStyle.abButtonWidth
-                                    text: "Data In Local DB"
+                                    text: "Save In Local DB"
                                     onClicked: {
-                                        Utils.getDataFromLocalDB();
+                                        //Utils.getDataFromLocalDB();
+                                        Utils.saveDataToLocalDB()
                                         //Utils.getDataFromCloud(AppStyle.abURLAddressBook+"/1")
                                         //Utils.sendContactToCloud(AppStyle.abURLAddressBook)
                                     }
@@ -250,6 +252,20 @@ StackView {
                                     width: AppStyle.abButtonWidth
                                     text: AppStyle.abReturnToMain
                                     onClicked: push(abMainView)
+                                }
+
+                                Button{
+                                    id: abAddressViewTestButton1
+                                    width: AppStyle.abButtonWidth
+                                    text: "TestButton1"
+                                    onClicked: console.log("Test")
+                                }
+
+                                Button{
+                                    id: abAddressViewTestButton2
+                                    width: AppStyle.abButtonWidth
+                                    text: "TestButton2"
+                                    onClicked: console.log("Test2")
                                 }
                         }
 
