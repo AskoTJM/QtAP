@@ -55,7 +55,7 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
 function outputJSONData(){
     abJSONModel.clear()
     // Why undefined
-    console.log("outputJSONDATA abStack.jsonABData size: " + JSON.stringify(abStack.jsonABData.length));
+    //console.log("outputJSONDATA abStack.jsonABData size: " + JSON.stringify(abStack.jsonABData.length));
 
     for (var x in abStack.jsonABData) {
         var jsonObject = abStack.jsonABData[x]
@@ -64,7 +64,7 @@ function outputJSONData(){
                                , "id": jsonObject["id"]
                                , "mobile": jsonObject["mobile"]
                                , "email": jsonObject["email"]})
-        console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
+        //console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
     }
 }
@@ -118,51 +118,66 @@ function searchFromJSON(searchString, searchField, exactMatch){
 
 function getDataFromLocalDB(){
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
-    //console.log("getDataFromLocalDB run.");
-
 
     try {
             db.transaction(function (tx) {
-                //console.log("getDataFromLocalDB_transaction run.")
                 tx.executeSql('CREATE TABLE IF NOT EXISTS AddressBook(id INTEGER,firstname TEXT,lastname TEXT,mobile TEXT,email TEXT)')
                 //tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ '333','hello', 'world','12131','a@c.com' ]);
                 //tx.executeSql('DELETE FROM AddressBook');
                 //console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
                 var rs = tx.executeSql('SELECT * FROM AddressBook');
-                //console.log("getDataFromLocalDB rs = " + JSON.stringify(rs));
+                var jsonObject = {};
+                var inputToDB
+                console.log("getDataFromLocalDB rs = " + JSON.stringify(rs));
                 //abStack.jsonABData = rs;
-//                var r = ""
-//                for (var i = 0; i < rs.rows.length; i++) {
-//                    r += rs.rows.item(i).id + ", " + rs.rows.item(i).firstname + "\n"
-//                    console.log("Row: "+i+" Content: "+ r)
-//                    r = ""
-//                }
+
 //                var r = ""
                 for (var i = 0; i < rs.rows.length; i++) {
-//                    var jsonObject = {"id": JSON.stringify(rs.rows.item(i).id),
-//                                      "firstname": JSON.stringify(rs.rows.item(i).firstname),
-//                                      "lastname" : JSON.stringify(rs.rows.item(i).lastname),
-//                                      "mobile": JSON.stringify(rs.rows.items(i).mobile),
-//                                      "email": JSON.stringify(rs.rows.items(i).email) };
 
-//                    var jsonObject;
-//                    jsonObject.id = rs.rows.item(i).id;
-//                    jsonObject.firstname = rs.rows.item(i).firstname;
-//                    jsonObject.lastname = rs.rows.item(i).lastname;
-//                    jsonObject.mobile = rs.rows.items(i).mobile;
-//                    jsonObject.email = rs.rows.items(i).email;
-                    //abStack.jsonABData.append(jsonObject);
+//                    abJSONModel.append({"lastname": rs.row.item(i).lastname
+//                                           , "firstname": rs.row.item(i).firstname
+//                                           , "id": rs.row.item(i).id
+//                                           , "mobile": rs.row.item(i).mobile
+//                                           , "email": rs.row.item(i).email})
+
+
+//                     inputToDB = JSON.stringify({"id":rs.rows.item(i).id,
+//                                      "firstname":rs.rows.item(i).firstname,
+//                                      "lastname":rs.rows.item(i).lastname,
+//                                      "mobile":rs.rows.items(i).mobile,
+//                                      "email":rs.rows.items(i).email });
+
+//                    if(i === 0){
+//                          inputToDB = ('{"id":'+rs.rows.item(i).id+',"firstname":"'+rs.rows.item(i).firstname+'","lastname":"'+rs.rows.item(i).lastname+'","mobile":"'+rs.rows.item(i).mobile+'","email":"'+rs.rows.item(i).email+'"}')
+//                       }else{
+//                           inputToDB += ('{"id":'+rs.rows.item(i).id+',"firstname":"'+rs.rows.item(i).firstname+'","lastname":"'+rs.rows.item(i).lastname+'","mobile":"'+rs.rows.item(i).mobile+'","email":"'+rs.rows.item(i).email+'"}');
+//                       }
+
+
+                    jsonObject.id = rs.rows.item(i).id;
+                    jsonObject.firstname = rs.rows.item(i).firstname;
+                    jsonObject.lastname = rs.rows.item(i).lastname;
+ //                   abStack.jsonABData[i] = jsonObject;
+                    //jsonObject.mobile = rs.rows.items(i).mobile;
+                    //jsonObject.email = rs.rows.items(i).email;
+                    //console.log("Content of mobile: " + JSON.stringify(rs.rows.items(i).mobile));
+                    //console.log("Content of email: " + JSON.stringify(rs.rows.items(i).email));
                     //console.log("Row: "+i+" Content: "+ JSON.stringify(rs.rows.item(i).lastname));
-                    console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
+                    //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
                 }
                 //console.log("GetDataFromLocalDB_outputJSONData");
-                outputJSONData();
+                //abStack.jsonABData = JSON.parse(inputToDB);
+                //inputToDB += ']'
+                console.log("getDataFromLocalDB-> content of jsonABData is: " + JSON.stringify(jsonABData))
+                //jsonABData = JSON.stringify(jsonObject) //JSON.stringify(inputToDB);
+                console.log("getDataFromLocalDB-> content of jsonObject is: " + JSON.stringify(jsonObject))
+                //outputJSONData();
             })
         } catch (err) {
             //console.log("getDataFromLocalDB_transaction_error run.")
             console.log("Error in getDataFromLocalDB in database: " + err)
         };
-
+    //console.log("getDataFromLocalDB-> SqLite rows:" + getLocalDBSize());
 }
 
 // function to save abStack.jsonAbData to Local DB
@@ -188,7 +203,7 @@ function saveDataToLocalDB(){
                                                                                         jsonObject["lastname"],
                                                                                         jsonObject["mobile"],
                                                                                         jsonObject["email"] ]);
-                        console.log("saveDataToLocalDB From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
+                        //console.log("saveDataToLocalDB From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
                     }
 
@@ -199,8 +214,29 @@ function saveDataToLocalDB(){
             console.log("Error in saveDataToLocalDB in database: " + err)
         };
     }
+    console.log("SaveDataToLocalDB-> SqLite DB contains: " + getLocalDBSize()) ;
+    //abAddressView.abSqLiteDataCounterText.Text = "Test";
 }
 
+// function to get number of rows from local SqLite
+// Status: WIP
+// Input: -
+// Output: Number of rows in local SqLite Database
+function getLocalDBSize(){
+    var numberOfRowsInSqLite
+    var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
+    try {
+        db.transaction(function (tx) {
+            var rs = tx.executeSql('SELECT * FROM AddressBook');
+            //return numberOfRowsInSqLite = rs.rows.length;
+            console.log("getLocalDBSize-> Addressess in SqLite: " + JSON.stringify(rs.rows.length));
+            //abSqLiteDataCounterText.text = JSON.stringify(rs.rows.lenght);
+        })
+    } catch (err) {
+            console.log("Error in getLocalDBSize() : " + err)
+    };
+
+}
 
 
 // function to clear local temporary data
@@ -222,6 +258,7 @@ function clearLocalDB(){
 function clearAddressListView(){
 // Clear ListView, temporarily here to make testing easier.
     abJSONModel.clear();
+    console.log("clearAddressListView-> Count now: " + abJSONModel.count);
 }
 
 function clearABData(){

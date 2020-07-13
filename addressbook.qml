@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 //import QtQuick 2.15
-import QtQuick.LocalStorage 2.0// as Sql
+import QtQuick.LocalStorage 2.12// as Sql
 
 import "."
 import "littlehelper.js" as Utils
@@ -239,8 +239,7 @@ StackView {
                                     onClicked: {
                                         Utils.clearLocalDB();
                                         Utils.saveDataToLocalDB();
-                                        //Utils.getDataFromCloud(AppStyle.abURLAddressBook+"/1")
-                                        //Utils.sendContactToCloud(AppStyle.abURLAddressBook)
+
                                     }
                                 }
 
@@ -258,7 +257,7 @@ StackView {
                                     onClicked: {
 
                                         Utils.getDataFromLocalDB()
-                                        console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
+                                        //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
                                     }
                                 }
 
@@ -273,7 +272,7 @@ StackView {
                         }
 
 
-                        // Counter for testing purposes for how many contacts there are
+                        // Counters for testing purposes for how many contacts there are
                         Text{
                             id: abCounterText
                             anchors.top: abAddressViewGrid.bottom
@@ -290,9 +289,45 @@ StackView {
                             //anchors.right: parent.right
                             font.pointSize: AppStyle.appDefaultFontSize
                             color: "white"
-                            width: parent.width
-                            text: "Addressess in jsonABData: " + JSON.stringify(jsonABData.length)
+                            //width: parent.width
+                            text: "Addressess in jsonABData: "
 
+                        }
+
+                    // Separate Text element needed because at start jsonABData is undefined
+                    // and won't show the text
+                        Text{
+                            id: abAbDataCounterNumberText
+                            anchors.top: abCounterText.bottom
+                            anchors.left: abAbDataCounterText.right
+                            //anchors.right: parent.right
+                            font.pointSize: AppStyle.appDefaultFontSize
+                            color: "white"
+                            //width: parent.width
+                            text: JSON.stringify(jsonABData.length)
+
+                        }
+
+                        Text{
+                            id: abSqLiteDataCounterText
+                            anchors.top: abAbDataCounterText.bottom
+                            //anchors.right: parent.right
+                            font.pointSize: AppStyle.appDefaultFontSize
+                            color: "white"
+                            //width: parent.width
+                            text: "Addresses in SqLite"
+
+                        }
+
+                        Text{
+                            id: abSqLiteDataCounterNumberText
+                            anchors.top: abAbDataCounterText.bottom
+                            anchors.left: abSqLiteDataCounterText.right
+                            //anchors.right: parent.right
+                            font.pointSize: AppStyle.appDefaultFontSize
+                            color: "white"
+                            //width: parent.width
+                            text: Utils.getLocalDBSize();
                         }
 
 
@@ -301,7 +336,7 @@ StackView {
                             color: AppStyle.appBackgroundColor
                             anchors.bottom: parent.bottom
                             anchors.topMargin: 10
-                            anchors.top: abAbDataCounterText.bottom
+                            anchors.top: abSqLiteDataCounterText.bottom
                             width: parent.width
                             //implicitHeight: abAddressListView.contentHeight
 

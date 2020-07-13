@@ -12,7 +12,9 @@
         ContactView for Add, Update and Search.
         AddressView for Browsing Contacts and Search results.
 
-    // Status: Not started
+    // Status: WIP
+    // Working: Save, at least on run time level, might need to ask permission on device.
+    //
         - Local database. Scripts related to that.
 
     // Status: Planning
@@ -22,7 +24,6 @@
 // Things to add/change/improve?
     // Status: Not started.
         - Add text to show last time local data was updated from Cloud
-
 
     // Status: Need to look into how to make, currently not important to implement.
         - Progress bar when getting or sending data to Cloud?
