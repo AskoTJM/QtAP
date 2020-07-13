@@ -157,9 +157,9 @@ function getDataFromLocalDB(){
                     jsonObject.id = rs.rows.item(i).id;
                     jsonObject.firstname = rs.rows.item(i).firstname;
                     jsonObject.lastname = rs.rows.item(i).lastname;
- //                   abStack.jsonABData[i] = jsonObject;
-                    //jsonObject.mobile = rs.rows.items(i).mobile;
-                    //jsonObject.email = rs.rows.items(i).email;
+                    jsonObject.mobile = rs.rows.item(i).mobile;
+                    jsonObject.email = rs.rows.item(i).email;
+                    //abStack.jsonABData[i] = jsonObject;
                     //console.log("Content of mobile: " + JSON.stringify(rs.rows.items(i).mobile));
                     //console.log("Content of email: " + JSON.stringify(rs.rows.items(i).email));
                     //console.log("Row: "+i+" Content: "+ JSON.stringify(rs.rows.item(i).lastname));
