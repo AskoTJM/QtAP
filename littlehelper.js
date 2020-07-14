@@ -126,11 +126,11 @@ function getDataFromLocalDB(){
                 //tx.executeSql('DELETE FROM AddressBook');
                 //console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
                 var rs = tx.executeSql('SELECT * FROM AddressBook');
-                var jsonObject = {};
-                var inputToDB
-                console.log("getDataFromLocalDB rs = " + JSON.stringify(rs));
-                //abStack.jsonABData = rs;
 
+                let inputToDB = [];
+//                console.log("getDataFromLocalDB rs = " + JSON.stringify(rs));
+//                abStack.jsonABData = rs;
+//                abStack.jsonABData = ""
 //                var r = ""
                 for (var i = 0; i < rs.rows.length; i++) {
 
@@ -144,34 +144,38 @@ function getDataFromLocalDB(){
 //                     inputToDB = JSON.stringify({"id":rs.rows.item(i).id,
 //                                      "firstname":rs.rows.item(i).firstname,
 //                                      "lastname":rs.rows.item(i).lastname,
-//                                      "mobile":rs.rows.items(i).mobile,
-//                                      "email":rs.rows.items(i).email });
+//                                      "mobile":rs.rows.item(i).mobile,
+//                                      "email":rs.rows.item(i).email });
 
 //                    if(i === 0){
-//                          inputToDB = ('{"id":'+rs.rows.item(i).id+',"firstname":"'+rs.rows.item(i).firstname+'","lastname":"'+rs.rows.item(i).lastname+'","mobile":"'+rs.rows.item(i).mobile+'","email":"'+rs.rows.item(i).email+'"}')
-//                       }else{
-//                           inputToDB += ('{"id":'+rs.rows.item(i).id+',"firstname":"'+rs.rows.item(i).firstname+'","lastname":"'+rs.rows.item(i).lastname+'","mobile":"'+rs.rows.item(i).mobile+'","email":"'+rs.rows.item(i).email+'"}');
-//                       }
+//                          inputToDB = '[';
+//                    }
+//                    inputToDB += ('{"id":'+rs.rows.item(i).id+',"firstname":"'+rs.rows.item(i).firstname+'","lastname":"'+rs.rows.item(i).lastname+'","mobile":"'+rs.rows.item(i).mobile+'","email":"'+rs.rows.item(i).email+'"}');
 
 
+                    let jsonObject = {};
                     jsonObject.id = rs.rows.item(i).id;
                     jsonObject.firstname = rs.rows.item(i).firstname;
                     jsonObject.lastname = rs.rows.item(i).lastname;
                     jsonObject.mobile = rs.rows.item(i).mobile;
                     jsonObject.email = rs.rows.item(i).email;
-                    //abStack.jsonABData[i] = jsonObject;
-                    //console.log("Content of mobile: " + JSON.stringify(rs.rows.items(i).mobile));
-                    //console.log("Content of email: " + JSON.stringify(rs.rows.items(i).email));
+                    //console.log("getDataFromLocalDB-> Content of Lastname: " + JSON.stringify(rs.rows.item(i).lastname));
+                    console.log("getDAtaFromLocalDB-> Content of jsonObject: " + JSON.stringify(jsonObject));
+                    inputToDB[inputToDB.length] = jsonObject;
+                    console.log("getDataFromLocalDB-> Content of inputToDB" + JSON.stringify(inputToDB));
+                    //inputToDB.push(jsonObject);
+                    //console.log("Content of email: " + JSON.stringify(rs.rows.item(i).email));
                     //console.log("Row: "+i+" Content: "+ JSON.stringify(rs.rows.item(i).lastname));
                     //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
                 }
                 //console.log("GetDataFromLocalDB_outputJSONData");
                 //abStack.jsonABData = JSON.parse(inputToDB);
-                //inputToDB += ']'
-                console.log("getDataFromLocalDB-> content of jsonABData is: " + JSON.stringify(jsonABData))
+                //inputToDB += ']';
+                abStack.jsonABData = inputToDB;
+                console.log("getDataFromLocalDB-> content of jsonABData is: " + JSON.stringify(abStack.jsonABData));
                 //jsonABData = JSON.stringify(jsonObject) //JSON.stringify(inputToDB);
                 console.log("getDataFromLocalDB-> content of jsonObject is: " + JSON.stringify(jsonObject))
-                //outputJSONData();
+                outputJSONData();
             })
         } catch (err) {
             //console.log("getDataFromLocalDB_transaction_error run.")
@@ -249,6 +253,7 @@ function clearLocalDB(){
     try{
          db.transaction(function (tx) {
             tx.executeSql('DELETE FROM AddressBook');
+            console.log("clearLocalDB -> Local Sqlite database cleared.");
         })
     } catch (err) {
         console.log("clearLocalDB_transaction_error run.")
@@ -261,9 +266,14 @@ function clearAddressListView(){
     console.log("clearAddressListView-> Count now: " + abJSONModel.count);
 }
 
+
+// Function to clear abStack.jsonABData
+// Status: For some reason abStack.jsonABData counter shows '9' after clearing?
 function clearABData(){
-// Clear abStack.jsonABData
-    abStack.jsonABData = undefined;
+    abStack.jsonABData = "";
+    //abStack.jsonABData = 'undefined';
+    console.log("clearABData -> jsonABData content now:" + JSON.stringify(abStack.jsonABData));
+
 }
 
 //From https://gist.github.com/endel/321925f6cafa25bbfbde
