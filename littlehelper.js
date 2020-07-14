@@ -1,3 +1,6 @@
+// Mode switches, maybe not flood console if not necessary for troubleshooting.
+const debugMode = true
+const verboseMode = true
 
 // Function to get all the contact data from the Cloud JSON and transferring it to jsonData
 // Status: Working
@@ -124,64 +127,34 @@ function getDataFromLocalDB(){
                 tx.executeSql('CREATE TABLE IF NOT EXISTS AddressBook(id INTEGER,firstname TEXT,lastname TEXT,mobile TEXT,email TEXT)')
                 //tx.executeSql('INSERT INTO AddressBook VALUES(?, ?, ?, ?, ?)', [ '333','hello', 'world','12131','a@c.com' ]);
                 //tx.executeSql('DELETE FROM AddressBook');
-                //console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
+                if(debugMode)
+                    console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
                 var rs = tx.executeSql('SELECT * FROM AddressBook');
 
                 let inputToDB = [];
-//                console.log("getDataFromLocalDB rs = " + JSON.stringify(rs));
-//                abStack.jsonABData = rs;
-//                abStack.jsonABData = ""
-//                var r = ""
+
                 for (var i = 0; i < rs.rows.length; i++) {
-
-//                    abJSONModel.append({"lastname": rs.row.item(i).lastname
-//                                           , "firstname": rs.row.item(i).firstname
-//                                           , "id": rs.row.item(i).id
-//                                           , "mobile": rs.row.item(i).mobile
-//                                           , "email": rs.row.item(i).email})
-
-
-//                     inputToDB = JSON.stringify({"id":rs.rows.item(i).id,
-//                                      "firstname":rs.rows.item(i).firstname,
-//                                      "lastname":rs.rows.item(i).lastname,
-//                                      "mobile":rs.rows.item(i).mobile,
-//                                      "email":rs.rows.item(i).email });
-
-//                    if(i === 0){
-//                          inputToDB = '[';
-//                    }
-//                    inputToDB += ('{"id":'+rs.rows.item(i).id+',"firstname":"'+rs.rows.item(i).firstname+'","lastname":"'+rs.rows.item(i).lastname+'","mobile":"'+rs.rows.item(i).mobile+'","email":"'+rs.rows.item(i).email+'"}');
-
-
                     let jsonObject = {};
                     jsonObject.id = rs.rows.item(i).id;
                     jsonObject.firstname = rs.rows.item(i).firstname;
                     jsonObject.lastname = rs.rows.item(i).lastname;
                     jsonObject.mobile = rs.rows.item(i).mobile;
                     jsonObject.email = rs.rows.item(i).email;
-                    //console.log("getDataFromLocalDB-> Content of Lastname: " + JSON.stringify(rs.rows.item(i).lastname));
-                    console.log("getDAtaFromLocalDB-> Content of jsonObject: " + JSON.stringify(jsonObject));
+
+                    if(debugMode)
+                        console.log("getDAtaFromLocalDB-> Content of jsonObject: " + JSON.stringify(jsonObject));
                     inputToDB[inputToDB.length] = jsonObject;
-                    console.log("getDataFromLocalDB-> Content of inputToDB" + JSON.stringify(inputToDB));
-                    //inputToDB.push(jsonObject);
-                    //console.log("Content of email: " + JSON.stringify(rs.rows.item(i).email));
-                    //console.log("Row: "+i+" Content: "+ JSON.stringify(rs.rows.item(i).lastname));
-                    //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
+                    if(debugMode)
+                        console.log("getDataFromLocalDB-> Content of inputToDB" + JSON.stringify(inputToDB));
+
                 }
-                //console.log("GetDataFromLocalDB_outputJSONData");
-                //abStack.jsonABData = JSON.parse(inputToDB);
-                //inputToDB += ']';
-                abStack.jsonABData = inputToDB;
+            abStack.jsonABData = inputToDB;
                 console.log("getDataFromLocalDB-> content of jsonABData is: " + JSON.stringify(abStack.jsonABData));
-                //jsonABData = JSON.stringify(jsonObject) //JSON.stringify(inputToDB);
-                console.log("getDataFromLocalDB-> content of jsonObject is: " + JSON.stringify(jsonObject))
                 outputJSONData();
             })
         } catch (err) {
-            //console.log("getDataFromLocalDB_transaction_error run.")
             console.log("Error in getDataFromLocalDB in database: " + err)
         };
-    //console.log("getDataFromLocalDB-> SqLite rows:" + getLocalDBSize());
 }
 
 // function to save abStack.jsonAbData to Local DB

@@ -1,7 +1,14 @@
 import QtQuick 2.0
 pragma Singleton
 
+
+
+
 QtObject {
+// Mode
+    property const debugMode: true
+    property const verboseMode: true
+
 // Object sizes
     property int appHeaderTitleSize: 10
     property int appLeftMargin: 20

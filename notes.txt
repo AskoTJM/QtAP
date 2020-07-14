@@ -100,7 +100,7 @@
         //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
         //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
 
-    // Status: In planning. Need to look into how it works.
+    // Status: Working. Although needs to manually give permission in Android for using storage
         //-Save to local database
         //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
         //Then the user can use the contact-list also without Internet-connection.
