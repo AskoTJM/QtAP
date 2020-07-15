@@ -11,5 +11,6 @@
         <file>addressBookRES/ABAddressView.qml</file>
         <file>addressBookRES/ABContactView.qml</file>
         <file>addressBookRES/ABMainView.qml</file>
+        <file>addressBookRES/ABBrowseButtonView.qml</file>
     </qresource>
 </RCC>

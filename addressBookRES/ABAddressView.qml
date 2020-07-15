@@ -14,16 +14,10 @@ Component{
     //    id: abAddressView
     // Component can only have one child, so wrapping everything in Item works around that.
 
-
             Item{
 
-                Component.onCompleted: {
-                                        if(Utils.debugMode){
-                                           console.log("ABAddressView.qml ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                Component.onCompleted: (Utils.debugMode ? console.log("ABAddressView.qml ready") : null);
 
-                                        }
-                }
-                //sComponent.
 
                 Rectangle{
 
@@ -51,78 +45,9 @@ Component{
                         }
                     }
 
-                    Grid{
+                    ABBrowseButtonView{
                         id: abAddressViewGrid
-                        width: implicitWidth
-                        height: implicitHeight
-                        rows: 3
-                        columns: 2
-                        rowSpacing: AppStyle.abButtonMarging / 2
-                        columnSpacing: AppStyle.abButtonMarging
-                        anchors{
-                            top: abAddressViewTitleText.bottom
-                            horizontalCenter: parent.horizontalCenter
-                            topMargin: 20
-                        }
-
-                            Button{
-                                id: abGetDataFromCloud
-                                width: AppStyle.abButtonWidth
-                                text: AppStyle.abGetDataFromCloud
-                                onClicked: {
-
-                                    Utils.getDataFromCloud(AppStyle.abURLAddressBook)
-                                }
-                            }
-
-                            Button{
-                                id: abAddressViewDataOutButton
-                                width: AppStyle.abButtonWidth
-                                text: "Clear jsonABData"
-                                onClicked: {
-                                    Utils.clearABData();
-
-                                }
-
-                            }
-
-                            Button{
-                                id: abAddressViewPlaceholderButton
-                                width: AppStyle.abButtonWidth
-                                text: "Save In Local DB"
-                                onClicked: {
-                                    Utils.clearLocalDB();
-                                    Utils.saveDataToLocalDB();
-
-                                }
-                            }
-
-                            Button{
-                                id: abAddressViewPrevButton
-                                width: AppStyle.abButtonWidth
-                                text: AppStyle.abReturnToMain
-                                onClicked: push(abMainView)
-                            }
-
-                            Button{
-                                id: abAddressViewTestButton1
-                                width: AppStyle.abButtonWidth
-                                text: "Get data from SqLite"
-                                onClicked: {
-
-                                    Utils.getDataFromLocalDB()
-                                    //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
-                                }
-                            }
-
-                            Button{
-                                id: abAddressViewTestButton2
-                                width: AppStyle.abButtonWidth
-                                text: "Clear ListView"
-                                onClicked: {
-                                    Utils.clearAddressListView();
-                                }
-                            }
+                        anchors.top: abAddressViewTitleText.bottom
                     }
 
 
@@ -137,6 +62,8 @@ Component{
                         width: parent.width
                         text: "Addressess in database: " + abJSONModel.count
                     }
+
+
 
 //                    Text{
 //                        id: abAbDataCounterText
