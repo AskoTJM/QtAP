@@ -1,24 +1,28 @@
-// Mode switches, maybe not flood console if not necessary for troubleshooting.
-const debugMode = true
-const verboseMode = true
+// Mode switches, switches console logging on/off on some parts
+const debugMode = false
+const verboseMode = false
+const thisFileName = "littlehelper.js"
 
 // Function to get all the contact data from the Cloud JSON and transferring it to jsonData
 // Status: Working
 function getDataFromCloud(getTheUrl){
+    if(verboseMode)
+        console.log(thisFileName+":getDataFromCloud() Run")
 
     var xhr = new XMLHttpRequest
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {        
-              abStack.jsonABData = JSON.parse(xhr.responseText)
-              //console.log("getDataFromCloud abStack.jsonABData size: " + JSON.stringify(abStack.jsonABData));
-              outputJSONData()
+              abStack.jsonABData = JSON.parse(xhr.responseText);
+              if(debugMode)
+                console.log(thisFileName+":getDataFromCloud() abStack.jsonABData size: " + JSON.stringify(abStack.jsonABData));
+              outputJSONData();
           }
         }
-        xhr.open("GET", Qt.resolvedUrl(getTheUrl))
-        xhr.send()
-        //console.log("function getDataFromCloud finished")
+        xhr.open("GET", Qt.resolvedUrl(getTheUrl));
+        xhr.send();
+        if(verboseMode)
+            console.log(thisFileName+":getDataFromCloud() finished");
 }
-
 
 
 // Function to upload data to Cloud
@@ -26,6 +30,9 @@ function getDataFromCloud(getTheUrl){
 // if id value is set update, if not new contact data.
 // Replaces separate Update and Add new Contact functions
 function sendContactDataToCloud(getTheUrl, jsonToSend){
+    if(verboseMode)
+        console.log(thisFileName+":sendContactDataToCloud() Run")
+
     var xhr = new XMLHttpRequest
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -36,19 +43,22 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
     // If "id" field is empty, it's new contact data.
     if(jsonToSend.id === ""){
        xhr.open("POST", Qt.resolvedUrl(getTheUrl))
-       console.log("JsonDataPOST: " + JSON.stringify(jsonToSend) );
+       if(debugMode)
+        console.log("JsonDataPOST: " + JSON.stringify(jsonToSend) );
     }
     // If "id" field has number, were updating existing contact.
     // Maybe run script to check from local data if that ID number actually exists?
     // if(searchFromJSON([id_number], "id", true) !== "")
     if(jsonToSend.id !== ""){
-       xhr.open("PUT", Qt.resolvedUrl(getTheUrl+"/"+jsonToSend.id));
-       console.log("JsonDataPUT: " + JSON.stringify(jsonToSend) );
+        xhr.open("PUT", Qt.resolvedUrl(getTheUrl+"/"+jsonToSend.id));
+        if(debugMode)
+            console.log("JsonDataPUT: " + JSON.stringify(jsonToSend) );
     }
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    delete jsonToSend.id;
+    delete jsonToSend.id;    
     xhr.send(JSON.stringify(jsonToSend));
-    console.log("JsonData: " + JSON.stringify(jsonToSend) );
+    if(debugMode)
+        console.log("JsonData: " + JSON.stringify(jsonToSend) );
 }
 
 
@@ -56,6 +66,9 @@ function sendContactDataToCloud(getTheUrl, jsonToSend){
 // Function to output data from jsonData and appending it to abJSONModel
 // to generate listView of it.
 function outputJSONData(){
+    if(verboseMode)
+        console.log(thisFileName+":outputJSONData() Run")
+
     abJSONModel.clear()
     // Why undefined
     //console.log("outputJSONDATA abStack.jsonABData size: " + JSON.stringify(abStack.jsonABData.length));
@@ -67,7 +80,8 @@ function outputJSONData(){
                                , "id": jsonObject["id"]
                                , "mobile": jsonObject["mobile"]
                                , "email": jsonObject["email"]})
-        //console.log("outputJSONData From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
+        if(debugMode)
+            console.log(thisFileName+":outputJSONData() -> Content of abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
 
     }
 }
@@ -79,24 +93,33 @@ function outputJSONData(){
 // Input: searchFromJSON(String to search, Field to search from, search for exactMatch true/false)
 // Returns: Arrays of indexes of the matches in jsonData
 function searchFromJSON(searchString, searchField, exactMatch){
+    if(verboseMode)
+        console.log(thisFileName+":searchFromJSON()-> Run")
+
     // Array to save result indexes
     var foundAtIndex = [];
+
     var searchStringI = /"searchString"/i ;
-    console.log("searchFromJSON");
+    if(debugMode)
+        console.log(thisFileName+":searchFromJSON()-> started.");
     for (var x in abStack.jsonABData) {
-        console.log("Transferring from jsonABData to jsonObject.");
+        if(debugMode)
+            console.log(thisFileName+":searchFromJSON()-> Transferring from jsonABData to jsonObject.");
         var jsonObject = abStack.jsonABData[x];
         var searchStringResult = jsonObject[searchField];
-        console.log("Lets check.");
+        if(debugMode)
+            console.log(thisFileName+":searchFromJSON()-> Lets check.");
 
     // If we need exact match. This works.
         if(exactMatch === true){
             if( searchStringResult === searchString ){
                 //foundAtIndex = x;
-                console.log("Found exact match at index: "+x);
+                if(verboseMode)
+                    console.log(thisFileName+":searchFromJSON()-> Found exact match at index: "+x);
                 foundAtIndex.push(x);
             }else{
-                console.log("Not found exact match. :( ");
+                if(verboseMode)
+                    console.log(thisFileName+":searchFromJSON()-> Not found exact match. :( ");
             }
     // when only partial match is needed
         }else{
@@ -104,10 +127,12 @@ function searchFromJSON(searchString, searchField, exactMatch){
             searchStringResult = searchStringResult.toLowerCase();
             searchString = searchString.toLowerCase();
             if(searchStringResult.match(searchString) ){
-                console.log("Found at least partial match at index: " + x);
+                if(verboseMode)
+                    console.log(thisFileName+":searchFromJSON()->Found at least partial match at index: " + x);
                 foundAtIndex.push(x);
             }else{
-                console.log("Not found. :( ");
+                if(verboseMode)
+                    console.log(thisFileName+":searchFromJSON()-> Not found. :( ");
             }
         }
     }
@@ -120,6 +145,9 @@ function searchFromJSON(searchString, searchField, exactMatch){
 // Output: -
 
 function getDataFromLocalDB(){
+    if(verboseMode)
+        console.log(thisFileName+":getDataFromLocalDB() Run")
+
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
 
     try {
@@ -142,18 +170,19 @@ function getDataFromLocalDB(){
                     jsonObject.email = rs.rows.item(i).email;
 
                     if(debugMode)
-                        console.log("getDAtaFromLocalDB-> Content of jsonObject: " + JSON.stringify(jsonObject));
+                        console.log(thisFileName+":getDataFromLocalDB()-> Content of jsonObject: " + JSON.stringify(jsonObject));
                     inputToDB[inputToDB.length] = jsonObject;
                     if(debugMode)
-                        console.log("getDataFromLocalDB-> Content of inputToDB" + JSON.stringify(inputToDB));
+                        console.log(thisFileName+":getDataFromLocalDB()-> Content of inputToDB" + JSON.stringify(inputToDB));
 
                 }
-            abStack.jsonABData = inputToDB;
-                console.log("getDataFromLocalDB-> content of jsonABData is: " + JSON.stringify(abStack.jsonABData));
+                abStack.jsonABData = inputToDB;
+                if(debugMode)
+                    console.log(thisFileName+":getDataFromLocalDB()-> content of jsonABData is: " + JSON.stringify(abStack.jsonABData));
                 outputJSONData();
             })
         } catch (err) {
-            console.log("Error in getDataFromLocalDB in database: " + err)
+            console.log("Error in "+thisFileName+":getDataFromLocalDB() in database: " + err)
         };
 }
 
@@ -162,12 +191,14 @@ function getDataFromLocalDB(){
 // Input: -
 // Output: -
 function saveDataToLocalDB(){
+    if(verboseMode)
+        console.log(thisFileName+":saveDataToLocal() Run")
 
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
 
-    console.log("saveDataToLocalDB run.");
     if(abStack.jsonABData === undefined){
-        console.log("saveDataToLocalDB script didn't run because abStack.jsonAbData is empty.")
+        if(verboseMode)
+            console.log(thisFileName+":saveDataToLocalDB() script didn't run because abStack.jsonAbData is empty.")
     }else{
         try {
                 db.transaction(function (tx) {
@@ -180,18 +211,18 @@ function saveDataToLocalDB(){
                                                                                         jsonObject["lastname"],
                                                                                         jsonObject["mobile"],
                                                                                         jsonObject["email"] ]);
-                        //console.log("saveDataToLocalDB From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname)
-
+                        if(debugMode)
+                            console.log("saveDataToLocalDB From abJSONModel: " + x + " " + abJSONModel.get(x).lastname +", "+ abJSONModel.get(x).firstname);
                     }
-
-                //console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')))
+                if(debugMode)
+                    console.log("In Database: " + JSON.stringify(tx.executeSql('SELECT * FROM AddressBook')));
                 })
         } catch (err) {
-            //console.log("saveDataToLocalDB_transaction_error run.")
-            console.log("Error in saveDataToLocalDB in database: " + err)
+            console.log(thisFileName+":saveDataToLocalDB()-> Error: " + err)
         };
     }
-    console.log("SaveDataToLocalDB-> SqLite DB contains: " + getLocalDBSize()) ;
+    if(debugMode)
+        console.log(thisFileName+":SaveDataToLocalDB()-> SqLite DB contains: " + getLocalDBSize()) ;
     //abAddressView.abSqLiteDataCounterText.Text = "Test";
 }
 
@@ -200,17 +231,21 @@ function saveDataToLocalDB(){
 // Input: -
 // Output: Number of rows in local SqLite Database
 function getLocalDBSize(){
+    if(verboseMode)
+        console.log(thisFileName+":getLocalDBSize()-> Run")
+
     var numberOfRowsInSqLite
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
     try {
         db.transaction(function (tx) {
             var rs = tx.executeSql('SELECT * FROM AddressBook');
             //return numberOfRowsInSqLite = rs.rows.length;
-            console.log("getLocalDBSize-> Addressess in SqLite: " + JSON.stringify(rs.rows.length));
+            if(debugMode)
+                console.log(thisFileName+":getLocalDBSize()-> Addressess in SqLite: " + JSON.stringify(rs.rows.length));
             //abSqLiteDataCounterText.text = JSON.stringify(rs.rows.lenght);
         })
     } catch (err) {
-            console.log("Error in getLocalDBSize() : " + err)
+            console.log(thisFileName+":getLocalDBSize()-> Error : " + err)
     };
 
 }
@@ -222,30 +257,41 @@ function getLocalDBSize(){
 // Output: -
 
 function clearLocalDB(){
+    if(verboseMode)
+        console.log(thisFileName+":clearLocalDB() Run")
+
     var db =  LocalStorage.openDatabaseSync("AddressBookDB", "1.0", "QtPhone Addressbook Local Database", 1000000);
     try{
          db.transaction(function (tx) {
             tx.executeSql('DELETE FROM AddressBook');
-            console.log("clearLocalDB -> Local Sqlite database cleared.");
+            if(debugMode)
+                console.log(thisFileName+":clearLocalDB() -> Local Sqlite database cleared.");
         })
     } catch (err) {
-        console.log("clearLocalDB_transaction_error run.")
-        console.log("Error clearing table AddressBook in database: " + err)
+        console.log(thisFileName+":clearLocalDB()-> Error : " + err)
     };
 }
 function clearAddressListView(){
 // Clear ListView, temporarily here to make testing easier.
+    if(verboseMode)
+        console.log(thisFileName+":clearAddressListView() Run")
+
     abJSONModel.clear();
-    console.log("clearAddressListView-> Count now: " + abJSONModel.count);
+    if(debugMode)
+        console.log(thisFileName+":clearAddressListView()-> Count now: " + abJSONModel.count);
 }
 
 
 // Function to clear abStack.jsonABData
 // Status: For some reason abStack.jsonABData counter shows '9' after clearing?
 function clearABData(){
+    if(verboseMode)
+        console.log(thisFileName+":clearABData() Run")
+
     abStack.jsonABData = "";
     //abStack.jsonABData = 'undefined';
-    console.log("clearABData -> jsonABData content now:" + JSON.stringify(abStack.jsonABData));
+    if(debugMode)
+        console.log(thisFileName+":clearABData() -> jsonABData content now:" + JSON.stringify(abStack.jsonABData));
 
 }
 
