@@ -10,7 +10,7 @@ import ".."
 import "../littlehelper.js" as Utils
 
 Grid{
-    //id: abAddressViewGrid
+    id: abAddressViewGrid
     width: implicitWidth
     height: implicitHeight
     rows: 3
@@ -55,12 +55,6 @@ Grid{
             }
         }
 
-        Button{
-            id: abAddressViewPrevButton
-            width: AppStyle.abButtonWidth
-            text: AppStyle.abReturnToMain
-            onClicked: push(abMainView)
-        }
 
         Button{
             id: abAddressViewTestButton1
@@ -73,6 +67,7 @@ Grid{
             }
         }
 
+
 //        Button{
 //            id: abAddressViewTestButton2
 //            width: AppStyle.abButtonWidth
@@ -81,4 +76,14 @@ Grid{
 //                Utils.clearAddressListView();
 //            }
 //        }
+
+        Button{
+            id: abAddressViewPrevButton
+            width: AppStyle.abButtonWidth
+            text: AppStyle.abReturnToMain
+            onClicked: push(abMainView)
+        }
+
+
+
 }

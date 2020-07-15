@@ -46,22 +46,22 @@ Component{
                     }
 
                     ABBrowseButtonView{
-                        id: abAddressViewGrid
+                        id: abAddressBrowserButtonGrid
                         anchors.top: abAddressViewTitleText.bottom
                     }
 
-
                     // Counters for testing purposes for how many contacts there are
 
-                    Text{
-                        id: abCounterText
-                        anchors.top: abAddressViewGrid.bottom
-                        //anchors.right: parent.right
-                        font.pointSize: AppStyle.appDefaultFontSize
-                        color: "white"
-                        width: parent.width
-                        text: "Addressess in database: " + abJSONModel.count
-                    }
+//                    Text{
+//                        id: abCounterText
+//                        anchors.top: abAddressBrowserButtonGrid.bottom
+//                        //anchors.right: parent.right
+//                        font.pointSize: AppStyle.appDefaultFontSize
+//                        color: "white"
+//                        width: parent.width
+//                        text: "Addressess in database: " + abJSONModel.count
+//                    }
+
 
 
 
@@ -122,7 +122,8 @@ Component{
                         anchors.bottom: parent.bottom
                         anchors.topMargin: 10
                         //anchors.top: abSqLiteDataCounterText.bottom
-                        anchors.top: abCounterText.bottom
+                        //anchors.top: abCounterText.bottom
+                        anchors.top: abAddressBrowserButtonGrid.bottom
                         width: parent.width
                         //implicitHeight: abAddressListView.contentHeight
 
@@ -134,9 +135,6 @@ Component{
                             width: parent.width - 20
                             //clip: true
                             //padding: 10
-
-
-
 
                             ListView {
                                     id: abAddressListView
