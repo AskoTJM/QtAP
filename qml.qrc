@@ -5,9 +5,11 @@
         <file>addressbook.qml</file>
         <file>AppStyle.qml</file>
         <file>qmldir</file>
-        <file>ContactModel.qml</file>
         <file>littlehelper.js</file>
         <file>ShadyPines.js</file>
         <file>notes.html</file>
+        <file>addressBookRES/ABAddressView.qml</file>
+        <file>addressBookRES/ABContactModel.qml</file>
+        <file>addressBookRES/ABMainView.qml</file>
     </qresource>
 </RCC>
