@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 //import QtQuick 2.15
-import QtQuick.LocalStorage 2.12// as Sql
+import QtQuick.LocalStorage 2.12
 
 import "."
 import "littlehelper.js" as Utils
@@ -81,17 +81,20 @@ StackView {
         }//Component
 
 
+    Pane{
 
-    ABMainView{
-        id: abMainView
-    }
+        ABMainView{
+            id: abMainView
+        }
 
-    ABAddressView{
-        id: abAddressView
-    }
+        ABAddressView{
+            id: abAddressView
+        }
 
-    ABContactModel{
-         id: abContactView
+        ABContactView{
+             id: abContactView
+        }
+
     }
 }//StackView
 

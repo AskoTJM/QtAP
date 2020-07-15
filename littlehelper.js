@@ -1,5 +1,5 @@
 // Mode switches, switches console logging on/off on some parts
-const debugMode = true
+const debugMode = false
 const verboseMode = true
 const thisFileName = "littlehelper.js"
 

@@ -9,7 +9,7 @@
         <file>ShadyPines.js</file>
         <file>notes.html</file>
         <file>addressBookRES/ABAddressView.qml</file>
-        <file>addressBookRES/ABContactModel.qml</file>
+        <file>addressBookRES/ABContactView.qml</file>
         <file>addressBookRES/ABMainView.qml</file>
     </qresource>
 </RCC>

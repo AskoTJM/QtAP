@@ -14,6 +14,7 @@ Component{
 
     // Component can only have one child, so wrapping everything in Item works around that.
         Item{
+
             Rectangle{
 
                 color: AppStyle.appBackgroundColor

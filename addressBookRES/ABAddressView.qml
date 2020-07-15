@@ -17,7 +17,13 @@ Component{
 
             Item{
 
-                Component.onCompleted: console.log("abAddressView ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+                Component.onCompleted: {
+                                        if(Utils.debugMode){
+                                           console.log("ABAddressView.qml ready") //Utils.getDataFromCloud("https://qtphone.herokuapp.com/contact")
+
+                                        }
+                }
+                //sComponent.
 
                 Rectangle{
 
@@ -121,6 +127,7 @@ Component{
 
 
                     // Counters for testing purposes for how many contacts there are
+
                     Text{
                         id: abCounterText
                         anchors.top: abAddressViewGrid.bottom
@@ -131,59 +138,64 @@ Component{
                         text: "Addressess in database: " + abJSONModel.count
                     }
 
-                    Text{
-                        id: abAbDataCounterText
-                        anchors.top: abCounterText.bottom
-                        //anchors.right: parent.right
-                        font.pointSize: AppStyle.appDefaultFontSize
-                        color: "white"
-                        //width: parent.width
-                        text: "Addressess in jsonABData: "
+//                    Text{
+//                        id: abAbDataCounterText
+//                        anchors.top: abCounterText.bottom
+//                        //anchors.right: parent.right
+//                        font.pointSize: AppStyle.appDefaultFontSize
+//                        color: "white"
+//                        //width: parent.width
+//                        text: "Addressess in jsonABData: "
+//                        visible: (Utils.debugMode ? true : false)
 
-                    }
+//                    }
 
-                // Separate Text element needed because at start jsonABData is undefined
-                // and won't show the text
-                    Text{
-                        id: abAbDataCounterNumberText
-                        anchors.top: abCounterText.bottom
-                        anchors.left: abAbDataCounterText.right
-                        //anchors.right: parent.right
-                        font.pointSize: AppStyle.appDefaultFontSize
-                        color: "white"
-                        //width: parent.width
-                        text: JSON.stringify(jsonABData.length)
+//                // Separate Text element needed because at start jsonABData is undefined
+//                // and won't show the text
+//                    Text{
+//                        id: abAbDataCounterNumberText
+//                        anchors.top: abCounterText.bottom
+//                        anchors.left: abAbDataCounterText.right
+//                        //anchors.right: parent.right
+//                        font.pointSize: AppStyle.appDefaultFontSize
+//                        color: "white"
+//                        //width: parent.width
+//                        text: JSON.stringify(jsonABData.length)
+//                        visible: (Utils.debugMode ? true : false)
 
-                    }
+//                    }
 
-                    Text{
-                        id: abSqLiteDataCounterText
-                        anchors.top: abAbDataCounterText.bottom
-                        //anchors.right: parent.right
-                        font.pointSize: AppStyle.appDefaultFontSize
-                        color: "white"
-                        //width: parent.width
-                        text: "Addresses in SqLite"
+//                    Text{
+//                        id: abSqLiteDataCounterText
+//                        anchors.top: abAbDataCounterText.bottom
+//                        //anchors.right: parent.right
+//                        font.pointSize: AppStyle.appDefaultFontSize
+//                        color: "white"
+//                        //width: parent.width
+//                        text: "Addresses in SqLite"
+//                        visible: (Utils.debugMode ? true : false)
 
-                    }
+//                    }
 
-                    Text{
-                        id: abSqLiteDataCounterNumberText
-                        anchors.top: abAbDataCounterText.bottom
-                        anchors.left: abSqLiteDataCounterText.right
-                        //anchors.right: parent.right
-                        font.pointSize: AppStyle.appDefaultFontSize
-                        color: "white"
-                        //width: parent.width
-                        text: Utils.getLocalDBSize();
-                    }
+//                    Text{
+//                        id: abSqLiteDataCounterNumberText
+//                        anchors.top: abAbDataCounterText.bottom
+//                        anchors.left: abSqLiteDataCounterText.right
+//                        //anchors.right: parent.right
+//                        font.pointSize: AppStyle.appDefaultFontSize
+//                        color: "white"
+//                        //width: parent.width
+//                        text: Utils.getLocalDBSize();
+//                        visible: (Utils.debugMode ? true : false)
+//                    }
 
                     Rectangle{
                         //anchors.fill: abAddressViewScroll
                         color: AppStyle.appBackgroundColor
                         anchors.bottom: parent.bottom
                         anchors.topMargin: 10
-                        anchors.top: abSqLiteDataCounterText.bottom
+                        //anchors.top: abSqLiteDataCounterText.bottom
+                        anchors.top: abCounterText.bottom
                         width: parent.width
                         //implicitHeight: abAddressListView.contentHeight
 
