@@ -8,7 +8,6 @@ import "."
 import "littlehelper.js" as Utils
 
 
-
 StackView {
 
     id: abStack

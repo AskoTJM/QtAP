@@ -1,6 +1,6 @@
 // Mode switches, switches console logging on/off on some parts
-const debugMode = false
-const verboseMode = false
+const debugMode = true
+const verboseMode = true
 const thisFileName = "littlehelper.js"
 
 // Function to get all the contact data from the Cloud JSON and transferring it to jsonData

@@ -1,10 +1,62 @@
 <html><body><pre>
 <h1>//File containing notes for Qt/Android summer project</h1>
+//Last update 15.07.2020
+<h2>// Assignment status</h2>
+<b>        //Contactlist-API</b>
+
+        //Get all contacts
+<text style="color:green;">        //Status: Working</text>
+                //http-GET
+                //https://qtphone.herokuapp.com/contact
+
+        //Get Contact BY ID
+<text style="color:green;">        //Status: Working</text>
+                //http-GET
+                //https://qtphone.herokuapp.com/contact/x
+                //WHERE x=id-value
+
+        //Add Contact
+<text style="color:green;">        //Status: Working</text>
+                //http-POST
+                //https://qtphone.herokuapp.com/contact
+                //with fields:
+                    //firstname
+                    //lastname
+                    //mobile
+                    //email
+
+
+        //Update Contact.
+<text style="color:green;">        //Status: Working</text>
+                //http-PUT
+                //https://qtphone.herokuapp.com/contact/x
+                //WHERE x=id-value
+                //and fields
+                    //firstname
+                    //lastname
+                    //mobile
+                    //email
+
+        //In the application implement all those operations. So that you can get, add and update contacts.
+        //If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:
+
+        //-Search a contact
+<text style="color:green;">        // Status: JS Script with both exact or non-exact results on specific fields. Realtime filtering not started.</text>
+            //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
+            //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
+
+        //-Save to local database
+<text style="color:green;">        // Status: Working. Although needs to manually give permission in Android to use local storage</text>
+            //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
+            //Then the user can use the contact-list also without Internet-connection.
+            //You can the add features like “sync to Remote-database” and/or “sync to Local-database”.
 
 <h2>// Main features</h2>
-    // Status: Thinking about it, maybe leave as-is for now. Because works.
-        - To use same script and treat jsonAbData always as temporarily storage data?
-          Or to change so that GetContactByID saves result to different var?
+
+    // Status: Decided. Sticking with jsonABData.
+        <del>Thinking about it, maybe leave as-is for now. Because works.</del>
+        <del>-To use same script and treat jsonAbData always as temporarily storage data?</del>
+        <del>Or to change so that GetContactByID saves result to different var?</del>
 
     // Status: Looking into States in QML
         - State machine type of solution to tell app what are we doing currently,
@@ -13,12 +65,12 @@
         ContactView for Add, Update and Search.
         AddressView for Browsing Contacts and Search results.
 
-<p style="color:green;">    // Status: Working</p>
+<text style="color:green;">    // Status: Working
     // Working: Save, need to add asking for permission on device.
-    // Currently manually needed to allow from Settings->Apps->QtAP
+    // Currently manually needed to allow from Settings->Apps->QtAP</text>
         - Local database. Scripts related to that.
 
-    // Status: Planning
+<text style="color:darkblue;">    // Status: Planning</text>
         - Changes to UI to make them more suitable for different states.
 
 
@@ -40,7 +92,7 @@
         - Limit what can be inserted into fields.
 
     // Status: Looking into
-        - Learn how to run and make tests
+        - Learn how to make and run tests in QtCreator
 
     // Status: Looking into
         - Split addressbook.qml file into smaller files?
@@ -48,68 +100,5 @@
 
 
 
-<h2>// Assignment status</h2>
-<p style="color:green;">        //Status: Working</p>
-        //Contactlist-API
 
-        //Get all contacts
-
-            //http-GET
-
-            //https://qtphone.herokuapp.com/contact
-
-
-<p style="color:green;">        //Status: Working</p>
-        //Get Contact BY ID
-
-            //http-GET
-
-            //https://qtphone.herokuapp.com/contact/x
-
-            //WHERE x=id-value
-
-
-<p style="color:green;">        //Status: Working</p>
-        //Add Contact
-
-            //http-POST
-
-            //https://qtphone.herokuapp.com/contact
-
-            //with fields:
-
-            //firstname
-            //lastname
-            //mobile
-            //email
-
-<p style="color:green;">        //Status: Working</p>
-        //Update Contact.
-
-            //http-PUT
-
-            //https://qtphone.herokuapp.com/contact/x
-
-            //WHERE x=id-value
-
-            //and fields
-
-            //firstname
-            //lastname
-            //mobile
-            //email
-
-        //In the application implement all those operations. So that you can get, add and update contacts.
-        //If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:
-
-<p style="color:green;">    // Status: JS Script with both exact or non-exact results on specific fields. Realtime filtering not started.</p>
-        //-Search a contact
-        //Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.
-        //I didn’t implement that in the API, so you will have to get all contacts and filter in the app.
-
-<p style="color:green;">    // Status: Working. Although needs to manually give permission in Android for using storage</p>
-        //-Save to local database
-        //Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.
-        //Then the user can use the contact-list also without Internet-connection.
-        //You can the add features like “sync to Remote-database” and/or “sync to Local-database”.
 </pre></body></html>
