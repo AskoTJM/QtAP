@@ -15,15 +15,14 @@ StackView {
     signal message(string msg)
     signal returnToMain()
 
-    initialItem: abMainView
+//    initialItem: abMainView
+    state: "MAIN"
     anchors.fill: parent
     anchors.leftMargin: AppStyle.appLeftMargin
     anchors.rightMargin: AppStyle.appRightMargin
 
     visible: true
 
-// Local database
-    property var db
 // Maybe use States to change UI and functionality ?
     property var currentState
 
@@ -37,6 +36,48 @@ StackView {
     Component.onCompleted: {
 
     }
+
+    states: [
+        State{
+            name: "MAIN"
+
+            StateChangeScript{
+                name: "mainScript"
+                script: {
+                    if(Utils.debugMode) console.log("addressbook.qml:mainScript-> Run");
+                    abStack.push(abMainView)
+                }
+            }
+        },
+        State{
+            name: "BROWSE"
+            StateChangeScript{
+                name: "browseScript"
+                script: {
+                    target: abStack
+                    if(Utils.debugMode) console.log("addressbook.qml:browseScript-> Run");
+                    abStack.push(abAddressView)
+                }
+            }
+        },
+        State{
+            name: "ADD"
+            StateChangeScript{
+                name: "addScript"
+                script: {
+                    if(Utils.debugMode) console.log("addressbook.qml:addScript-> Run");
+                    abStack.push(abContactView)
+                }
+            }
+        },
+        State{
+            name: "UPDATE"
+        },
+        State{
+            name: "SEARCH"
+        }
+
+    ]
 
     ListModel{
         id: abJSONModel

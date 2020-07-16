@@ -10,7 +10,7 @@ import ".."
 import "../littlehelper.js" as Utils
 
 Component{
-    //id: abMainView
+    id: abMainView
 
     // Component can only have one child, so wrapping everything in Item works around that.
         Item{
@@ -55,7 +55,9 @@ Component{
                             width: AppStyle.abButtonWidth
                             text: AppStyle.abGetData
                             onClicked: {
-                                push(abAddressView)
+                                //push(abAddressView)
+                                if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                                abStack.state =  "BROWSE"
                             }
                         }
 
@@ -65,7 +67,9 @@ Component{
                             text: AppStyle.abAddUser
                             onClicked: {
                                 currentIndex = -2
-                                push(abContactView)
+                                //push(abContactView)
+                                if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                                abStack.state =  "ADD"
                             }
                         }
 

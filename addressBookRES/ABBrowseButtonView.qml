@@ -1,3 +1,5 @@
+// Button Grid for Browsing
+
 import QtQuick 2.4
 //import QtQuick 2.12
 import QtQuick.Controls 2.5
@@ -81,7 +83,11 @@ Grid{
             id: abAddressViewPrevButton
             width: AppStyle.abButtonWidth
             text: AppStyle.abReturnToMain
-            onClicked: push(abMainView)
+            onClicked: {
+                //push(abMainView)
+                if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                abStack.state =  "MAIN"
+            }
         }
 
 
