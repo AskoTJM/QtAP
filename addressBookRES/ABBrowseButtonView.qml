@@ -19,11 +19,11 @@ Grid{
     columns: 2
     rowSpacing: AppStyle.abButtonMarging / 2
     columnSpacing: AppStyle.abButtonMarging
-    anchors{
-        //top: abAddressViewTitleText.bottom
-        horizontalCenter: parent.horizontalCenter
-        topMargin: 20
-    }
+//    anchors{
+//        //top: abAddressViewTitleText.bottom
+//        horizontalCenter: parent.horizontalCenter
+//        topMargin: 20
+//    }
 
         Button{
             id: abGetDataFromCloud
@@ -65,6 +65,7 @@ Grid{
             onClicked: {
 
                 Utils.getDataFromLocalDB()
+                //abAddressListView.forceLayout();
                 //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
             }
         }

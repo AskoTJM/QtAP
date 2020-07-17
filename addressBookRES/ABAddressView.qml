@@ -20,36 +20,36 @@ Component{
                 Component.onCompleted: (Utils.debugMode ? console.log("ABAddressView.qml ready") : null);
 
 
-                Rectangle{
+//                Rectangle{
 
-                color: AppStyle.appBackgroundColor
-                anchors{
-                // Didn't work as planned, but I might try again later
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                }
+//                color: AppStyle.appBackgroundColor
+//                anchors{
+//                // Didn't work as planned, but I might try again later
+//                    top: parent.top
+//                    left: parent.left
+//                    right: parent.right
+//                    bottom: parent.bottom
+//                }
 
-                    Text{
+//                    Text{
 
-                        id: abAddressViewTitleText
-                        color: AppStyle.appTextColor
-                        text: AppStyle.abTitle
-                        font.pointSize: AppStyle.appInfoFontSize
-                        fontSizeMode: Text.FixedSize
+//                        id: abAddressViewTitleText
+//                        color: AppStyle.appTextColor
+//                        text: AppStyle.abTitle
+//                        font.pointSize: AppStyle.appInfoFontSize
+//                        fontSizeMode: Text.FixedSize
 
-                        anchors{
-                            top: parent.top
-                            margins: AppStyle.abButtonMarging + 10
-                            horizontalCenter: parent.horizontalCenter
-                        }
-                    }
+//                        anchors{
+//                            top: parent.bottom
+//                            margins: AppStyle.abButtonMarging + 10
+//                            horizontalCenter: parent.horizontalCenter
+//                        }
+//                    }
 
-                    ABBrowseButtonView{
-                        id: abAddressBrowserButtonGrid
-                        anchors.top: abAddressViewTitleText.bottom
-                    }
+//                    ABBrowseButtonView{
+//                        id: abAddressBrowserButtonGrid
+//                        anchors.top: abAddressViewTitleText.bottom
+//                    }
 
                     // Counters for testing purposes for how many contacts there are
 
@@ -120,13 +120,14 @@ Component{
                     Rectangle{
                         //anchors.fill: abAddressViewScroll
                         color: AppStyle.appBackgroundColor
+                        //color: "white"
                         anchors.bottom: parent.bottom
                         anchors.topMargin: 10
-                        //anchors.top: abSqLiteDataCounterText.bottom
-                        //anchors.top: abCounterText.bottom
+                            //anchors.top: abSqLiteDataCounterText.bottom
+                            //anchors.top: abCounterText.bottom
                         anchors.top: abAddressBrowserButtonGrid.bottom
                         width: parent.width
-                        //implicitHeight: abAddressListView.contentHeight
+                        implicitHeight: abAddressListView.contentHeight
 
 
 
@@ -152,6 +153,6 @@ Component{
                         }//ScrollView
                     }//Rectangle
 
-            }//Rectangle
+ //           }//Rectangle
         }//Item
 }//Component

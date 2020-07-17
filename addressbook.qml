@@ -1,7 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
-//import QtQuick 2.15
 import QtQuick.LocalStorage 2.12
 
 import "."
@@ -23,9 +22,6 @@ StackView {
 
     visible: true
 
-// Maybe use States to change UI and functionality ?
-    property var currentState
-
 // Switching between contacts is using Index
     property var currentIndex
 // new or updated contact data
@@ -33,8 +29,9 @@ StackView {
 // Local Temporary Data
     property var jsonABData
 
-    Component.onCompleted: {
-
+    Component.onCompleted: {      
+        if(Utils.debugMode) console.log(this.height + " and " + this.width);
+        Utils.getDataFromLocalDB();
     }
 
     states: [
@@ -56,7 +53,7 @@ StackView {
                 script: {
                     target: abStack
                     if(Utils.debugMode) console.log("addressbook.qml:browseScript-> Run");
-                    abStack.push(abAddressView)
+                    abStack.push(abBrowseState)
                 }
             }
         },
@@ -124,16 +121,23 @@ StackView {
 
     Pane{
 
+        // Main
         ABMainView{
             id: abMainView
         }
 
+        // Browsing addressbook
         ABAddressView{
             id: abAddressView
         }
 
+        // Add new contact
         ABContactView{
              id: abContactView
+        }
+
+        ABBrowseView{
+            id: abBrowseState
         }
 
     }
