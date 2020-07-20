@@ -7,7 +7,7 @@ import "."
 import "littlehelper.js" as Utils
 import "addressBookRES"
 //import
-StackView {
+StackView{
 
     id: abStack
 // Signals
@@ -31,7 +31,7 @@ StackView {
 
     Component.onCompleted: {      
         if(Utils.debugMode) console.log(this.height + " and " + this.width);
-        Utils.getDataFromLocalDB();
+        //Utils.getDataFromLocalDB();
     }
 
     states: [
@@ -41,8 +41,11 @@ StackView {
             StateChangeScript{
                 name: "mainScript"
                 script: {
-                    if(Utils.debugMode) console.log("addressbook.qml:mainScript-> Run");
-                    abStack.push(abMainView)
+                    //target: abStack
+                    if(Utils.verboseMode) console.log("addressbook.qml:mainScript-> Run");
+                    // Some bug(?) popped up and requires now this to function.
+                    abStack.clear();
+                    abStack.push(abMainView);
                 }
             }
         },
@@ -51,10 +54,10 @@ StackView {
             StateChangeScript{
                 name: "browseScript"
                 script: {
-                    target: abStack
-                    if(Utils.debugMode) console.log("addressbook.qml:browseScript-> Run");
-                    //abStack.push(abAddressView)
-                    abStack.push(abBrowseState)
+                    //target: abStack
+                    if(Utils.verboseMode) console.log("addressbook.qml:browseScript-> Run");
+                    abStack.push(abAddressView)
+                    //abStack.push(abBrowseState)
                 }
             }
         },
@@ -63,7 +66,7 @@ StackView {
             StateChangeScript{
                 name: "addScript"
                 script: {
-                    if(Utils.debugMode) console.log("addressbook.qml:addScript-> Run");
+                    if(Utils.verboseMode) console.log("addressbook.qml:addScript-> Run");
                     abStack.push(abContactView)
                 }
             }
@@ -97,7 +100,7 @@ StackView {
                     spacing: 10
                     Text {
                       color: AppStyle.appTextColor
-                      font.pixelSize: AppStyle.appDefaultFontSize
+                      font.pixelSize: AppStyle.appDefaultFontSize + 5
                       text: (id).pad(3) + ": "
                       horizontalAlignment: Text.AlignRight
 

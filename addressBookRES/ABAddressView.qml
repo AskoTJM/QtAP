@@ -11,7 +11,7 @@ import ".."
 import "../littlehelper.js" as Utils
 
 
-Component{
+//Component{
     //    id: abAddressView
     // Component can only have one child, so wrapping everything in Item works around that.
 
@@ -30,21 +30,6 @@ Component{
 //                    right: parent.right
 //                    bottom: parent.bottom
 //                }
-
-//                    Text{
-
-//                        id: abAddressViewTitleText
-//                        color: AppStyle.appTextColor
-//                        text: AppStyle.abTitle
-//                        font.pointSize: AppStyle.appInfoFontSize
-//                        fontSizeMode: Text.FixedSize
-
-//                        anchors{
-//                            top: parent.bottom
-//                            margins: AppStyle.abButtonMarging + 10
-//                            horizontalCenter: parent.horizontalCenter
-//                        }
-//                    }
 
 
 
@@ -129,25 +114,31 @@ Component{
                         //width: parent.width
                         //implicitHeight: //abAddressListView.contentHeight
 
-//                        ABContactButtonView{
-//                            id: abAddressBrowserButtonGrid
-//                        }
+
+                        Text{
+                            id: abAddressViewTitleText
+                            color: AppStyle.appTextColor
+                            text: AppStyle.abTitle
+                            font.pointSize: AppStyle.appInfoFontSize + 5
+                            fontSizeMode: Text.FixedSize
+                            anchors.topMargin: 10
+                        }
 
 
 
                         ScrollView{
                             id: abAddressViewScroll
-                            height: parent.height
+                            height: parent.height - (abAddressBrowserButtonGrid.height + abAddressViewTitleText.height + 20)
                             width: parent.width - 20
+                            anchors.top: abAddressViewTitleText.bottom
+                            anchors.topMargin: 10
 
                             ListView {
                                     id: abAddressListView
                                     anchors.top: parent.top
-                                    //Screws up
                                     boundsBehavior: Flickable.StopAtBounds
                                     clip: true
                                     width: parent * 0.95
-                                    //height: contentHeight
                                     visible: true
                                     model: abJSONModel
                                     delegate: abAddressList
@@ -159,9 +150,10 @@ Component{
 
                         ABBrowseButtonView{
                             id: abAddressBrowserButtonGrid
+                            anchors.topMargin: 10
                         }
 
 
             }//Rectangle
         }//Item
-}//Component
+//}//Component

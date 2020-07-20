@@ -6,7 +6,7 @@ import QtQuick.LocalStorage 2.12
 import "."
 import ".."
 import "../littlehelper.js" as Utils
-Component{
+//Component{
     Item {
 
         Rectangle{
@@ -14,21 +14,6 @@ Component{
         color: AppStyle.appBackgroundColor
         anchors.fill: parent
 
-
-
-
-                ABBrowseButtonView{
-                    id: abBrowseButtons1
-                }
-
-                ABBrowseButtonView{
-                    id: abBrowseButtons
-                }
-
-                ABAddressView{
-                    id: abAddressView2;
-                    //anchors.top: abBrowseButtons.bottom
-                }
 
 //                Rectangle{
 //                    //anchors.fill: abAddressViewScroll
@@ -107,7 +92,13 @@ Component{
 //                    }//ScrollView
 //                }//Rectangle
 
+                ABAddressView{
+                    id: abAddressView1
+                }
 
+                ABBrowseButtonView{
+                    id: abBrowseButtons
+                }
         } // Rectangle
     } // Item
-} // Component
+//} // Component
