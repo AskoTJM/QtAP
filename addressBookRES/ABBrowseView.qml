@@ -14,21 +14,19 @@ Component{
         color: AppStyle.appBackgroundColor
         anchors.fill: parent
 
-            Item{
+
+
 
                 ABBrowseButtonView{
                     id: abBrowseButtons1
-                    anchors.top: parent.top
                 }
 
                 ABBrowseButtonView{
                     id: abBrowseButtons
-                    anchors.top: abBrowseButtons1.bottom
                 }
 
                 ABAddressView{
                     id: abAddressView2;
-
                     //anchors.top: abBrowseButtons.bottom
                 }
 
@@ -109,7 +107,7 @@ Component{
 //                    }//ScrollView
 //                }//Rectangle
 
-            }
+
         } // Rectangle
     } // Item
 } // Component

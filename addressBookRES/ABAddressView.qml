@@ -46,11 +46,9 @@ Component{
 //                        }
 //                    }
 
-//                    ABBrowseButtonView{
-//                        id: abAddressBrowserButtonGrid
-//                        anchors.top: abAddressViewTitleText.bottom
-//                    }
 
+
+//    }
                     // Counters for testing purposes for how many contacts there are
 
 //                    Text{
@@ -118,16 +116,22 @@ Component{
 //                    }
 
                     Rectangle{
-                        //anchors.fill: abAddressViewScroll
+                        id: abAddressViewBackground
+                        anchors.fill: parent
                         color: AppStyle.appBackgroundColor
-                        //color: "white"
-                        anchors.bottom: parent.bottom
-                        anchors.topMargin: 10
+                            //color: "white"
+                            //anchors.bottom: parent.bottom
+                            //anchors.topMargin: 10
                             //anchors.top: abSqLiteDataCounterText.bottom
                             //anchors.top: abCounterText.bottom
-                        anchors.top: abAddressBrowserButtonGrid.bottom
-                        width: parent.width
-                        implicitHeight: abAddressListView.contentHeight
+                            //anchors.top: abAddressBrowserButtonGrid.bottom
+                            //anchors.top: parent.top
+                        //width: parent.width
+                        //implicitHeight: //abAddressListView.contentHeight
+
+//                        ABContactButtonView{
+//                            id: abAddressBrowserButtonGrid
+//                        }
 
 
 
@@ -135,8 +139,6 @@ Component{
                             id: abAddressViewScroll
                             height: parent.height
                             width: parent.width - 20
-                            //clip: true
-                            //padding: 10
 
                             ListView {
                                     id: abAddressListView
@@ -151,8 +153,15 @@ Component{
                                     delegate: abAddressList
                             }
                         }//ScrollView
-                    }//Rectangle
 
- //           }//Rectangle
+
+//                   }//Rectangle
+
+                        ABBrowseButtonView{
+                            id: abAddressBrowserButtonGrid
+                        }
+
+
+            }//Rectangle
         }//Item
 }//Component

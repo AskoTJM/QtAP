@@ -53,6 +53,7 @@ StackView {
                 script: {
                     target: abStack
                     if(Utils.debugMode) console.log("addressbook.qml:browseScript-> Run");
+                    //abStack.push(abAddressView)
                     abStack.push(abBrowseState)
                 }
             }

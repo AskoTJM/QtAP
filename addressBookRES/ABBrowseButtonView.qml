@@ -1,29 +1,24 @@
 // Button Grid for Browsing
 
 import QtQuick 2.4
-//import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
-//import QtQuick 2.15
-import QtQuick.LocalStorage 2.12// as Sql
+import QtQuick.LocalStorage 2.12
 
 import "."
 import ".."
 import "../littlehelper.js" as Utils
 
 Grid{
-    id: abAddressViewGrid
-    width: implicitWidth
-    height: implicitHeight
-    rows: 3
-    columns: 2
-    rowSpacing: AppStyle.abButtonMarging / 2
-    columnSpacing: AppStyle.abButtonMarging
-//    anchors{
-//        //top: abAddressViewTitleText.bottom
-//        horizontalCenter: parent.horizontalCenter
-//        topMargin: 20
-//    }
+anchors.bottom: parent.bottom
+rows: 2
+columns: 2
+anchors.horizontalCenter: parent.horizontalCenter
+width: implicitWidth
+height: implicitHeight
+rowSpacing: AppStyle.abButtonMarging / 2
+columnSpacing: AppStyle.abButtonMarging
+
 
         Button{
             id: abGetDataFromCloud
@@ -35,16 +30,7 @@ Grid{
             }
         }
 
-//        Button{
-//            id: abAddressViewDataOutButton
-//            width: AppStyle.abButtonWidth
-//            text: "Clear jsonABData"
-//            onClicked: {
-//                Utils.clearABData();
 
-//            }
-
-//        }
 
         Button{
             id: abAddressViewPlaceholderButton
@@ -71,6 +57,27 @@ Grid{
         }
 
 
+        Button{
+            id: abAddressViewPrevButton
+            width: AppStyle.abButtonWidth
+            text: AppStyle.abReturnToMain
+            onClicked: {
+                if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                abStack.state =  "MAIN"
+            }
+        }
+
+//        Button{
+//            id: abAddressViewDataOutButton
+//            width: AppStyle.abButtonWidth
+//            text: "Clear jsonABData"
+//            onClicked: {
+//                Utils.clearABData();
+
+//            }
+
+//        }
+
 //        Button{
 //            id: abAddressViewTestButton2
 //            width: AppStyle.abButtonWidth
@@ -79,18 +86,7 @@ Grid{
 //                Utils.clearAddressListView();
 //            }
 //        }
-
-        Button{
-            id: abAddressViewPrevButton
-            width: AppStyle.abButtonWidth
-            text: AppStyle.abReturnToMain
-            onClicked: {
-                //push(abMainView)
-                if(Utils.debugMode) console.log("Old State: " + abStack.state);
-                abStack.state =  "MAIN"
-            }
-        }
-
-
-
 }
+
+
+
