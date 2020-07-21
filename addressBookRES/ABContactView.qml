@@ -9,12 +9,16 @@ import "."
 import ".."
 import "../littlehelper.js" as Utils
 
+
 Component{
      //   id: abContactView
 
+
     // Component can only have one child, so wrapping everything in Item works around that.
         Item{
+
             Component.onCompleted: {
+
                 if(currentIndex >= 0){
                     var jsonObject = abStack.jsonABData[currentIndex]
                     abContactViewIdField.text = jsonObject["id"]
@@ -22,18 +26,42 @@ Component{
                     abContactViewLastNameField.text = jsonObject["lastname"]
                     abContactViewNumberField.text = jsonObject["mobile"]
                     abContactViewEmailField.text = jsonObject["email"]
-                }else if(currentIndex === -2){
+                }
+//                }else if(abStack.state === "ADD"){
+                if(abStack.state == "ADD"){
+                    abContactViewTitle.text = AppStyle.abAddUser
+
+                    abContactViewIdText.color = "gray"
+
                     abContactViewIdField.clear()
                     abContactViewFirstNameField.clear()
                     abContactViewLastNameField.clear()
                     abContactViewNumberField.clear()
                     abContactViewEmailField.clear()
+
+                }else if(abStack.state === "UPDATE"){
+                    abContactViewTitle.text = "Update contact"
+
+
+                }else if(abStack.state === "VIEW"){
+                    if(Utils.debugMode) console.log("ABContactView.qml:Componen.onCompleted-> Run")
+                    abContactViewTitle.text = "View contact"
+                    abContactViewIdField.readOnly = true
+                    abContactViewFirstNameField.readOnly = true
+                    abContactViewLastNameField.readOnly = true
+                    abContactViewNumberField.readOnly = true
+                    abContactViewEmailField.readOnly = true
+
+                }else if(abStack.state === "SEARCH"){
+                    abContactViewTitle.text = "Search contact"
+
                 }else if(Number(abJSONModel.count) === 0){
                     Utils.getDataFromCloud(AppStyle.abURLAddressBook)
                     currentIndex = 0
                 }
 
-            }
+            }    
+
             Rectangle{
             color: AppStyle.appBackgroundColor
             anchors.fill: parent
@@ -70,8 +98,7 @@ Component{
                         color: AppStyle.appTextColor
                         text: "id: "
                         font.pointSize: AppStyle.appDefaultFontSize
-                        Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
-
+                        Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth                        
 
                     }
 //                        Rectangle{
@@ -80,6 +107,7 @@ Component{
                         TextField{
                             id: abContactViewIdField
                             color: AppStyle.appTextColor
+                            readOnly: true
 
                         }
 //                        }

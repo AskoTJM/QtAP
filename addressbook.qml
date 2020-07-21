@@ -31,18 +31,17 @@ StackView{
 
     Component.onCompleted: {      
         if(Utils.debugMode) console.log(this.height + " and " + this.width);
-        //Utils.getDataFromLocalDB();
+        Utils.getDataFromLocalDB();
     }
 
     states: [
         State{
             name: "MAIN"
-
             StateChangeScript{
                 name: "mainScript"
                 script: {
                     //target: abStack
-                    if(Utils.verboseMode) console.log("addressbook.qml:mainScript-> Run");
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:MAIN-> Run");
                     // Some bug(?) popped up and requires now this to function.
                     abStack.clear();
                     abStack.push(abMainView);
@@ -55,7 +54,8 @@ StackView{
                 name: "browseScript"
                 script: {
                     //target: abStack
-                    if(Utils.verboseMode) console.log("addressbook.qml:browseScript-> Run");
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:BROWSE-> Run");
+
                     abStack.push(abAddressView)
                     //abStack.push(abBrowseState)
                 }
@@ -66,16 +66,40 @@ StackView{
             StateChangeScript{
                 name: "addScript"
                 script: {
-                    if(Utils.verboseMode) console.log("addressbook.qml:addScript-> Run");
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:ADD-> Run");
                     abStack.push(abContactView)
                 }
             }
         },
         State{
             name: "UPDATE"
+            StateChangeScript{
+                name: "updateScript"
+                script: {
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:UPDATE-> Run");
+                }
+            }
         },
         State{
+            name: "VIEW"
+            StateChangeScript{
+                name: "viewScript"
+                script: {
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:VIEW-> Run");
+                    abStack.push(abContactView)
+                }
+            }
+        },
+
+        State{
             name: "SEARCH"
+            StateChangeScript{
+                name: "searchScript"
+                script: {
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:SEARCH-> Run");
+                    abStack.push(abContactView)
+                }
+            }
         }
 
     ]
@@ -92,15 +116,18 @@ StackView{
                 width:  childrenRect.width
                 height: childrenRect.height
                 onClicked: {
+                   if(Utils.debugMode) console.log("addressbook.qml:abAddressList-> Current STATE: "+ abStack.state)
                    currentIndex = index
-                   console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
+                   if(Utils.debugMode) console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
                    push(abContactView)
+                   abStack.state = "VIEW"
+
                 }
                 RowLayout{
                     spacing: 10
                     Text {
                       color: AppStyle.appTextColor
-                      font.pixelSize: AppStyle.appDefaultFontSize + 5
+                      font.pixelSize: AppStyle.appDefaultFontSize
                       text: (id).pad(3) + ": "
                       horizontalAlignment: Text.AlignRight
 

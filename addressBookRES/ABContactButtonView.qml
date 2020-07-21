@@ -9,12 +9,15 @@ import "."
 import ".."
 import "../littlehelper.js" as Utils
 
-Grid{
+GridLayout{
     anchors.bottom: parent.bottom
-    rows: 2
+    //rows: 3
     columns: 2
     anchors.horizontalCenter: parent.horizontalCenter
-    width: implicitWidth
+    //width: implicitWidth
+    //width: ( AppStyle.abButtonWidth + AppStyle.abButtonMarging + AppStyle.abButtonWidth)
+    //Layout.horizontalCenter: parent.horizontalCenter
+    //Layout.minimumWidth: AppStyle.abButtonMarging + AppStyle.abButtonWidth + AppStyle.abButtonWidth
     height: implicitHeight
     rowSpacing: AppStyle.abButtonMarging / 2
     columnSpacing: AppStyle.abButtonMarging
@@ -22,11 +25,42 @@ Grid{
     //spacing: 10
     //margins: 10
 
+    Component.onCompleted: {
+        switch(abStack.state){
+            case "SEARCH":
+                abContactViewPrevButton.visible = false;
+                abContactViewNextButton.visible = false;
+                abContactViewSaveButton.visible = false;
+                break;
+            case "UPDATE":
+                abContactViewPrevButton.visible = false;
+                abContactViewNextButton.visible = false;
+                abContactViewEditButton.visible = false;
+                abContactViewSaveButton.visible = true;
+                break;
+            case "ADD":
+                abContactViewPrevButton.visible = false;
+                abContactViewNextButton.visible = false;
+                break;
+            case "VIEW":
+                abContactViewSaveButton.visible = false;
+                abContactViewEditButton.visible = true;
+                //abEmptyButton.visible = true;
+                break;
+
+            default:
+                break;
+
+        }
+    }
 
     Button{
         id: abContactViewPrevButton
         width: AppStyle.abButtonWidth
+        Layout.fillWidth: true
+        Layout.preferredWidth: AppStyle.abButtonWidth
         text: "Previous user"
+
         onClicked: {
             if( currentIndex === undefined){
                 currentIndex = 0
@@ -41,7 +75,6 @@ Grid{
                 console.log("Error in abContactViewPrevButton, illegal value in currentIndex")
             }
             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
-//                            dataToContactView(currentIndex)
 
                 var jsonObject = abStack.jsonABData[currentIndex]
                 abContactViewIdField.text = jsonObject["id"]
@@ -56,6 +89,8 @@ Grid{
     Button{
         id: abContactViewNextButton
         width: AppStyle.abButtonWidth
+        Layout.fillWidth: true
+        Layout.preferredWidth: AppStyle.abButtonWidth
         text: "Next user"
         onClicked: {
             if( currentIndex === undefined){
@@ -71,7 +106,6 @@ Grid{
                 console.log("Error in abContactViewNextButton, illegal value in currentIndex")
             }
             console.log("CurrentIndex  goes  to: " + Number(currentIndex))
-//                            dataToContactView(currentIndex)
                 var jsonObject = abStack.jsonABData[currentIndex]
                 abContactViewIdField.text = jsonObject["id"]
                 abContactViewFirstNameField.text = jsonObject["firstname"]
@@ -86,6 +120,10 @@ Grid{
     Button{
         id: abContactViewSaveButton
         width: AppStyle.abButtonWidth
+        Layout.fillWidth: true
+        Layout.preferredWidth: AppStyle.abButtonWidth
+        Layout.column: 0
+        Layout.row: 1
         text: AppStyle.abSaveUser
         onClicked: {
             currentContact = {"id":abContactViewIdField.text,
@@ -93,16 +131,38 @@ Grid{
                 "lastname":abContactViewLastNameField.text,
                 "mobile":abContactViewNumberField.text,
                 "email":abContactViewEmailField.text};
-            //Utils.updateContactInCloud(AppStyle.abURLAddressBook+"/133", currentContact)
             Utils.sendContactDataToCloud(AppStyle.abURLAddressBook, currentContact)
-            //console.log("Save data: " + JSON.stringify(currentContact) )
 
         }
     }
 
     Button{
+        id: abContactViewEditButton
+        width: AppStyle.abButtonWidth
+        Layout.fillWidth: true
+        Layout.preferredWidth: AppStyle.abButtonWidth
+        Layout.column: 0
+        Layout.row: 1
+        visible: false
+        text: "Edit user"
+        onClicked: {
+            abStack.state = "UPDATE"
+            Component.completed();
+            if(Utils.debugMode) console.log("ABContactButtonView.qml:abContactViewEditButton:onClicked-> Run STATE now:" + abStack.state)
+
+
+        }
+    }
+
+
+
+    Button{
         id: abContactViewBackToMainButton
         width: AppStyle.abButtonWidth
+        Layout.preferredWidth: AppStyle.abButtonWidth
+        Layout.fillWidth: true
+        Layout.column: 1
+        Layout.row: 1
         text: AppStyle.abReturnToMain
         onClicked: {
             //push(abMainView)
@@ -110,4 +170,8 @@ Grid{
             abStack.state =  "MAIN"
          }
     }
+
+
+
+
 }

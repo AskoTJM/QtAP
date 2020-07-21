@@ -58,7 +58,5 @@ QtObject {
     property var abContactViewFirstColumnWidth : 0.25 // 0.09
 
 
-
-
 }
 

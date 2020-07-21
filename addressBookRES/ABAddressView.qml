@@ -142,6 +142,7 @@ import "../littlehelper.js" as Utils
                                     visible: true
                                     model: abJSONModel
                                     delegate: abAddressList
+
                             }
                         }//ScrollView
 
@@ -150,7 +151,7 @@ import "../littlehelper.js" as Utils
 
                         ABBrowseButtonView{
                             id: abAddressBrowserButtonGrid
-                            anchors.topMargin: 10
+                            //anchors.topMargin: 10
                         }
 
 

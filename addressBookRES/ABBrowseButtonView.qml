@@ -26,11 +26,10 @@ columnSpacing: AppStyle.abButtonMarging
             width: AppStyle.abButtonWidth
             text: AppStyle.abGetDataFromCloud
             onClicked: {
-
                 Utils.getDataFromCloud(AppStyle.abURLAddressBook)
+                abAddressViewTitleText.text = ("Addresses from Cloud ")
             }
         }
-
 
 
         Button{
@@ -49,9 +48,9 @@ columnSpacing: AppStyle.abButtonMarging
             id: abAddressViewGetLocalDB
             width: AppStyle.abButtonWidth
             text: "Get data from SqLite"
-            onClicked: {
-                console.log("WTF")
+            onClicked: {              
                 Utils.getDataFromLocalDB()
+                abAddressViewTitleText.text = ("Addresses from Local DB")
                 //abAddressListView.forceLayout();
                 //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
             }

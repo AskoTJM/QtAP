@@ -78,7 +78,8 @@ Component{
                             width: AppStyle.abButtonWidth
                             text: AppStyle.abSearch
                             onClicked: {
-                                console.log("Search pushed.")
+                                if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                                abStack.state = "SEARCH"
                             }
                         }
 
