@@ -40,17 +40,12 @@ Component{
                     abContactViewEmailField.clear()
 
                 }else if(abStack.state === "UPDATE"){
-                    abContactViewTitle.text = "Update contact"
-
+                    Utils.contactStateTo("UPDATE")
 
                 }else if(abStack.state === "VIEW"){
                     if(Utils.debugMode) console.log("ABContactView.qml:Componen.onCompleted-> Run")
-                    abContactViewTitle.text = "View contact"
-                    abContactViewIdField.readOnly = true
-                    abContactViewFirstNameField.readOnly = true
-                    abContactViewLastNameField.readOnly = true
-                    abContactViewNumberField.readOnly = true
-                    abContactViewEmailField.readOnly = true
+
+                    //Utils.contactStateTo("VIEW")
 
                 }else if(abStack.state === "SEARCH"){
                     abContactViewTitle.text = "Search contact"
@@ -67,7 +62,7 @@ Component{
             anchors.fill: parent
                 Text{
                     id: abContactViewTitle
-                    text: "Add/Update Contact"
+                    text: "-.-"
                     color: "white"
                     font.pointSize: 27
                     anchors{

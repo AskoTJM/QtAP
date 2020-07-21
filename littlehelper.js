@@ -295,6 +295,38 @@ function clearABData(){
 
 }
 
+// Function for scripts when changing State in ABContactView
+// Input: State to switch to
+// Output: -
+function contactStateTo(toWhat){
+    switch(toWhat){
+        case "UPDATE":
+            abStack.state = "UPDATE"
+            abContactViewPrevButton.visible = false;
+            abContactViewNextButton.visible = false;
+            abContactViewEditButton.visible = false;
+            abContactViewSaveButton.visible = true;
+            abContactViewTitle.text = "Update contact"
+            abContactViewIdField.readOnly = true
+            abContactViewFirstNameField.readOnly = false
+            abContactViewLastNameField.readOnly = false
+            abContactViewNumberField.readOnly = false
+            abContactViewEmailField.readOnly = false
+            break;
+        case "VIEW":
+            abStack.state = "VIEW"
+            abContactViewTitle.text = "View contact"
+            abContactViewIdField.readOnly = true
+            abContactViewFirstNameField.readOnly = true
+            abContactViewLastNameField.readOnly = true
+            abContactViewNumberField.readOnly = true
+            abContactViewEmailField.readOnly = true
+            break;
+        default:
+            break;
+    }
+}
+
 //From https://gist.github.com/endel/321925f6cafa25bbfbde
 
 // Function to add zero padding when showing data in Listview

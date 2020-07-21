@@ -146,14 +146,12 @@ GridLayout{
         visible: false
         text: "Edit user"
         onClicked: {
-            abStack.state = "UPDATE"
-            Component.completed();
+            Utils.contactStateTo("UPDATE")
             if(Utils.debugMode) console.log("ABContactButtonView.qml:abContactViewEditButton:onClicked-> Run STATE now:" + abStack.state)
 
 
         }
     }
-
 
 
     Button{
@@ -170,7 +168,6 @@ GridLayout{
             abStack.state =  "MAIN"
          }
     }
-
 
 
 

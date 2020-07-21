@@ -56,16 +56,30 @@ columnSpacing: AppStyle.abButtonMarging
             }
         }
 
-
         Button{
-            id: abAddressViewPrevButton
+            id: abBrowseViewBackToMainButton
             width: AppStyle.abButtonWidth
+//            Layout.preferredWidth: AppStyle.abButtonWidth
+//            Layout.fillWidth: true
+//            Layout.column: 1
+//            Layout.row: 1
             text: AppStyle.abReturnToMain
             onClicked: {
+                //push(abMainView)
                 if(Utils.debugMode) console.log("Old State: " + abStack.state);
                 abStack.state =  "MAIN"
-            }
+             }
         }
+
+//        Button{
+//            id: abAddressViewPrevButton
+//            width: AppStyle.abButtonWidth
+//            text: AppStyle.abReturnToMain
+//            onClicked: {
+//                if(Utils.debugMode) console.log("ABBrowseButtonView.qml:abAddressViewPreOld State: " + abStack.state);
+//                abStack.state =  "MAIN"
+//            }
+//        }
 
 //        Button{
 //            id: abAddressViewDataOutButton
