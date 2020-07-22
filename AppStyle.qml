@@ -26,16 +26,16 @@ QtObject {
 
     // Strings for ComboBox choosing app, probably would be smarter to transfer into another file.
 
-    property string appChoiceDefaultDescription: "This app was tested with 5\" display at 1920x1080 resolution \nand targeting Android API 24 (Android 7.0) \nSo if it looks weird, try those."
+    property string appChoiceDefaultDescription: "This app was tested with 5\" display at 1920x1080 resolution \nand running Android API 24 (Android 7.0) \nSo if it looks weird, try those."
 
     property string appChoice0Title: "Addressbook"
     property string appChoice0Description: "App for accessing addressbook located in Heroku using JSON \n HOX! Asking permission for local storage is not implemented yet. Allow manually from settings->apps->QtAP."
 
     property string appChoice1Title: "Apple"
-    property string appChoice1Description: "How do you like them apples?"
+    property string appChoice1Description: "How do you like them apples? \n Nothing here, yet."
 
     property string appChoice2Title: "Banana"
-    property string appChoice2Description: "BANANAS!!!"
+    property string appChoice2Description: "BANANAS!!! Tank yu."
 
 // addressbook.qml ( = ab) Specifics
     // URLs
@@ -46,6 +46,7 @@ QtObject {
     property string abAddUser: "Add Contact"
     property string abReturnToMain: "Return to main"
     property string abTitle: "Heroku Addressbook"
+    property string abAddressViewDefaultTitle: "Addresses automatically from local DB"
     property string abGetDataFromCloud: "Get from Cloud"
     property string abSaveUser: "Save data"
     property string abSearch: "Search"

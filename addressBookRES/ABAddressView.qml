@@ -118,7 +118,7 @@ import "../littlehelper.js" as Utils
                         Text{
                             id: abAddressViewTitleText
                             color: AppStyle.appTextColor
-                            text: AppStyle.abTitle
+                            text: AppStyle.abAddressViewDefaultTitle
                             font.pointSize: AppStyle.appInfoFontSize + 5
                             fontSizeMode: Text.FixedSize
                             anchors.topMargin: 10

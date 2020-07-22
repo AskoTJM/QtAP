@@ -136,11 +136,31 @@ function searchFromJSON(searchString, searchField, exactMatch){
             }
         }
     }
+
+    searchToJSON(foundAtIndex);
     return foundAtIndex;
+}
+
+// Function to insert search results from searchFromJSON() to abSearchModel to show in Search state
+// Input: indexes of abStack.abJSONModel
+function searchToJSON(insertThese){
+    //abSearchModel.clear();
+    abJSONModel.clear();
+    for( var x in insertThese){
+        //abJSONModel.append()
+        var jsonObject = abStack.jsonABData[insertThese[x]]
+        abJSONModel.append({"lastname": jsonObject["lastname"]
+                               , "firstname": jsonObject["firstname"]
+                               , "id": jsonObject["id"]
+                               , "mobile": jsonObject["mobile"]
+                               , "email": jsonObject["email"]})
+
+    }
 }
 
 // function to open/create Sqlite database
 // Status: WIP
+
 // Input: -
 // Output: -
 
@@ -325,6 +345,31 @@ function contactStateTo(toWhat){
             break;
         default:
             break;
+    }
+}
+// Function to hide UI elements in ABContactView.qml when in Search State
+// Input: What NOT to hide.
+// Doesn't work " TypeError: Value is null and could not be converted to an object "
+function contactSearchSwitch(chosenOne){
+    switch(chosenOne){
+        case "firstname":
+            abContactViewIdText.visible = false
+            abContactViewIdField.visible = false
+//                                        abContactViewFirstNameText.visible = false
+//                                        abContactViewFirstNameField = false
+            abContactViewLastNameText.visible = false
+            abContactViewLastNameField.visible = false
+            abContactViewNumberText.visible = false
+            abContactViewNumberField.visible = false
+            abContactViewEmailText.visible = false
+            abContactViewEmailField.visible = false
+            break;
+        case "search":
+            abContactViewSearchBackButton.visible = true;
+            break;
+        default:
+            break;
+
     }
 }
 

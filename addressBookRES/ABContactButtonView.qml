@@ -31,6 +31,7 @@ GridLayout{
                 abContactViewPrevButton.visible = false;
                 abContactViewNextButton.visible = false;
                 abContactViewSaveButton.visible = false;
+                abContactViewSearchBackButton.visible = true;
                 break;
             case "UPDATE":
                 abContactViewPrevButton.visible = false;
@@ -149,6 +150,20 @@ GridLayout{
             Utils.contactStateTo("UPDATE")
             if(Utils.debugMode) console.log("ABContactButtonView.qml:abContactViewEditButton:onClicked-> Run STATE now:" + abStack.state)
 
+
+        }
+    }
+
+    Button{
+        id: abContactViewSearchBackButton
+        width: AppStyle.abButtonWidth
+        Layout.fillWidth: true
+        Layout.preferredWidth: AppStyle.abButtonWidth
+        Layout.column: 0
+        Layout.row: 1
+        visible: false
+        text: "Back"
+        onClicked: {
 
         }
     }

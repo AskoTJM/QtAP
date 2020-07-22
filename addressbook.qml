@@ -43,7 +43,7 @@ StackView{
                     //target: abStack
                     if(Utils.verboseMode) console.log("addressbook.qml:STATE:MAIN-> Run");
                     // Some bug(?) popped up and requires now this to function.
-                    //abStack.clear();
+                    abStack.clear();
                     abStack.push(abMainView);
                 }
             }
@@ -103,6 +103,11 @@ StackView{
         }
 
     ]
+
+    ListModel{
+        id: abSearchModel
+    }
+
 
     ListModel{
         id: abJSONModel

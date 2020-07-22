@@ -17,7 +17,10 @@ Component{
     // Component can only have one child, so wrapping everything in Item works around that.
         Item{
 
+
             Component.onCompleted: {
+                // Most of this code would nice to get into JS-script file for cleaner look,
+                // but for now it causes issues and currently it's more important to get everything working.
 
                 if(currentIndex >= 0){
                     var jsonObject = abStack.jsonABData[currentIndex]
@@ -44,11 +47,22 @@ Component{
 
                 }else if(abStack.state === "VIEW"){
                     if(Utils.debugMode) console.log("ABContactView.qml:Componen.onCompleted-> Run")
-
-                    //Utils.contactStateTo("VIEW")
+                    abStack.state = "VIEW"
+                    abContactViewTitle.text = "View contact"
+                    abContactViewIdField.readOnly = true
+                    abContactViewFirstNameField.readOnly = true
+                    abContactViewLastNameField.readOnly = true
+                    abContactViewNumberField.readOnly = true
+                    abContactViewEmailField.readOnly = true
 
                 }else if(abStack.state === "SEARCH"){
                     abContactViewTitle.text = "Search contact"
+                    abContactViewIdField.clear()
+                    abContactViewIdField.readOnly = false
+                    abContactViewFirstNameField.clear()
+                    abContactViewLastNameField.clear()
+                    abContactViewNumberField.clear()
+                    abContactViewEmailField.clear()
 
                 }else if(Number(abJSONModel.count) === 0){
                     Utils.getDataFromCloud(AppStyle.abURLAddressBook)
@@ -62,7 +76,7 @@ Component{
             anchors.fill: parent
                 Text{
                     id: abContactViewTitle
-                    text: "-.-"
+                    text: "You shouldn't see this."
                     color: "white"
                     font.pointSize: 27
                     anchors{
@@ -103,9 +117,31 @@ Component{
                             id: abContactViewIdField
                             color: AppStyle.appTextColor
                             readOnly: true
+                            Keys.onReleased: {
+                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewIdField: " + this.text );
+                                Utils.searchFromJSON(text,"id",true)
+                            }
+                            onFocusChanged:{
+                                if(activeFocus.toString()){
+                                    if(abStack.state === "SEARCH"){
+//                                        abContactViewIdText.visible = false
+//                                        abContactViewIdField.visible = false
+                                        abContactViewFirstNameText.visible = false
+                                        abContactViewFirstNameField.visible = false
+                                        abContactViewLastNameText.visible = false
+                                        abContactViewLastNameField.visible = false
+                                        abContactViewNumberText.visible = false
+                                        abContactViewNumberField.visible = false
+                                        abContactViewEmailText.visible = false
+                                        abContactViewEmailField.visible = false
+                                        abContactViewScroll.visible = true
 
+                                    }
+                                }
+
+
+                            }
                         }
-//                        }
 
 
 
@@ -133,7 +169,31 @@ Component{
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                             color: AppStyle.appTextColor
-                            focus: true
+                            Keys.onReleased: {
+                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewFirstNameField: " + this.text );
+                                Utils.searchFromJSON(text,"firstname",false)
+                            }
+                            //focus: true
+                            onFocusChanged:{
+                                if(activeFocus.toString()){
+                                    if(abStack.state === "SEARCH"){
+                                        abContactViewIdText.visible = false
+                                        abContactViewIdField.visible = false
+//                                        abContactViewFirstNameText.visible = false
+//                                        abContactViewFirstNameField = false
+                                        abContactViewLastNameText.visible = false
+                                        abContactViewLastNameField.visible = false
+                                        abContactViewNumberText.visible = false
+                                        abContactViewNumberField.visible = false
+                                        abContactViewEmailText.visible = false
+                                        abContactViewEmailField.visible = false
+                                        abContactViewScroll.visible = true
+                                        //Utils.contactSearchSwitch("search");
+                                    }
+                                }
+
+                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewFirstNameField: Focus: " + activeFocus.toString() )
+                            }
 
                             //background: "whitesmoke"
                             //Layout.alignment: right
@@ -155,6 +215,29 @@ Component{
                         color: AppStyle.appTextColor
                         Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                        Keys.onReleased: {
+                            if(Utils.debugMode) console.log("ABContactView.qml:abContactViewLastNameField: " + this.text );
+                            Utils.searchFromJSON(text,"lastname",false)
+                        }
+                        onFocusChanged:{
+                            if(activeFocus.toString()){
+                                if(abStack.state === "SEARCH"){
+                                    abContactViewIdText.visible = false
+                                    abContactViewIdField.visible = false
+                                    abContactViewFirstNameText.visible = false
+                                    abContactViewFirstNameField.visible = false
+//                                    abContactViewLastNameText.visible = false
+//                                    abContactViewLastNameField.visible = false
+                                    abContactViewNumberText.visible = false
+                                    abContactViewNumberField.visible = false
+                                    abContactViewEmailText.visible = false
+                                    abContactViewEmailField.visible = false
+                                    abContactViewScroll.visible = true
+
+                                }
+                            }
+
+                        }
                     }
 
                     Text{
@@ -173,6 +256,30 @@ Component{
                         color: AppStyle.appTextColor
                         Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                        Keys.onReleased: {
+                            if(Utils.debugMode) console.log("ABContactView.qml:abContactViewNumberField: " + this.text );
+                            Utils.searchFromJSON(text,"mobile",false)
+                        }
+                        onFocusChanged:{
+                            if(activeFocus.toString()){
+                                if(abStack.state === "SEARCH"){
+                                    abContactViewIdText.visible = false
+                                    abContactViewIdField.visible = false
+                                    abContactViewFirstNameText.visible = false
+                                    abContactViewFirstNameField.visible = false
+                                    abContactViewLastNameText.visible = false
+                                    abContactViewLastNameField.visible = false
+//                                    abContactViewNumberText.visible = false
+//                                    abContactViewNumberField.visible = false
+                                    abContactViewEmailText.visible = false
+                                    abContactViewEmailField.visible = false
+                                    abContactViewScroll.visible = true
+
+                                }
+                            }
+
+                        }
+
                     }
                     Text{
 
@@ -189,14 +296,59 @@ Component{
                         color: AppStyle.appTextColor
                         Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                        Keys.onReleased: {
+                            if(Utils.debugMode) console.log("ABContactView.qml:abContactViewEmailField: " + this.text );
+                            Utils.searchFromJSON(text,"email",false)
+                        }
+                        onFocusChanged:{
+                            if(activeFocus.toString()){
+                                if(abStack.state === "SEARCH"){
+                                    abContactViewIdText.visible = false
+                                    abContactViewIdField.visible = false
+                                    abContactViewFirstNameText.visible = false
+                                    abContactViewFirstNameField.visible = false
+                                    abContactViewLastNameText.visible = false
+                                    abContactViewLastNameField.visible = false
+                                    abContactViewNumberText.visible = false
+                                    abContactViewNumberField.visible = false
+//                                    abContactViewEmailText.visible = false
+//                                    abContactViewEmailField.visible = false
+                                    abContactViewScroll.visible = true
+                                    //Utils.contactSearchSwitch("search");
+                                }
+                            }
+                        }
+
                     }
-
-
 
                 } //GridLayout
 
+                ScrollView{
+                    id: abContactViewScroll
+                    //height: parent.height - ( abContactGridView.height + abContactButtonView.height + abContactViewTitle.height + abContactButtonView.topMargin.height )
+                    width: parent.width - 20
+                    anchors.top: abContactGridView.bottom
+                    anchors.topMargin: 10
+                    anchors.bottom: abContactButtonView.top
+                    visible: false
+
+                    ListView {
+                            id: abContactListView
+                            anchors.top: parent.top
+                            boundsBehavior: Flickable.StopAtBounds
+                            clip: true
+                            width: parent * 0.95
+                            visible: true
+                            model: abJSONModel
+                            delegate: abAddressList
+
+                    }
+                }//ScrollView
+
+
             ABContactButtonView{
                 id: abContactButtonView
+                //anchors.bottom: parent.bottom
             }
 
             }//Rectangle
