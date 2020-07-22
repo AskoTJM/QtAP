@@ -313,6 +313,7 @@ function contactStateTo(toWhat){
             abContactViewNumberField.readOnly = false
             abContactViewEmailField.readOnly = false
             break;
+        // Gets errors, so for now copy+pasted back to ABContactView:Component.onCompleted.
         case "VIEW":
             abStack.state = "VIEW"
             abContactViewTitle.text = "View contact"

@@ -1,6 +1,6 @@
 <html><body><pre>
 <h1>//File containing notes for Qt/Android summer project</h1>
-//Last update 15.07.2020
+//Last update 22.07.2020
 <h2>// Assignment status</h2>
 <b>        //Contactlist-API</b>
 
@@ -58,12 +58,12 @@
         <del>-To use same script and treat jsonAbData always as temporarily storage data?</del>
         <del>Or to change so that GetContactByID saves result to different var?</del>
 
-    // Status: Looking into States in QML
+<text style="color:green;">    // Status: Working.</text>
         - State machine type of solution to tell app what are we doing currently,
         switching things on and off as needed.
         Point is that we can re-use the two UI for multiple things.
-        ContactView for Add, Update and Search.
-        AddressView for Browsing Contacts and Search results.
+        ContactView for Add, Update, Search and View contacts.
+        AddressView for Browsing Contacts <del>and Search results.</del>
 
 <text style="color:green;">    // Status: Working
     // Working: Save, need to add asking for permission on device.
@@ -94,11 +94,27 @@
     // Status: Looking into
         - Learn how to make and run tests in QtCreator
 
-    // Status: Looking into
+
+
+<text style="color:green;">    // Status: Some success. Continue later if time, as we can workaround it for now.</text>
+        - Trying to split JavaScripts of State machine parts into separate file.
+        So we can switch UI components on command, but when run from Component.onComplete causes errors.
+
+<text style="color:green;">    // Status: Mostly working. Some parts I would have wanted to "split" didn't work after it.</text>
         - Split addressbook.qml file into smaller files?
         https://stackoverflow.com/questions/35118900/how-do-i-split-my-qml-code-into-multiple-files
 
+<h2>// Bugs and Issues</h2>
 
+<text style="color:purple;">    // Status: Tried to fix unsuccessfully</text>
+        - In ABMainView.qml, on left upper corner shows small grey button that runs
+        ABBrowseButtonView.qml:abAddressViewGetLocalDB()
+        Don't know when it got there, why it got there or how to get rid off it.
 
+<text style="color:blue;">    // Status: Tried to fix, only found a workaround.</text>
+        - After returning from ABAddressView.qml to ABMainView.qml,
+        next time trying to get into ABAddressView.qml causes an error.
+        Issue doesn't happen with ABContactView.qml.
+        Workaround: Always when returning to ABMainView.qml abStack.clear() is run.
 
 </pre></body></html>
