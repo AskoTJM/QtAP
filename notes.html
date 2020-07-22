@@ -112,6 +112,12 @@
 
 <h2>// Bugs and Issues</h2>
 
+<text style="color:blue;">    // Status: Possible fix, haven't tried it. Still works so fix later.</text>
+    - Using script in ABAddressView.qml:abContactListView delegate to choose between
+	components to delegate causes error " Unable to assign [undefined] to QQmlComponent* "
+	Possible fix:	https://forum.qt.io/topic/85963/unable-to-assign-to-qqmlcomponent/2 
+					https://forum.qt.io/topic/53899/solved-how-to-create-delegates-and-listmodel-dynamically-in-javascript/6
+
 <text style="color:purple;">    // Status: Tried to fix unsuccessfully</text>
         - In ABMainView.qml, on left upper corner shows small grey button that runs
         ABBrowseButtonView.qml:abAddressViewGetLocalDB()
