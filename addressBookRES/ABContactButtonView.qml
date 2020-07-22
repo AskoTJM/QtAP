@@ -180,6 +180,7 @@ GridLayout{
         onClicked: {
             //push(abMainView)
             if(Utils.debugMode) console.log("Old State: " + abStack.state);
+            Utils.getDataFromLocalDB();
             abStack.state =  "MAIN"
          }
     }

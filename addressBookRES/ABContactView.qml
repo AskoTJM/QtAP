@@ -10,13 +10,14 @@ import ".."
 import "../littlehelper.js" as Utils
 
 
+
 Component{
      //   id: abContactView
-
+//    property var searchBy
 
     // Component can only have one child, so wrapping everything in Item works around that.
         Item{
-
+            //
 
             Component.onCompleted: {
                 // Most of this code would nice to get into JS-script file for cleaner look,
@@ -135,6 +136,7 @@ Component{
                                         abContactViewEmailText.visible = false
                                         abContactViewEmailField.visible = false
                                         abContactViewScroll.visible = true
+//                                        searchBy = "id"
 
                                     }
                                 }
@@ -188,7 +190,8 @@ Component{
                                         abContactViewEmailText.visible = false
                                         abContactViewEmailField.visible = false
                                         abContactViewScroll.visible = true
-                                        //Utils.contactSearchSwitch("search");
+//                                        searchBy = "firstname"
+
                                     }
                                 }
 
@@ -233,6 +236,7 @@ Component{
                                     abContactViewEmailText.visible = false
                                     abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
+//                                    searchBy = "lastname"
 
                                 }
                             }
@@ -274,6 +278,8 @@ Component{
                                     abContactViewEmailText.visible = false
                                     abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
+//                                    searchBy = "mobile"
+
 
                                 }
                             }
@@ -315,6 +321,8 @@ Component{
 //                                    abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
                                     //Utils.contactSearchSwitch("search");
+//                                    searchBy = "email"
+
                                 }
                             }
                         }
@@ -340,7 +348,19 @@ Component{
                             width: parent * 0.95
                             visible: true
                             model: abJSONModel
-                            delegate: abAddressList
+                            delegate: {
+                                if(abContactViewIdField.focus === true ){
+                                    abAddressList
+                                }else if(abContactViewFirstNameField.focus === true){
+                                    abAddressList
+                                }else if(abContactViewLastNameField.focus === true){
+                                    abAddressList
+                                }else if(abContactViewNumberField.focus === true){
+                                    abContactSearchMobileList
+                                }else if(abContactViewEmailField.focus === true){
+                                    abContactSearchEmailList
+                                }
+                            }
 
                     }
                 }//ScrollView

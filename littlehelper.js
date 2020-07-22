@@ -316,6 +316,7 @@ function clearABData(){
 }
 
 // Function for scripts when changing State in ABContactView
+// Status: "UPDATE" works and is used, "VIEW" gives errors if used on Completed:onComplete
 // Input: State to switch to
 // Output: -
 function contactStateTo(toWhat){

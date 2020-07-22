@@ -105,55 +105,189 @@ StackView{
     ]
 
     ListModel{
-        id: abSearchModel
-    }
-
-
-    ListModel{
         id: abJSONModel
     }
 
-        Component{
-            id: abAddressList
+    Component{
+        id: abAddressList
 
-            MouseArea {
+        MouseArea {
 
-                width:  childrenRect.width
-                height: childrenRect.height
-                onClicked: {
-                   if(Utils.debugMode) console.log("addressbook.qml:abAddressList-> Current STATE: "+ abStack.state)
-                   currentIndex = index
-                   if(Utils.debugMode) console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
-                   push(abContactView)
-                   abStack.state = "VIEW"
+            width:  childrenRect.width
+            height: childrenRect.height
+            onClicked: {
+               if(Utils.debugMode) console.log("addressbook.qml:abAddressList-> Current STATE: "+ abStack.state)
+               currentIndex = index
+               if(Utils.debugMode) console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
+               push(abContactView)
+               abStack.state = "VIEW"
+
+            }
+            RowLayout{
+                spacing: 10
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: (id).pad(3) + ": "
+                  horizontalAlignment: Text.AlignRight
 
                 }
-                RowLayout{
-                    spacing: 10
-                    Text {
-                      color: AppStyle.appTextColor
-                      font.pixelSize: AppStyle.appDefaultFontSize
-                      text: (id).pad(3) + ": "
-                      horizontalAlignment: Text.AlignRight
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: lastname +", "
 
-                    }
-                    Text {
-                      color: AppStyle.appTextColor
-                      font.pixelSize: AppStyle.appDefaultFontSize
-                      text: lastname +", "
+                }
 
-                    }
-                    Text {
-                      color: AppStyle.appTextColor
-                      font.pixelSize: AppStyle.appDefaultFontSize
-                      text: firstname
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: firstname
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: mobile
+                  visible: false
+
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: email
+                  visible: false
+                }
 
 
-                    }
-                }//RowLayout
+            }//RowLayout
             }//MouseArea
-        }//Component
+    }//Component
 
+    Component{
+        id: abContactSearchEmailList
+
+        MouseArea {
+
+            width:  childrenRect.width
+            height: childrenRect.height
+            onClicked: {
+               if(Utils.debugMode) console.log("addressbook.qml:abAddressList-> Current STATE: "+ abStack.state)
+               currentIndex = index
+               if(Utils.debugMode) console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
+               push(abContactView)
+               abStack.state = "VIEW"
+
+            }
+            RowLayout{
+                spacing: 10
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: (id).pad(3) + ": "
+                  horizontalAlignment: Text.AlignRight
+
+                }
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: lastname +", "
+
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: firstname
+                  visible: false
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: mobile
+                  visible: false
+
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: email
+                  visible: true
+                }
+
+
+            }//RowLayout
+            }//MouseArea
+    }//Component
+
+    Component{
+        id: abContactSearchMobileList
+
+        MouseArea {
+
+            width:  childrenRect.width
+            height: childrenRect.height
+            onClicked: {
+               if(Utils.debugMode) console.log("addressbook.qml:abAddressList-> Current STATE: "+ abStack.state)
+               currentIndex = index
+               if(Utils.debugMode) console.log("Clicked: index: " + index + " id: "+ id +" "+ lastname +", "+ firstname +" ")
+               push(abContactView)
+               abStack.state = "VIEW"
+
+            }
+            RowLayout{
+                spacing: 10
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: (id).pad(3) + ": "
+                  horizontalAlignment: Text.AlignRight
+
+                }
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: lastname
+
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: ", "
+                  visible: false
+
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: firstname
+                  visible: false
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: mobile
+                  visible: true
+
+                }
+
+                Text {
+                  color: AppStyle.appTextColor
+                  font.pixelSize: AppStyle.appDefaultFontSize
+                  text: email
+                  visible: false
+                }
+
+
+            }//RowLayout
+            }//MouseArea
+    }//Component
 
     Pane{
 

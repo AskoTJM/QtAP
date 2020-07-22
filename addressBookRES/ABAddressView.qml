@@ -17,8 +17,9 @@ import "../littlehelper.js" as Utils
 
             Item{
 
-                Component.onCompleted: (Utils.debugMode ? console.log("ABAddressView.qml ready") : null);
-
+                Component.onCompleted: {
+                    (Utils.debugMode ? console.log("ABAddressView.qml ready") : null);
+                }
 
 //                Rectangle{
 
