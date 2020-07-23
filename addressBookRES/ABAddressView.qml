@@ -116,6 +116,7 @@ import "../littlehelper.js" as Utils
                         //implicitHeight: //abAddressListView.contentHeight
 
 
+
                         Text{
                             id: abAddressViewTitleText
                             color: AppStyle.appTextColor
@@ -153,6 +154,11 @@ import "../littlehelper.js" as Utils
                         ABBrowseButtonView{
                             id: abAddressBrowserButtonGrid
                             //anchors.topMargin: 10
+                        }
+
+                        ProgressBar {
+                            id: abBrowseBusy
+                            indeterminate: true
                         }
 
 

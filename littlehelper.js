@@ -6,6 +6,9 @@ const thisFileName = "littlehelper.js"
 // Function to get all the contact data from the Cloud JSON and transferring it to jsonData
 // Status: Working
 function getDataFromCloud(getTheUrl){
+
+    abBrowseBusy.visible = true;
+
     if(verboseMode)
         console.log(thisFileName+":getDataFromCloud() Run")
 
@@ -111,6 +114,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
             console.log(thisFileName+":searchFromJSON()-> Lets check.");
 
     // If we need exact match. This works.
+    // Planned on using with ID field, but doesnt't work with realtime filtering.
         if(exactMatch === true){
             if( searchStringResult === searchString ){
                 //foundAtIndex = x;
@@ -124,15 +128,21 @@ function searchFromJSON(searchString, searchField, exactMatch){
     // when only partial match is needed
         }else{
         //Strings to lower case
-            searchStringResult = searchStringResult.toLowerCase();
-            searchString = searchString.toLowerCase();
+        //Trying toLowerCase() id field causes error because its a Integer, so we'll turn it into String for comparison.
+            if(searchField === "id"){
+                searchString = searchString.toString();
+                searchStringResult = searchStringResult.toString();
+                if(debugMode) console.log("littlehelper.js:searchFromJSON: " + searchString + " & " + searchStringResult)
+            }else{
+                searchStringResult = searchStringResult.toLowerCase();
+                searchString = searchString.toLowerCase();
+            }
+
             if(searchStringResult.match(searchString) ){
-                if(verboseMode)
-                    console.log(thisFileName+":searchFromJSON()->Found at least partial match at index: " + x);
+                if(verboseMode) console.log(thisFileName+":searchFromJSON()->Found at least partial match at index: " + x);
                 foundAtIndex.push(x);
             }else{
-                if(verboseMode)
-                    console.log(thisFileName+":searchFromJSON()-> Not found. :( ");
+                if(verboseMode) console.log(thisFileName+":searchFromJSON()-> Not found. :( ");
             }
         }
     }
@@ -158,9 +168,8 @@ function searchToJSON(insertThese){
     }
 }
 
-// function to open/create Sqlite database
-// Status: WIP
-
+// Function to open/create Sqlite database and get data from it.
+// Status: Working
 // Input: -
 // Output: -
 

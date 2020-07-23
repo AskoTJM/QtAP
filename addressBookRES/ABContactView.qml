@@ -10,14 +10,12 @@ import ".."
 import "../littlehelper.js" as Utils
 
 
-
 Component{
      //   id: abContactView
 //    property var searchBy
 
     // Component can only have one child, so wrapping everything in Item works around that.
         Item{
-            //
 
             Component.onCompleted: {
                 // Most of this code would nice to get into JS-script file for cleaner look,
@@ -95,7 +93,6 @@ Component{
 
                     width: parent.width
                     anchors{
-                        //fill: parent
                         top: abContactViewTitle.bottom
                         topMargin: 40
                     }
@@ -120,7 +117,7 @@ Component{
                             readOnly: true
                             Keys.onReleased: {
                                 if(Utils.debugMode) console.log("ABContactView.qml:abContactViewIdField: " + this.text );
-                                Utils.searchFromJSON(text,"id",true)
+                                Utils.searchFromJSON(text,"id",false)
                             }
                             onFocusChanged:{
                                 if(activeFocus.toString()){
@@ -136,8 +133,6 @@ Component{
                                         abContactViewEmailText.visible = false
                                         abContactViewEmailField.visible = false
                                         abContactViewScroll.visible = true
-//                                        searchBy = "id"
-
                                     }
                                 }
 
@@ -172,7 +167,6 @@ Component{
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                             color: AppStyle.appTextColor
                             Keys.onReleased: {
-                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewFirstNameField: " + this.text );
                                 Utils.searchFromJSON(text,"firstname",false)
                             }
                             //focus: true
@@ -190,28 +184,18 @@ Component{
                                         abContactViewEmailText.visible = false
                                         abContactViewEmailField.visible = false
                                         abContactViewScroll.visible = true
-//                                        searchBy = "firstname"
-
                                     }
                                 }
-
-                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewFirstNameField: Focus: " + activeFocus.toString() )
                             }
-
-                            //background: "whitesmoke"
-                            //Layout.alignment: right
                         }
-//                        }
 
                     Text{
-
                         id: abContactViewLastNameText
                         color: AppStyle.appTextColor
                         text: "Lastname: "
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 2
                         font.pointSize: AppStyle.appDefaultFontSize
-
                     }
                     TextField{
                         id: abContactViewLastNameField
@@ -236,11 +220,8 @@ Component{
                                     abContactViewEmailText.visible = false
                                     abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
-//                                    searchBy = "lastname"
-
                                 }
                             }
-
                         }
                     }
 
@@ -252,8 +233,6 @@ Component{
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 3
                         font.pointSize: AppStyle.appDefaultFontSize
-
-
                     }
                     TextField{
                         id: abContactViewNumberField
@@ -278,12 +257,8 @@ Component{
                                     abContactViewEmailText.visible = false
                                     abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
-//                                    searchBy = "mobile"
-
-
                                 }
                             }
-
                         }
 
                     }
@@ -321,7 +296,6 @@ Component{
 //                                    abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
                                     //Utils.contactSearchSwitch("search");
-//                                    searchBy = "email"
 
                                 }
                             }
@@ -364,7 +338,6 @@ Component{
 
                     }
                 }//ScrollView
-
 
             ABContactButtonView{
                 id: abContactButtonView
