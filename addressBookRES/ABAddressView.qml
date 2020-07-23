@@ -123,16 +123,23 @@ import "../littlehelper.js" as Utils
                             text: AppStyle.abAddressViewDefaultTitle
                             font.pointSize: AppStyle.appInfoFontSize + 5
                             fontSizeMode: Text.FixedSize
+                            anchors.top : parent.top
                             anchors.topMargin: 10
                         }
-
+                        ProgressBar {
+                            id: abBrowseBusy
+                            width: parent.width
+                            anchors.top: abAddressViewTitleText.bottom
+                            indeterminate: true
+                            visible: false
+                        }
 
 
                         ScrollView{
                             id: abAddressViewScroll
-                            height: parent.height - (abAddressBrowserButtonGrid.height + abAddressViewTitleText.height + 20)
+                            height: parent.height - (abAddressBrowserButtonGrid.height + abAddressViewTitleText.height + 25)
                             width: parent.width - 20
-                            anchors.top: abAddressViewTitleText.bottom
+                            anchors.top: abBrowseBusy.bottom //abAddressViewTitleText.bottom
                             anchors.topMargin: 10
 
                             ListView {
@@ -156,10 +163,7 @@ import "../littlehelper.js" as Utils
                             //anchors.topMargin: 10
                         }
 
-                        ProgressBar {
-                            id: abBrowseBusy
-                            indeterminate: true
-                        }
+
 
 
             }//Rectangle

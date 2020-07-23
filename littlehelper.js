@@ -18,6 +18,7 @@ function getDataFromCloud(getTheUrl){
               abStack.jsonABData = JSON.parse(xhr.responseText);
               if(debugMode)
                 console.log(thisFileName+":getDataFromCloud() abStack.jsonABData size: " + JSON.stringify(abStack.jsonABData));
+              abBrowseBusy.visible = false
               outputJSONData();
           }
         }
@@ -342,6 +343,8 @@ function contactStateTo(toWhat){
             abContactViewLastNameField.readOnly = false
             abContactViewNumberField.readOnly = false
             abContactViewEmailField.readOnly = false
+            abContactViewNumberFieldMouseArea.visible = false
+            abContactViewEmailFieldMouseArea.visible = false
             break;
         // Gets errors, so for now copy+pasted back to ABContactView:Component.onCompleted.
         case "VIEW":
@@ -381,6 +384,16 @@ function contactSearchSwitch(chosenOne){
             break;
 
     }
+}
+
+
+// Function to predial phone number. Making a call would require more permissions,
+// and would actually be annoying when testing.
+// Status: ???
+// Input: phone number
+    function abMakeCall(numberToCall){
+
+
 }
 
 //From https://gist.github.com/endel/321925f6cafa25bbfbde

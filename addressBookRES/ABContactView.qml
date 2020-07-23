@@ -40,6 +40,8 @@ Component{
                     abContactViewLastNameField.clear()
                     abContactViewNumberField.clear()
                     abContactViewEmailField.clear()
+                    abContactViewNumberFieldMouseArea.visible = false
+                    abContactViewEmailFieldMouseArea.visible = false
 
                 }else if(abStack.state === "UPDATE"){
                     Utils.contactStateTo("UPDATE")
@@ -53,6 +55,8 @@ Component{
                     abContactViewLastNameField.readOnly = true
                     abContactViewNumberField.readOnly = true
                     abContactViewEmailField.readOnly = true
+                    abContactViewNumberFieldMouseArea.visible = true
+                    abContactViewEmailFieldMouseArea.visible = true
 
                 }else if(abStack.state === "SEARCH"){
                     abContactViewTitle.text = "Search contact"
@@ -62,6 +66,8 @@ Component{
                     abContactViewLastNameField.clear()
                     abContactViewNumberField.clear()
                     abContactViewEmailField.clear()
+                    abContactViewNumberFieldMouseArea.visible = false
+                    abContactViewEmailFieldMouseArea.visible = false
 
                 }else if(Number(abJSONModel.count) === 0){
                     Utils.getDataFromCloud(AppStyle.abURLAddressBook)
@@ -260,6 +266,15 @@ Component{
                                 }
                             }
                         }
+                        MouseArea {
+                                id: abContactViewNumberFieldMouseArea
+                                anchors.fill: parent
+                                visible: false
+                                onClicked:{
+                                    if(Utils.debugMode) console.debug("Got click event received on mobile! ") ;
+                                    //if(abStack.state === "VIEW") Qt.openUrlExternally("tel:\""+ abContactViewNumberField.text + "\"".arg(phone)) ;
+                                }
+                        }
 
                     }
                     Text{
@@ -295,10 +310,18 @@ Component{
 //                                    abContactViewEmailText.visible = false
 //                                    abContactViewEmailField.visible = false
                                     abContactViewScroll.visible = true
-                                    //Utils.contactSearchSwitch("search");
 
                                 }
                             }
+                        }
+                        MouseArea {
+                            id: abContactViewEmailFieldMouseArea
+                            anchors.fill: parent
+                                visible: false
+                                onClicked:{
+                                    if(Utils.debugMode) console.debug("Got click event received on email! ") ;
+
+                             }
                         }
 
                     }

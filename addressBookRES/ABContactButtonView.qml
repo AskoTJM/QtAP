@@ -164,7 +164,25 @@ GridLayout{
         visible: false
         text: "Back"
         onClicked: {
+            abContactViewIdText.visible = true
+            abContactViewIdField.visible = true
+            abContactViewFirstNameText.visible = true
+            abContactViewFirstNameField.visible = true
+            abContactViewLastNameText.visible = true
+            abContactViewLastNameField.visible = true
+            abContactViewNumberText.visible = true
+            abContactViewNumberField.visible = true
+            abContactViewEmailText.visible = true
+            abContactViewEmailField.visible = true
 
+            abContactViewScroll.visible = false
+
+            abContactViewIdField.clear()
+            abContactViewIdField.readOnly = false
+            abContactViewFirstNameField.clear()
+            abContactViewLastNameField.clear()
+            abContactViewNumberField.clear()
+            abContactViewEmailField.clear()
         }
     }
 
