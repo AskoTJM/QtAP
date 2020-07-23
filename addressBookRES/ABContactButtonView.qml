@@ -14,16 +14,9 @@ GridLayout{
     //rows: 3
     columns: 2
     anchors.horizontalCenter: parent.horizontalCenter
-    //width: implicitWidth
-    //width: ( AppStyle.abButtonWidth + AppStyle.abButtonMarging + AppStyle.abButtonWidth)
-    //Layout.horizontalCenter: parent.horizontalCenter
-    //Layout.minimumWidth: AppStyle.abButtonMarging + AppStyle.abButtonWidth + AppStyle.abButtonWidth
     height: implicitHeight
     rowSpacing: AppStyle.abButtonMarging / 2
     columnSpacing: AppStyle.abButtonMarging
-    //anchors.margins: 20
-    //spacing: 10
-    //margins: 10
 
     Component.onCompleted: {
         switch(abStack.state){
@@ -196,7 +189,6 @@ GridLayout{
         Layout.row: 1
         text: AppStyle.abReturnToMain
         onClicked: {
-            //push(abMainView)
             if(Utils.debugMode) console.log("Old State: " + abStack.state);
             Utils.getDataFromLocalDB();
             abStack.state =  "MAIN"

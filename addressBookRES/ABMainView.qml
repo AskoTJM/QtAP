@@ -42,6 +42,7 @@ Component{
                     height: implicitHeight
                     rows: 3
                     columns: 2
+
                     rowSpacing: AppStyle.abButtonMarging / 2
                     columnSpacing: AppStyle.abButtonMarging
                     anchors{
@@ -84,6 +85,28 @@ Component{
                         }
 
                         Button{
+                            id: abAboutButton
+                            width: AppStyle.abButtonWidth
+                            text: "About"
+                            onClicked: {
+                                if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                                abLoader.source = "ABAboutView.qml"
+                                //abStack.state = "ABOUT"
+                            }
+
+                        }
+
+                        Button{
+                            id: abSettingsButton
+                            width: AppStyle.abButtonWidth
+                            text: "Settings ?"
+                            onClicked: {
+
+                            }
+
+                        }
+
+                        Button{
                             id: abBackToMainButton
                             width: AppStyle.abButtonWidth
                             text: AppStyle.abReturnToMain
@@ -93,5 +116,7 @@ Component{
                 }//Grid
 
             }//Rectangle
-    }//Item
+
+
+        }//Item
 }//Component

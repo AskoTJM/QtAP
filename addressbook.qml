@@ -14,6 +14,7 @@ StackView{
     signal message(string msg)
     signal returnToMain()
 
+
 //    initialItem: abMainView
     state: "MAIN"
     anchors.fill: parent
@@ -98,6 +99,16 @@ StackView{
                 script: {
                     if(Utils.verboseMode) console.log("addressbook.qml:STATE:SEARCH-> Run");
                     abStack.push(abContactView)
+                }
+            }
+        },
+        State{
+            name: "ABOUT"
+            StateChangeScript{
+                name: "aboutSCript"
+                script: {
+                    if(Utils.verboseMode) console.log("addressbook.qml:STATE:ABOUT-> Run");
+                    abStack.push(abAboutView)
                 }
             }
         }
@@ -306,10 +317,27 @@ StackView{
              id: abContactView
         }
 
-        ABBrowseView{
-            id: abBrowseState
-        }
+//        ABAboutView{
+//            id: abAboutView
+//        }
 
     }
+
+
+    Loader {
+       id: abLoader
+       anchors.fill: parent
+    }
+
+//    Connections {
+//        ignoreUnknownSignals: true
+//        target :  abLoader.item
+//        onReturn: {
+//            abLoader.source = ""
+//         }
+
+//    }
 }//StackView
+
+
 

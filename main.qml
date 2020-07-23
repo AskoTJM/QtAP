@@ -211,7 +211,7 @@ ApplicationWindow {
 
              onReturnToMain: {
                  windowLoader.source = ""
-            // Header and footer were removed to get more screen estate
+            // Header and footer were removed to get more screen
 //                 footerTxt.text = "Main"
              }
              //onExit : { windowLoader.source = "main.qml" }
