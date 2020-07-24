@@ -204,15 +204,17 @@ ApplicationWindow {
          Connections {
              ignoreUnknownSignals: true
              target :  windowLoader.item
-             onMessage: console.log(msg)
+             onMessage:{
+
+                 console.log(msg)
+                 windowLoader.source = msg
+             }
         // target with check is, probably smart but now freezes the whole thing. So don't uncomment
              //target: windowLoader.valid ? windowLoader.item : null
 
 
              onReturnToMain: {
                  windowLoader.source = ""
-            // Header and footer were removed to get more screen
-//                 footerTxt.text = "Main"
              }
              //onExit : { windowLoader.source = "main.qml" }
          }

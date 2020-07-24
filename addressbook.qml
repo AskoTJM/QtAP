@@ -109,6 +109,7 @@ StackView{
                 script: {
                     if(Utils.verboseMode) console.log("addressbook.qml:STATE:ABOUT-> Run");
                     abStack.push(abAboutView)
+
                 }
             }
         }
@@ -317,26 +318,13 @@ StackView{
              id: abContactView
         }
 
-//        ABAboutView{
-//            id: abAboutView
-//        }
+        ABAboutView{
+            id: abAboutView
+        }
 
     }
 
 
-    Loader {
-       id: abLoader
-       anchors.fill: parent
-    }
-
-//    Connections {
-//        ignoreUnknownSignals: true
-//        target :  abLoader.item
-//        onReturn: {
-//            abLoader.source = ""
-//         }
-
-//    }
 }//StackView
 
 
