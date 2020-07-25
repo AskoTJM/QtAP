@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtWebView 1.1
+//import QtWebKit.experimental 1.0
 import "."
 import ".."
 import "../littlehelper.js" as Utils
@@ -19,8 +20,9 @@ Component{
                     id: webView
                     anchors.top: parent.top
                     width: parent.width
+
                     height: parent.height - (abBackToMainButton.height + 10)
-                    scale: 0.1
+
                     //url: "https://stackoverflow.com/questions/14047576/how-to-display-embedded-html-in-qt-webview"
 
                     // Workaround from https://stackoverflow.com/questions/14047576/how-to-display-embedded-html-in-qt-webview
@@ -47,6 +49,7 @@ Component{
                     anchors.top: webView.bottom
                     onClicked:{
                         //abStack.returnToMain();
+                        abStack.state = "MAIN"
                         abStack.pop();
                     }
                 }
