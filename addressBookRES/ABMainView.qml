@@ -89,7 +89,7 @@ Component{
                         Button{
                             id: abAboutButton
                             width: AppStyle.abButtonWidth
-                            text: "About"
+                            text: AppStyle.abAbout
                             onClicked: {
                                 if(Utils.debugMode) console.log("Old State: " + abStack.state);
                                 //popup.open()

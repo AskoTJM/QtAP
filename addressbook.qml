@@ -18,8 +18,6 @@ StackView{
 //    initialItem: abMainView
     state: "MAIN"
     anchors.fill: parent
-    anchors.leftMargin: AppStyle.appLeftMargin
-    anchors.rightMargin: AppStyle.appRightMargin
 
     visible: true
 

@@ -42,18 +42,28 @@ Component{
                             }
             }
 
+            Grid{
+                anchors.top: webView.bottom
+                columns: 2
+
+                Button{
+                    id: abAboutViewButton
+                    width: AppStyle.abButtonWidth
+                    text: AppStyle.abAbout
+                }
+
                 Button{
                     id: abBackToMainButton
                     width: AppStyle.abButtonWidth
                     text: AppStyle.abReturnToMain
-                    anchors.top: webView.bottom
+
                     onClicked:{
                         //abStack.returnToMain();
                         abStack.state = "MAIN"
                         abStack.pop();
                     }
                 }
-
+            }
         }
 
 //    Component.onCompleted: {

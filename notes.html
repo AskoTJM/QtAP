@@ -13,7 +13,7 @@ div{
 </head>
 <body><div>
 <h1>File containing notes for Qt/Android summer project</h1>
-Last update 23.07.2020
+Last update 25.07.2020
 
 <h2> Assignment status</h2>
 <br>
@@ -144,10 +144,11 @@ components to delegate causes error " Unable to assign [undefined] to QQmlCompon
 Possible fix:	https://forum.qt.io/topic/85963/unable-to-assign-to-qqmlcomponent/2 <br>
 https://forum.qt.io/topic/53899/solved-how-to-create-delegates-and-listmodel-dynamically-in-javascript/6<br>
 <br>
-<text style="color:purple;"> Status: Tried to fix unsuccessfully</text><br>
+<text style="color:green;"> Status: Fixed</text><br>
 <b>- In ABMainView.qml, on left upper corner shows small grey button that runs<br>
 ABBrowseButtonView.qml: abAddressViewGetLocalDB()</b><br>
-Don't know when it got there, why it got there or how to get rid off it.<br>
+<del>Don't know when it got there, why it got there or how to get rid off it.<del><br>
+Silly anchoring on ABMainView.qml. Fixed.<br>
 <br>
 <text style="color:blue;"> Status: Tried to fix, only found a workaround.</text><br>
 <b>- After returning from ABAddressView.qml to ABMainView.qml,<br>
@@ -167,12 +168,12 @@ Don't know what causes this. And not critical issue. So figure how to fix whenev
 <b>-Bug in WebView</b><br>
 , gives an error "W art     : Attempt to remove non-JNI local reference, dumping threat error with WebView" in console, works anyway.<br>
 <br>
-<text style="color:blue;"> Status: WIP</text><br>
+<text style="color:green;"> Status: Finished.</text><br>
 <b>- WebView didn't like pre tag </b><br>
 so need to do a major edit to notes.html to make it readable.<br>
 <br>
-<text style="color:purple;"> Status: Working, somewhat.</text><br>
-<b>-WebView scales it's content weirdly at least with AVD Android 7.0, with Android 10 looks better.</b><br>
+<text style="color:purple;"> Status: Working, sort of. Use different version of Android to circumvent. 7 bad, 10 good.</text><br>
+<b>-WebView scales it's content weirdly.</b><br>
 <del>Don't know why so difficult trying to fix. Size of the page in webview changes from good to huge.</del><br>
 Seems to be another bug out of our hands.<br> 
 <br>
