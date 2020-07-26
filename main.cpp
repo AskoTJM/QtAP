@@ -22,12 +22,15 @@
 bool requestAndroidPermissions(){
     //Request requiered permissions at runtime
 
-    const QVector<QString> permissions({"android.permission.ACCESS_COARSE_LOCATION",
-                                        "android.permission.BLUETOOTH",
-                                        "android.permission.BLUETOOTH_ADMIN",
-                                        "android.permission.INTERNET",
-                                        "android.permission.WRITE_EXTERNAL_STORAGE",
-                                        "android.permission.READ_EXTERNAL_STORAGE"});
+//    const QVector<QString> permissions({"android.permission.ACCESS_COARSE_LOCATION",
+//                                        "android.permission.BLUETOOTH",
+//                                        "android.permission.BLUETOOTH_ADMIN",
+//                                        "android.permission.INTERNET",
+//                                        "android.permission.WRITE_EXTERNAL_STORAGE",
+//                                        "android.permission.READ_EXTERNAL_STORAGE"});
+    const QVector<QString> permissions({"android.permission.INTERNET",
+                                        "android.permission.WRITE_INTERNAL_STORAGE",
+                                        "android.permission.READ_INTERNAL_STORAGE"});
 
     for(const QString &permission : permissions){
         auto result = QtAndroid::checkPermission(permission);
@@ -40,11 +43,38 @@ bool requestAndroidPermissions(){
 
     return true;
 }
+
+// From https://bugreports.qt.io/browse/QTBUG-50759
+bool checkPermission() {
+    QtAndroid::PermissionResult r = QtAndroid::checkPermission("android.permission.WRITE_EXTERNAL_STORAGE");
+    if(r == QtAndroid::PermissionResult::Denied) {
+        QtAndroid::requestPermissionsSync( QStringList() << "android.permission.WRITE_EXTERNAL_STORAGE" );
+        r = QtAndroid::checkPermission("android.permission.WRITE_EXTERNAL_STORAGE");
+        if(r == QtAndroid::PermissionResult::Denied) {
+             return false;
+        }
+   }
+   return true;
+}
 #endif
 
 
 int main(int argc, char *argv[])
 {
+
+//        requestAndroidPermissions();
+//        Added for permission request
+//        #if defined (Q_OS_ANDROID)
+//           if(!requestAndroidPermissions())
+//              return -1;
+//      #endif
+
+
+#if defined (Q_OS_ANDROID)
+    if(!checkPermission())
+        return -1;
+#endif
+
 
     QQuickStyle::setStyle("Material");
     //QQuickStyle::setStyle("Default");
@@ -62,11 +92,6 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     return app.exec();
-    requestAndroidPermissions();
-// Added for permission request
-//    #if defined (Q_OS_ANDROID)
-//       if(!requestAndroidPermissions())
-//          return -1;
-//  #endif
+
 }
 

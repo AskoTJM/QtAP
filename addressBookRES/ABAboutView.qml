@@ -21,7 +21,7 @@ Component{
                     anchors.top: parent.top
                     width: parent.width
 
-                    height: parent.height - (abBackToMainButton.height + 10)
+                    height: parent.height - ( aboutButtonGrid.height + 10 + AppStyle.abButtonMarging)
 
                     //url: "https://stackoverflow.com/questions/14047576/how-to-display-embedded-html-in-qt-webview"
 
@@ -43,8 +43,19 @@ Component{
             }
 
             Grid{
-                anchors.top: webView.bottom
+                id: aboutButtonGrid
+                width: implicitWidth
+                height: implicitHeight
                 columns: 2
+
+                rowSpacing: AppStyle.abButtonMarging / 2
+                columnSpacing: AppStyle.abButtonMarging
+                anchors{
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                    bottomMargin: 20
+                }
+
 
                 Button{
                     id: abAboutViewButton

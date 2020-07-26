@@ -26,10 +26,10 @@ QtObject {
 
     // Strings for ComboBox choosing app, probably would be smarter to transfer into another file.
 
-    property string appChoiceDefaultDescription: "This app was tested in AVD with 5\" display at 1920x1080 resolution."
+    property string appChoiceDefaultDescription: "This app was tested in AVD with 5\" display at 1920x1080 resolution. \n WebView in About doesn't play nice with Android 7.0"
 
     property string appChoice0Title: "Addressbook"
-    property string appChoice0Description: "App for accessing addressbook located in Heroku using JSON \n HOX! Asking permission for local storage is not implemented yet. Allow manually from settings->apps->QtAP."
+    property string appChoice0Description: "App for accessing addressbook located in Heroku using JSON. \n"
 
     property string appChoice1Title: "Apple"
     property string appChoice1Description: "How do you like them apples? \n Nothing here, yet."

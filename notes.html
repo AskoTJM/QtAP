@@ -21,6 +21,7 @@ Last update 25.07.2020
 No colour: Haven't started or no real progress. Might be just looking into it, 
 basically just here to remind what could be done.<br>
 <br>
+
 <text style="color:green;">Green: Working. Finished or at least in state of "Good enough". No progress needed or planned.</text><br>
 <br>
 <text style="color:blue;">Blue: Partial success. Working but not how we would like it. Might return to it later.</text><br>
@@ -52,6 +53,7 @@ lastname<br>
 mobile<br>
 email</p><br>
 <br>
+
 <text style="color:green;">	Status: Working</text><br>
 <b>Update Contact.</b><br>
 http-PUT<br>
@@ -66,13 +68,15 @@ email<br>
 In the application implement all those operations. So that you can get, add and update contacts.<br>
 If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:<br>
 <br>
+
 <text style="color:green;">	Status: Working</text><br>
 <b>-Search a contact</b><br>
 Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.<br>
 I didn’t implement that in the API, so you will have to get all contacts and filter in the app.<br>
 <br>
-<text style="color:green;"> Status: Working. Button for getting local Sqlite data, button for getting Heroku data, and</text><br>
- button to save Cloud data as local data. Although needs to manually give permission in Android to use local storage<br>
+
+<text style="color:green;"> Status: Working/WIP. Button for getting local Sqlite data, button for getting Heroku data, and button to save Cloud data as local data.</text><br>
+<i>Asking for local storage permission seems to work now, but if it doesn't ask for it then you have to manually allow it.</i><br>
 <b>-Save to local database</b><br>
 Study if it is possible to use SQLite in QtAndroid and if possible save the data to SQLite database.<br>
 Then the user can use the contact-list also without Internet-connection.<br>
@@ -84,14 +88,18 @@ You can the add features like “sync to Remote-database” and/or “sync to Lo
 <del>Thinking about it, maybe leave as-is for now. Because works.</del><br>
 <del>-To use same script and treat jsonAbData always as temporarily storage data? Or to change so that GetContactByID saves result to different var?</del><br>
 <br>
+
 <text style="color:green;"> Status: Working.</text><br>
 <b>- State machine type of solution to tell app what are we doing currently, switching things on and off as needed.</b><br>
 Point is that we can re-use the two UI for multiple things.ContactView for Add, Update, Search and View contacts. AddressView for Browsing Contacts <del>and Search results.</del><br>
 <br>
+
 <text style="color:green;"> Status: Working: Save, need to add asking for permission on device.Currently manually needed to allow from Settings->Apps->QtAP</text><br>
 <b>- Local database. Scripts related to that.</b><br>
 <br>
-<text style="color:darkblue;">     Status: Work in progress, mostly done.</text><br>
+
+<text style="color:green;">Status: Done.</text><br>
+<i>Trying to split all UI components into small segments caused issues. So only where it was doable.</i><br>
 <b>- Changes to UI to make them more suitable for different states.</b><br>
 
 <h2> Things to add/change/improve?</h2><br>
@@ -99,37 +107,49 @@ Point is that we can re-use the two UI for multiple things.ContactView for Add, 
  Status: Not started.<br>
 <b>- Add text to show last time local data was updated from Cloud</b><br>
 <br>
+
 <text style="color:green;">Status: Working.</text></text><br>
 <b>- Progress bar when getting or sending data to Cloud?</b><br>
 Wouldn't look like it was stuck.<br>
 <br>
+
  Status: Not even thinking about it<br>
 <b>- Transition animations, might look nice and should be easy to implement.</b><br>
 <br>
- Status: Not started<br>
+
+ Status: Looking into it.<br>
+ <i>Requires creating Android Intents, seems not so straigh forward thing to do.</i><br>
 <b>- Call to number by clicking it, also send email by clicking it</b><br>
 <br>
+
  Status: Not started<br>
 <b>- Limit what can be inserted into fields.</b><br>
 <br>
+
  Status: Looking into</text><br>
 <b>- Learn how to make and run tests in QtCreator</b><br>
 <br>
-<text style="color:blue;">     Status: Some success. Continue later if time, as we can workaround it for now.</text><br>
+
+<text style="color:blue;">Status: Some success. Continue later if time, as we can workaround it for now.</text><br>
 <b>- Trying to split JavaScripts of State machine parts into separate file.</b><br>
 So we can switch UI components on command, but when run from Component.onComplete causes errors.<br>
 <br>
-<text style="color:green;">     Status: Mostly working. Some parts I would have wanted to "split" didn't work after it.</text><br>
+
+<text style="color:green;">Status: Mostly working. Some parts I would have wanted to "split" didn't work after it.</text><br>
 <b>- Split addressbook.qml file into smaller files?</b><br>
 https://stackoverflow.com/questions/35118900/how-do-i-split-my-qml-code-into-multiple-files<br>
 <br>
-<text style="color:blue;"> Status: WIP, annoying issues and bugs. </text><br>
+
+<text style="color:green;">Status: Working.</text><br>
+<i>Some bug in WebView causes zooming/scaling issue on Android 7.0, fixed by Android 10.</i>
 <b>- Open notes.html page on app</b><br>
 https://stackoverflow.com/questions/14047576/how-to-display-embedded-html-in-qt-webview<br>
 <br>
+
  Status: Not started<br>
 <b>- Make cleaner version of Components for different searches in delegates</b><br>
 <br>
+
  Status: Thinking about it<br>
 <b>- Remove use of currentIndex, and switch to using ID ?</b><br>
 Pro: Code looks nicer? <br>
@@ -138,41 +158,49 @@ Cons: Would need to rework and breaking of things, with little gains. If we chan
 <br>		
 <h2> Bugs and Issues</h2><br>
 <br>
+
 <text style="color:blue;"> Status: Possible fix, haven't tried it. Still works so fix later.</text><br>
 <b>- Using script in ABAddressView.qml:abContactListView delegate to choose between<br>
 components to delegate causes error " Unable to assign [undefined] to QQmlComponent* "</b><br>
 Possible fix:	https://forum.qt.io/topic/85963/unable-to-assign-to-qqmlcomponent/2 <br>
 https://forum.qt.io/topic/53899/solved-how-to-create-delegates-and-listmodel-dynamically-in-javascript/6<br>
 <br>
+
 <text style="color:green;"> Status: Fixed</text><br>
 <b>- In ABMainView.qml, on left upper corner shows small grey button that runs<br>
 ABBrowseButtonView.qml: abAddressViewGetLocalDB()</b><br>
-<del>Don't know when it got there, why it got there or how to get rid off it.<del><br>
+<del>Don't know when it got there, why it got there or how to get rid off it.</del><br>
 Silly anchoring on ABMainView.qml. Fixed.<br>
 <br>
+
 <text style="color:blue;"> Status: Tried to fix, only found a workaround.</text><br>
 <b>- After returning from ABAddressView.qml to ABMainView.qml,<br>
-next time trying to get into ABAddressView.qml causes an error.</b><br>
-Issue doesn't happen with ABContactView.qml, which works exactly the same way.<br>
-Workaround: Always when returning to ABMainView.qml abStack.clear() is run.<br>
+	next time trying to get into ABAddressView.qml causes an error.</b><br>
+	Issue doesn't happen with ABContactView.qml, which works exactly the same way.<br>
+	Workaround: Always when returning to ABMainView.qml abStack.clear() is run.<br>
 <br>
+
 <text style="color:purple;"> Status: Tried to fix unsuccessfully</text><br>
 <b>- When editing TextField on Android emulator, have to press enter before you can succesfully edit text.</b><br> 
-Weird, not sure if bug unrelated to project and we can do anything about it. If time left, might look into it and if there is a way to circumvent. Didn't see this issue when using real phone.<br>
-<br>
- Status: Not started.<br>
-<b>- Combobox from main.qm can be launched from different views.</b><br>
-Don't know what causes this. And not critical issue. So figure how to fix whenever.<br>
-<br>		
- Status: Can't do anything about it.<br>
+	Weird, not sure if bug unrelated to project and we can do anything about it. If time left, might look into it and if there is a way to circumvent. Didn't see this issue when using real phone.<br>
+	<br>
+
+	 Status: Not started.<br>
+<b>- Combobox from main.qml can be launched from different views.</b><br>
+	Don't know what causes this. And not critical issue. So figure how to fix whenever.<br>
+	<br>		
+
+	 Status: Can't do anything about it.<br>
 <b>-Bug in WebView</b><br>
-, gives an error "W art     : Attempt to remove non-JNI local reference, dumping threat error with WebView" in console, works anyway.<br>
-<br>
-<text style="color:green;"> Status: Finished.</text><br>
+	, gives an error "W art     : Attempt to remove non-JNI local reference, dumping threat error with WebView" in console, works anyway.<br>
+	<br>
+
+	<text style="color:green;"> Status: Finished.</text><br>
 <b>- WebView didn't like pre tag </b><br>
-so need to do a major edit to notes.html to make it readable.<br>
-<br>
-<text style="color:purple;"> Status: Working, sort of. Use different version of Android to circumvent. 7 bad, 10 good.</text><br>
+	so need to do a major edit to notes.html to make it readable.<br>
+	<br>
+	<text style="color:purple;"> Status: Working, sort of. Use different version of Android to circumvent. 7 bad, 10 good.</text><br>
+
 <b>-WebView scales it's content weirdly.</b><br>
 <del>Don't know why so difficult trying to fix. Size of the page in webview changes from good to huge.</del><br>
 Seems to be another bug out of our hands.<br> 

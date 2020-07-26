@@ -84,30 +84,7 @@ Component{
                                 if(Utils.debugMode) console.log("Old State: " + abStack.state);
                                 abStack.state = "SEARCH"
                             }
-                        }
-
-                        Button{
-                            id: abAboutButton
-                            width: AppStyle.abButtonWidth
-                            text: AppStyle.abAbout
-                            onClicked: {
-                                if(Utils.debugMode) console.log("Old State: " + abStack.state);
-                                //popup.open()
-                                abStack.state = "ABOUT"
-
-                            }
-
-                        }
-
-                        Button{
-                            id: abSettingsButton
-                            width: AppStyle.abButtonWidth
-                            text: "Settings ?"
-                            onClicked: {
-
-                            }
-
-                        }
+                        }                        
 
                         Button{
                             id: abBackToMainButton
@@ -118,6 +95,40 @@ Component{
 
                 }//Grid
 
+                Grid{
+                    width: implicitWidth
+                    height: implicitHeight
+                    columns: 2
+
+                    rowSpacing: AppStyle.abButtonMarging / 2
+                    columnSpacing: AppStyle.abButtonMarging
+                    anchors{
+                        bottom: parent.bottom
+                        horizontalCenter: parent.horizontalCenter
+                        bottomMargin: 20
+                    }
+
+                    Button{
+                        id: abSettingsButton
+                        width: AppStyle.abButtonWidth
+                        text: "Settings ?"
+                        onClicked: {
+
+                        }
+                    }
+
+                    Button{
+                        id: abAboutButton
+                        width: AppStyle.abButtonWidth
+                        text: AppStyle.abAbout
+                        onClicked: {
+                            if(Utils.debugMode) console.log("Old State: " + abStack.state);
+                            //popup.open()
+                            abStack.state = "ABOUT"
+
+                        }
+                    }
+                }// GridView
             }//Rectangle
 
         }//Item
