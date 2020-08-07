@@ -62,6 +62,8 @@ QtObject {
     property string abIdText: "id: "
     property string abFirstNameText: "Firstname: "
     property string abLastNameText: "Lastname: "
+    property string abPhoneText: "Phone: "
+    property string abEmailText: "Email: "
 
     // Values
     property int abButtonWidth: 150
