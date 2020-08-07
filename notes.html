@@ -13,7 +13,7 @@ div{
 </head>
 <body><div>
 <h1>File containing notes for Qt/Android summer project</h1>
-Last update 25.07.2020
+Last update 7.8.2020
 
 <h2> Assignment status</h2>
 <br>
@@ -69,7 +69,8 @@ In the application implement all those operations. So that you can get, add and 
 If you have still time left, you can figure out yourself what more you could implement. Here are a couple of examples:<br>
 <br>
 
-<text style="color:green;">	Status: Working</text><br>
+<text style="color:green;">	Status: Working, sort of.</text><br>
+<i>Real-time search works fine when using physical keyboard. Android virtual keyboards don't send keyEvents, they only submit text when the enter is pressed and onChange and onEdited events also only happen when enter is pressed.</i><br>
 <b>-Search a contact</b><br>
 Example there is a person named Matti Mainio, if you start to type “Mat” or “Mai” ->you will see all the contacts which has those substrings.<br>
 I didn’t implement that in the API, so you will have to get all contacts and filter in the app.<br>
@@ -203,7 +204,7 @@ Silly anchoring on ABMainView.qml. Fixed.<br>
 
 <b>-WebView scales it's content weirdly.</b><br>
 <del>Don't know why so difficult trying to fix. Size of the page in webview changes from good to huge.</del><br>
-Seems to be another bug out of our hands.<br> 
+Seems to be a bug. Updating WebView from PlayStore might fix this or on AVD using newer version of Android, 10 seems to work fine.<br> 
 <br>
 
 </div></body></html>

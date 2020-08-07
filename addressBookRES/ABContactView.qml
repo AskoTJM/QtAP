@@ -3,7 +3,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
 //import QtQuick 2.15
-import QtQuick.LocalStorage 2.12// as Sql
+import QtQuick.LocalStorage 2.12 // as Sql
 
 import "."
 import ".."
@@ -109,7 +109,7 @@ Component{
 
                         id: abContactViewIdText
                         color: AppStyle.appTextColor
-                        text: "id: "
+                        text: AppStyle.abIdText
                         font.pointSize: AppStyle.appDefaultFontSize
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth                        
 
@@ -121,6 +121,7 @@ Component{
                             id: abContactViewIdField
                             color: AppStyle.appTextColor
                             readOnly: true
+                            // Works with physical keyboard but might not with virtual keyboard
                             Keys.onReleased: {
                                 if(Utils.debugMode) console.log("ABContactView.qml:abContactViewIdField: " + this.text );
                                 Utils.searchFromJSON(text,"id",false)
@@ -152,7 +153,7 @@ Component{
 
                         id: abContactViewFirstNameText
                         color: AppStyle.appTextColor
-                        text: "Firstname: "
+                        text: AppStyleabFirstNameText
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 1
 //                            Layout.column: 0
@@ -172,9 +173,24 @@ Component{
                             Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                             Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
                             color: AppStyle.appTextColor
-                            Keys.onReleased: {
-                                Utils.searchFromJSON(text,"firstname",false)
+
+                            // Works with physical keyboard but might not with virtual keyboard
+                            Keys.onPressed: {
+                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewFirstNameField: " + this.text );
+                                // For some reason this temporary var is needed to get alphabetical realtime filtering work
+                                var firstNameTempTxt = abContactViewFirstNameField.displayText
+                                Utils.searchFromJSON(firstNameTempTxt,"firstname",false)
+
                             }
+
+
+//                            onTextChanged: {
+//                                if(Utils.debugMode) console.log("ABContactView.qml:abContactViewFirstNameField: " + this.text );
+//                                // For some reason this temporary var is needed to get alphabetical realtime filtering work
+//                                var firstNameTempTxt = abContactViewFirstNameField.displayText
+//                                Utils.searchFromJSON(firstNameTempTxt,"firstname",false)
+//                            }
+
                             //focus: true
                             onFocusChanged:{
                                 if(activeFocus.toString()){
@@ -198,7 +214,7 @@ Component{
                     Text{
                         id: abContactViewLastNameText
                         color: AppStyle.appTextColor
-                        text: "Lastname: "
+                        text: AppStyle.abLastNameText
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 2
                         font.pointSize: AppStyle.appDefaultFontSize
@@ -208,9 +224,12 @@ Component{
                         color: AppStyle.appTextColor
                         Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                        // Works with physical keyboard but might not with virtual keyboard
                         Keys.onReleased: {
                             if(Utils.debugMode) console.log("ABContactView.qml:abContactViewLastNameField: " + this.text );
-                            Utils.searchFromJSON(text,"lastname",false)
+                            // For some reason this temporary var is needed to get alphabetical realtime filtering work
+                            var lastNameTempTxt = abContactViewLastNameField.displayText
+                            Utils.searchFromJSON(lastNameTempTxt,"lastname",false)
                         }
                         onFocusChanged:{
                             if(activeFocus.toString()){
@@ -235,7 +254,7 @@ Component{
 
                         id: abContactViewNumberText
                         color: AppStyle.appTextColor
-                        text: "Phone: "
+                        text: AppStyle.abPhoneText
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 3
                         font.pointSize: AppStyle.appDefaultFontSize
@@ -245,6 +264,7 @@ Component{
                         color: AppStyle.appTextColor
                         Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                        // Works with physical keyboard but might not with virtual keyboard
                         Keys.onReleased: {
                             if(Utils.debugMode) console.log("ABContactView.qml:abContactViewNumberField: " + this.text );
                             Utils.searchFromJSON(text,"mobile",false)
@@ -272,6 +292,7 @@ Component{
                                 visible: false
                                 onClicked:{
                                     if(Utils.debugMode) console.debug("Got click event received on mobile! ") ;
+
                                     //if(abStack.state === "VIEW") Qt.openUrlExternally("tel:\""+ abContactViewNumberField.text + "\"".arg(phone)) ;
                                 }
                         }
@@ -281,7 +302,7 @@ Component{
 
                         id: abContactViewEmailText
                         color: AppStyle.appTextColor
-                        text: "Email: "
+                        text: AppStyle.abEmailText
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 4
                         font.pointSize: AppStyle.appDefaultFontSize
@@ -292,9 +313,12 @@ Component{
                         color: AppStyle.appTextColor
                         Layout.columnSpan: AppStyle.abContactViewSecondColumnSpan
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewSecondColumnWidth
+                        // Works with physical keyboard but might not with virtual keyboard
                         Keys.onReleased: {
                             if(Utils.debugMode) console.log("ABContactView.qml:abContactViewEmailField: " + this.text );
-                            Utils.searchFromJSON(text,"email",false)
+                            // For some reason this temporary var is needed to get alphabetical realtime filtering work
+                            var emailTempTxt = abContactViewEmailField.displayText
+                            Utils.searchFromJSON(emailTempTxt,"email",false)
                         }
                         onFocusChanged:{
                             if(activeFocus.toString()){

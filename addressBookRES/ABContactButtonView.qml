@@ -53,14 +53,14 @@ GridLayout{
         width: AppStyle.abButtonWidth
         Layout.fillWidth: true
         Layout.preferredWidth: AppStyle.abButtonWidth
-        text: "Previous user"
+        text: AppStyle.abPreviousUser
 
         onClicked: {
             if( currentIndex === undefined){
                 currentIndex = 0
             }
 
-            console.log("CurrentIndex goes from: " + Number(currentIndex))
+            if(Utils.debugMode) console.log("CurrentIndex goes from: " + Number(currentIndex))
             if( currentIndex <= 0){
                 currentIndex = ( abJSONModel.count - 1)
             }else if(  currentIndex > 0 ){
@@ -68,7 +68,7 @@ GridLayout{
             }else{
                 console.log("Error in abContactViewPrevButton, illegal value in currentIndex")
             }
-            console.log("CurrentIndex  goes  to: " + Number(currentIndex))
+            if(Utils.debugMode) console.log("CurrentIndex  goes  to: " + Number(currentIndex))
 
                 var jsonObject = abStack.jsonABData[currentIndex]
                 abContactViewIdField.text = jsonObject["id"]
@@ -85,7 +85,7 @@ GridLayout{
         width: AppStyle.abButtonWidth
         Layout.fillWidth: true
         Layout.preferredWidth: AppStyle.abButtonWidth
-        text: "Next user"
+        text: AppStyle.abNextUser
         onClicked: {
             if( currentIndex === undefined){
                 currentIndex = 0
@@ -138,7 +138,7 @@ GridLayout{
         Layout.column: 0
         Layout.row: 1
         visible: false
-        text: "Edit user"
+        text: AppStyle.abEditUser
         onClicked: {
             Utils.contactStateTo("UPDATE")
             if(Utils.debugMode) console.log("ABContactButtonView.qml:abContactViewEditButton:onClicked-> Run STATE now:" + abStack.state)
@@ -155,8 +155,10 @@ GridLayout{
         Layout.column: 0
         Layout.row: 1
         visible: false
-        text: "Back"
+        text: AppStyle.abBack
         onClicked: {
+            Utils.getDataFromLocalDB();
+            Utils.outputJSONData();
             abContactViewIdText.visible = true
             abContactViewIdField.visible = true
             abContactViewFirstNameText.visible = true

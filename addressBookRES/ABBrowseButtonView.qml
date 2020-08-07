@@ -27,7 +27,7 @@ columnSpacing: AppStyle.abButtonMarging
             text: AppStyle.abGetDataFromCloud
             onClicked: {
                 Utils.getDataFromCloud(AppStyle.abURLAddressBook)
-                abAddressViewTitleText.text = ("Addresses from Cloud ")
+                abAddressViewTitleText.text = AppStyle.abAddressFromCloud
             }
         }
 
@@ -35,7 +35,7 @@ columnSpacing: AppStyle.abButtonMarging
         Button{
             id: abAddressViewPlaceholderButton
             width: AppStyle.abButtonWidth
-            text: "Save In Local DB"
+            text: AppStyle.abSaveToLocalDB
             onClicked: {
                 Utils.clearLocalDB();
                 Utils.saveDataToLocalDB();
@@ -47,59 +47,24 @@ columnSpacing: AppStyle.abButtonMarging
         Button{
             id: abAddressViewGetLocalDB
             width: AppStyle.abButtonWidth
-            text: "Get data from SqLite"
+            text: AppStyle.abGetFromLocalDB
             onClicked: {              
                 Utils.getDataFromLocalDB()
-                abAddressViewTitleText.text = ("Addresses from Local DB")
-                //abAddressListView.forceLayout();
-                //console.log("getDataFromLocalDB: " + JSON.stringify(abStack.jsonABData));
+                abAddressViewTitleText.text = AppStyle.abAddressFromLocalDB
+
             }
         }
 
         Button{
             id: abBrowseViewBackToMainButton
             width: AppStyle.abButtonWidth
-//            Layout.preferredWidth: AppStyle.abButtonWidth
-//            Layout.fillWidth: true
-//            Layout.column: 1
-//            Layout.row: 1
             text: AppStyle.abReturnToMain
             onClicked: {
-                //push(abMainView)
                 if(Utils.debugMode) console.log("Old State: " + abStack.state);
                 abStack.state =  "MAIN"
              }
         }
 
-//        Button{
-//            id: abAddressViewPrevButton
-//            width: AppStyle.abButtonWidth
-//            text: AppStyle.abReturnToMain
-//            onClicked: {
-//                if(Utils.debugMode) console.log("ABBrowseButtonView.qml:abAddressViewPreOld State: " + abStack.state);
-//                abStack.state =  "MAIN"
-//            }
-//        }
-
-//        Button{
-//            id: abAddressViewDataOutButton
-//            width: AppStyle.abButtonWidth
-//            text: "Clear jsonABData"
-//            onClicked: {
-//                Utils.clearABData();
-
-//            }
-
-//        }
-
-//        Button{
-//            id: abAddressViewTestButton2
-//            width: AppStyle.abButtonWidth
-//            text: "Clear ListView"
-//            onClicked: {
-//                Utils.clearAddressListView();
-//            }
-//        }
 }
 
 

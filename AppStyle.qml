@@ -29,7 +29,7 @@ QtObject {
     property string appChoiceDefaultDescription: "This app was tested in AVD with 5\" display at 1920x1080 resolution. \n WebView in About doesn't play nice with Android 7.0"
 
     property string appChoice0Title: "Addressbook"
-    property string appChoice0Description: "App for accessing addressbook located in Heroku using JSON. \n"
+    property string appChoice0Description: "App for accessing addressbook located in Heroku using JSON. \n Summer 2020 project for Oulu University of Applied Sciences.\n"
 
     property string appChoice1Title: "Apple"
     property string appChoice1Description: "How do you like them apples? \n Nothing here, yet."
@@ -51,6 +51,17 @@ QtObject {
     property string abSaveUser: "Save data"
     property string abSearch: "Search"
     property string abAbout: "About"
+    property string abAddressFromCloud: "Addresses from Cloud"
+    property string abSaveToLocalDB: "Save To Local DB"
+    property string abGetFromLocalDB: "From Local DB"
+    property string abAddressFromLocalDB: "Addresses from Local DB"
+    property string abPreviousUser: "Previous user"
+    property string abNextUser: "Next user"
+    property string abEditUser: "Edit user"
+    property string abBack: "Back"
+    property string abIdText: "id: "
+    property string abFirstNameText: "Firstname: "
+    property string abLastNameText: "Lastname: "
 
     // Values
     property int abButtonWidth: 150

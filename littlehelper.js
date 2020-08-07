@@ -97,13 +97,13 @@ function outputJSONData(){
 // Input: searchFromJSON(String to search, Field to search from, search for exactMatch true/false)
 // Returns: Arrays of indexes of the matches in jsonData
 function searchFromJSON(searchString, searchField, exactMatch){
-    if(verboseMode)
-        console.log(thisFileName+":searchFromJSON()-> Run")
-
+    if(verboseMode) console.log(thisFileName+":searchFromJSON()-> Run")
+    if(debugMode) console.log("littlehelper:searchFromJSON(): Received searchString = " +searchString)
     // Array to save result indexes
     var foundAtIndex = [];
 
-    var searchStringI = /"searchString"/i ;
+    var searchStringI = "/\"" + searchString + "\"/i" ;
+    if(debugMode) console.log("littlehelper:searchFromJSON(): Created searchStringI " + searchStringI)
     if(debugMode)
         console.log(thisFileName+":searchFromJSON()-> started.");
     for (var x in abStack.jsonABData) {
@@ -126,17 +126,19 @@ function searchFromJSON(searchString, searchField, exactMatch){
                 if(verboseMode)
                     console.log(thisFileName+":searchFromJSON()-> Not found exact match. :( ");
             }
-    // when only partial match is needed
+
         }else{
+        // when only partial match is needed
         //Strings to lower case
         //Trying toLowerCase() id field causes error because its a Integer, so we'll turn it into String for comparison.
             if(searchField === "id"){
                 searchString = searchString.toString();
                 searchStringResult = searchStringResult.toString();
-                if(debugMode) console.log("littlehelper.js:searchFromJSON: " + searchString + " & " + searchStringResult)
+                if(debugMode) console.log("littlehelper.js:searchFromJSON: ID-search:"  + searchString + " & " + searchStringResult)
             }else{
-                searchStringResult = searchStringResult.toLowerCase();
-                searchString = searchString.toLowerCase();
+                searchString  = searchString.toLowerCase();
+                searchStringResult = searchStringResult.toLowerCase();                
+                if(debugMode) console.log("littlehelper.js:searchFromJSON: String-search: " + searchString + " & " + searchStringResult)
             }
 
             if(searchStringResult.match(searchString) ){

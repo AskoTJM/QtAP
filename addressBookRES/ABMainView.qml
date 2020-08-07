@@ -107,15 +107,15 @@ Component{
                         horizontalCenter: parent.horizontalCenter
                         bottomMargin: 20
                     }
+                    // Way to change settings not implemented yet.
+//                    Button{
+//                        id: abSettingsButton
+//                        width: AppStyle.abButtonWidth
+//                        text: "Settings ?"
+//                        onClicked: {
 
-                    Button{
-                        id: abSettingsButton
-                        width: AppStyle.abButtonWidth
-                        text: "Settings ?"
-                        onClicked: {
-
-                        }
-                    }
+//                        }
+ //                   }
 
                     Button{
                         id: abAboutButton
