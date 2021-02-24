@@ -153,7 +153,7 @@ Component{
 
                         id: abContactViewFirstNameText
                         color: AppStyle.appTextColor
-                        text: AppStyleabFirstNameText
+                        text: AppStyle.abFirstNameText
                         Layout.preferredWidth: abContactGridView.width * AppStyle.abContactViewFirstColumnWidth
                         Layout.row: 1
 //                            Layout.column: 0

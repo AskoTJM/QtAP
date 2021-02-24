@@ -102,7 +102,7 @@ function searchFromJSON(searchString, searchField, exactMatch){
     // Array to save result indexes
     var foundAtIndex = [];
 
-    var searchStringI = "/\"" + searchString + "\"/i" ;
+    //var searchStringI = "/\"" + searchString + "\"/i" ;
     if(debugMode) console.log("littlehelper:searchFromJSON(): Created searchStringI " + searchStringI)
     if(debugMode)
         console.log(thisFileName+":searchFromJSON()-> started.");
